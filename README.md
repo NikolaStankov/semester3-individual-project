@@ -1,3 +1,2 @@
 # IndividualTrackProject-S3
-
-Initaliazed gitlab runner
+Initializing runner for pipelines
