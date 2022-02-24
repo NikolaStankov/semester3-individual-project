@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
-@Repository
+@Repository("nbaTickets")
 @Primary
 public class NBAGamesTicketsRepository implements TicketsRepository {
 
@@ -22,12 +22,12 @@ public class NBAGamesTicketsRepository implements TicketsRepository {
     }
 
     @Override
-    public List<Ticket> getTickets() {
+    public List<Ticket> selectAllTickets() {
         return this.tickets;
     }
 
     @Override
-    public Ticket getTicket(long ticketId) {
+    public Ticket selectTicket(long ticketId) {
         for (Ticket ticket : this.tickets) {
             if (ticket.getTicketId() == ticketId)
                 return ticket;
@@ -36,8 +36,8 @@ public class NBAGamesTicketsRepository implements TicketsRepository {
     }
 
     @Override
-    public boolean saveTicket(Ticket ticket) {
-        if (this.getTicket(ticket.getTicketId()) != null){
+    public boolean insertTicket(Ticket ticket) {
+        if (this.selectTicket(ticket.getTicketId()) != null){
             return false;
         }
 
@@ -47,11 +47,11 @@ public class NBAGamesTicketsRepository implements TicketsRepository {
 
     @Override
     public boolean deleteTicket(long tickedId) {
-        if (this.getTicket(tickedId) == null){
+        if (this.selectTicket(tickedId) == null){
             return false;
         }
 
-        Ticket ticket = this.getTicket(tickedId);
+        Ticket ticket = this.selectTicket(tickedId);
         return this.tickets.remove(ticket);
     }
 }
