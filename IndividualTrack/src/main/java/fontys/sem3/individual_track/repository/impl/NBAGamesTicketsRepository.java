@@ -16,9 +16,9 @@ public class NBAGamesTicketsRepository implements TicketsRepository {
     public NBAGamesTicketsRepository() {
         this.tickets = new ArrayList<>();
         this.tickets.add(new Ticket(1, 20, "Lakers vs Spurs"));
-        this.tickets.add(new Ticket(1, 20, "Lakers vs GSW"));
-        this.tickets.add(new Ticket(1, 25, "GSW vs Charlotte Hornets"));
-        this.tickets.add(new Ticket(1, 15, "Orlando Magic vs Wizards"));
+        this.tickets.add(new Ticket(2, 20, "Lakers vs GSW"));
+        this.tickets.add(new Ticket(3, 25, "GSW vs Charlotte Hornets"));
+        this.tickets.add(new Ticket(4, 15, "Orlando Magic vs Wizards"));
     }
 
     @Override
@@ -32,6 +32,7 @@ public class NBAGamesTicketsRepository implements TicketsRepository {
             if (ticket.getTicketId() == ticketId)
                 return ticket;
         }
+
         return null;
     }
 
