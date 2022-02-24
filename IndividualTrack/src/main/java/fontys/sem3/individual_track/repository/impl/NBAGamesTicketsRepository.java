@@ -11,7 +11,7 @@ import java.util.List;
 @Primary
 public class NBAGamesTicketsRepository implements TicketsRepository {
 
-    private  List<Ticket> tickets;
+    private final List<Ticket> tickets;
 
     public NBAGamesTicketsRepository() {
         this.tickets = new ArrayList<>();
