@@ -7,6 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
+
 public class Ticket {
     private long ticketId;
     private double price;
@@ -17,4 +18,5 @@ public class Ticket {
         this.price = price;
         this.game = game;
     }
+
 }
