@@ -11,6 +11,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins ="*", allowedHeaders = "*")
 @RequestMapping("/tickets")
 public class TicketsController {
     private final TicketsService ticketsService;
