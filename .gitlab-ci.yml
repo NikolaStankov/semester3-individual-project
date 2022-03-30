@@ -22,6 +22,7 @@ build-frontend:
   image: node:latest    # Run the job in a `node` docker image
   stage: build-frontend
   script:
+    - cd FrontEnd
     - cd Front_end_nba
     - cd nba-portal
     - npm install      # Run `npm install` and `npm build`
