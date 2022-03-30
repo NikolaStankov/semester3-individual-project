@@ -18,9 +18,6 @@ test:
     - ./gradlew test
     - ./gradlew.bat --stop
 
-stages:
-  - build
-
 build-frontend:
   image: node:latest    # Run the job in a `node` docker image
   stage: build-frontend
@@ -29,7 +26,6 @@ build-frontend:
     - cd nba-portal
     - npm install      # Run `npm install` and `npm build`
     - npm build
-
 
 sonarqube-check:
   image: gradle:jre11-slim
