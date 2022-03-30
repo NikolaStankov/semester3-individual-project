@@ -26,7 +26,7 @@ build-frontend:
     - cd Front_end_nba
     - cd nba-portal
     - npm install      # Run `npm install` and `npm build`
-    - npm build
+    - npm test
 
 sonarqube-check:
   image: gradle:jre11-slim
