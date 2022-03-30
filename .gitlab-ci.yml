@@ -1,6 +1,7 @@
 stages:
   - build
   - test
+  - build-frontend
   - sonarqube-check
 
 build:
@@ -16,6 +17,19 @@ test:
     - cd IndividualTrack
     - ./gradlew test
     - ./gradlew.bat --stop
+
+stages:
+  - build
+
+build-frontend:
+  image: node:latest    # Run the job in a `node` docker image
+  stage: build-frontend
+  script:
+    - cd Front_end_nba
+    - cd nba-portal
+    - npm install      # Run `npm install` and `npm build`
+    - npm build
+
 
 sonarqube-check:
   image: gradle:jre11-slim
