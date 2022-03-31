@@ -20,10 +20,10 @@ public class NBAGamesRepository implements GamesRepository {
 
     public NBAGamesRepository() {
         this.gamesList = new ArrayList<>();
-        this.gamesList.add(new Game(1, LocalDate.now(), 2022,
+        this.gamesList.add(new Game(1, "2018-10-16", 2022,
                 new Team(1, "LAL","Los Angeles", "Western", "Los Angeles Lakers"),
                 new Team(2, "LAC","Los Angeles", "Western", "Los Angeles Clippers")));
-        this.gamesList.add(new Game(2, LocalDate.now(), 2022,
+        this.gamesList.add(new Game(2, "2018-10-16", 2022,
                 new Team(3, "MIH", "Miami", "Eastern", "Miami Heat"),
                 new Team(4, "CHB", "Chicago", "Eastern", "Chicago Bulls")));
     }

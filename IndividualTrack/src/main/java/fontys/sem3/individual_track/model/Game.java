@@ -11,13 +11,13 @@ import java.util.Date;
 @Setter
 public class Game {
     private long id;
-    private LocalDate date;
+    private String date;
     private int season;
     private Team homeTeam;
     private Team visitorTeam;
 
     public Game(@JsonProperty("id") long id,
-                @JsonProperty("date") LocalDate date,
+                @JsonProperty("date") String date,
                 @JsonProperty("season") int season,
                 @JsonProperty("home_team") Team homeTeam,
                 @JsonProperty("visitor_team") Team visitorTeam){
