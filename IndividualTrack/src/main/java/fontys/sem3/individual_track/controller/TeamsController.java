@@ -46,10 +46,10 @@ public class TeamsController {
     @PostMapping
     public ResponseEntity<Team> addTeam(@RequestBody Team team) {
         if (!this.teamsService.addTeam(team)) {
-            String entity = "A team with this id(" + team.getTeamId() + ") already exists";
+            String entity = "A team with this id(" + team.getId() + ") already exists";
             return new ResponseEntity(entity, HttpStatus.CONFLICT);
         } else {
-            String url = "teams/" + team.getTeamId();
+            String url = "teams/" + team.getId();
             URI uri = URI.create(url);
             return new ResponseEntity(uri, HttpStatus.CREATED);
         }

@@ -18,10 +18,10 @@ public class NBATeamsRepository implements TeamsRepository {
 
     public NBATeamsRepository() {
         this.teamList = new ArrayList<>();
-        this.teamList.add(new Team(1, "LA Lakers", "Western"));
-        this.teamList.add(new Team(2, "LA Clippers", "Western"));
-        this.teamList.add(new Team(3, "Miami Heat", "Eastern"));
-        this.teamList.add(new Team(4, "Chicago Bulls", "Eastern"));
+        this.teamList.add(new Team(1, "LAL","Los Angeles", "Western", "Los Angeles Lakers"));
+        this.teamList.add(new Team(2, "LAC","Los Angeles", "Western", "Los Angeles Clippers"));
+        this.teamList.add(new Team(3, "MIH", "Miami", "Eastern", "Miami Heat"));
+        this.teamList.add(new Team(4, "CHB", "Chicago", "Eastern", "Chicago Bulls"));
     }
 
     @Override
@@ -32,7 +32,7 @@ public class NBATeamsRepository implements TeamsRepository {
     @Override
     public Team selectTeam(long teamId) {
         for (Team team : this.teamList) {
-            if (team.getTeamId() == teamId)
+            if (team.getId() == teamId)
                 return team;
         }
 
@@ -41,7 +41,7 @@ public class NBATeamsRepository implements TeamsRepository {
 
     @Override
     public boolean insertTeam(Team team) {
-        if (this.selectTeam(team.getTeamId()) != null) {
+        if (this.selectTeam(team.getId()) != null) {
             return false;
         }
 

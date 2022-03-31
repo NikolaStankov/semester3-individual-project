@@ -6,19 +6,25 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 @Getter
 @Setter
 
 public class Ticket {
-    private long ticketId;
+    private long id;
     private double price;
+    private LocalDate purchasedDate;
     private String game;
 
-    public Ticket(@JsonProperty("ticketId") long ticketId,
+    public Ticket(@JsonProperty("id") long id,
                   @JsonProperty("price") double price,
+                  @JsonProperty("purchased_date") LocalDate purchasedDate,
                   @JsonProperty("game") String game) {
-        this.ticketId = ticketId;
+        this.id = id;
         this.price = price;
+        this.purchasedDate = purchasedDate;
         this.game = game;
     }
 

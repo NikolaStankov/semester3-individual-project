@@ -5,6 +5,7 @@ import fontys.sem3.individual_track.repository.TicketsRepository;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 @Repository("nbaTickets")
@@ -15,10 +16,10 @@ public class NBAGamesTicketsRepository implements TicketsRepository {
 
     public NBAGamesTicketsRepository() {
         this.tickets = new ArrayList<>();
-        this.tickets.add(new Ticket(1, 20, "Lakers vs Spurs"));
-        this.tickets.add(new Ticket(2, 20, "Lakers vs GSW"));
-        this.tickets.add(new Ticket(3, 25, "GSW vs Charlotte Hornets"));
-        this.tickets.add(new Ticket(4, 15, "Orlando Magic vs Wizards"));
+        this.tickets.add(new Ticket(1, 20, LocalDate.now(), "Some game"));
+        this.tickets.add(new Ticket(2, 20, LocalDate.now(), "Some game"));
+        this.tickets.add(new Ticket(3, 25, LocalDate.now(), "Some game"));
+        this.tickets.add(new Ticket(4, 15, LocalDate.now(), "Some game"));
     }
 
     @Override
@@ -29,7 +30,7 @@ public class NBAGamesTicketsRepository implements TicketsRepository {
     @Override
     public Ticket selectTicket(long ticketId) {
         for (Ticket ticket : this.tickets) {
-            if (ticket.getTicketId() == ticketId)
+            if (ticket.getId() == ticketId)
                 return ticket;
         }
 
@@ -38,7 +39,7 @@ public class NBAGamesTicketsRepository implements TicketsRepository {
 
     @Override
     public boolean insertTicket(Ticket ticket) {
-        if (this.selectTicket(ticket.getTicketId()) != null){
+        if (this.selectTicket(ticket.getId()) != null){
             return false;
         }
 

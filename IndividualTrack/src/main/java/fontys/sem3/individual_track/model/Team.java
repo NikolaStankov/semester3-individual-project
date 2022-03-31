@@ -4,18 +4,28 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @Getter
 @Setter
 public class Team {
-    private long teamId;
-    private String name;
+    private long id;
+    private String abbreviation;
+    private String city;
     private String conference;
+    private String fullName;
 
-    public Team(@JsonProperty("teamId") long teamId,
-                @JsonProperty("name") String name,
-                @JsonProperty("conference") String conference) {
-        this.teamId = teamId;
-        this.name = name;
+    public Team(@JsonProperty("id") long id,
+                @JsonProperty("abbreviation") String abbreviation,
+                @JsonProperty("city") String city,
+                @JsonProperty("conference") String conference,
+                @JsonProperty("full_name") String fullName
+                ) {
+        this.id = id;
+        this.abbreviation = abbreviation;
+        this.city = city;
         this.conference = conference;
+        this.fullName = fullName;
     }
+
 }

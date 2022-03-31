@@ -46,10 +46,10 @@ public class TicketsController {
     @PostMapping
     public ResponseEntity<Ticket> addTicket(@RequestBody Ticket ticket) {
         if (!this.ticketsService.addTicket(ticket)) {
-            String entity = "A ticket with this id(" + ticket.getTicketId() + ") already exists";
+            String entity = "A ticket with this id(" + ticket.getId() + ") already exists";
             return new ResponseEntity(entity, HttpStatus.CONFLICT);
         } else {
-            String url = "tickets" + "/" + ticket.getTicketId();
+            String url = "tickets" + "/" + ticket.getId();
             URI uri = URI.create(url);
             return new ResponseEntity(uri, HttpStatus.CREATED);
         }
