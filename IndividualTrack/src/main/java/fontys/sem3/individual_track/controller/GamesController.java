@@ -1,22 +1,21 @@
 package fontys.sem3.individual_track.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
 import fontys.sem3.individual_track.business.GamesService;
 import fontys.sem3.individual_track.model.Game;
-import fontys.sem3.individual_track.model.Ticket;
+import fontys.sem3.individual_track.model.Team;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
-import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -25,7 +24,7 @@ import java.util.List;
 public class GamesController {
     private final GamesService gamesService;
     private final RestTemplate restTemplate;
-    private String externalURL = "https://www.balldontlie.io/api/v1/games";
+
 
     @Autowired
     public GamesController(GamesService gamesService,
@@ -35,22 +34,39 @@ public class GamesController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Game>> getAllGames() {
+    public ResponseEntity<List<Game>> getAllGames() throws JsonProcessingException {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("YYYY-MM-dd");
+        LocalDateTime now = LocalDateTime.now();
+        String currDate = dtf.format(now);
+
+        String externalURL = "https://www.balldontlie.io/api/v1/games?"+"start_date="+currDate;
+        System.out.println(externalURL);
 
         String gamesResponse = this.restTemplate.getForObject(externalURL, String.class);
+        JSONObject jsonObject = new JSONObject(gamesResponse);
+        JSONArray jsonArray = jsonObject.getJSONArray("data");
+        List<Game> gameList = new ArrayList<>();
 
-        ObjectMapper mapper = new ObjectMapper();
-        List<Game> gamesList = new ArrayList<>();
+        for (int i = 0; i < jsonArray.length(); i++){
+            long id = jsonArray.getJSONObject(i).getLong("id");
+            String date = jsonArray.getJSONObject(i).getString("date");
+            int season = jsonArray.getJSONObject(i).getInt("season");
 
-        try {
-            gamesList = mapper.readValue(gamesResponse, new TypeReference<List<Game>>(){});
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-            return ResponseEntity.notFound().build();
+            String homeTeamData = jsonArray.getJSONObject(i).getJSONObject("home_team").toString();
+            String visitorTeamData = jsonArray.getJSONObject(i).getJSONObject("visitor_team").toString();
+
+            ObjectMapper objectMapper = new ObjectMapper();
+
+            Team homeTeam = objectMapper.readValue(homeTeamData, Team.class);
+            Team visitorTeam = objectMapper.readValue(visitorTeamData, Team.class);
+
+            Game game = new Game(id, date, season, homeTeam, visitorTeam);
+
+            gameList.add(game);
         }
 
-        if (gamesList != null) {
-            return ResponseEntity.ok().body(gamesList);
+        if (!gameList.isEmpty()) {
+            return ResponseEntity.ok().body(gameList);
         }
         else{
             return ResponseEntity.notFound().build();

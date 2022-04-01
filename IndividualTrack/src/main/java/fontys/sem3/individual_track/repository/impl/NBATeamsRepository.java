@@ -18,10 +18,18 @@ public class NBATeamsRepository implements TeamsRepository {
 
     public NBATeamsRepository() {
         this.teamList = new ArrayList<>();
-        this.teamList.add(new Team(1, "LAL","Los Angeles", "Western", "Los Angeles Lakers"));
-        this.teamList.add(new Team(2, "LAC","Los Angeles", "Western", "Los Angeles Clippers"));
-        this.teamList.add(new Team(3, "MIH", "Miami", "Eastern", "Miami Heat"));
-        this.teamList.add(new Team(4, "CHB", "Chicago", "Eastern", "Chicago Bulls"));
+        this.teamList.add(new Team(1, "LAL","Los Angeles",
+                "Western","Pacific",
+                "Los Angeles Lakers", "Lakers"));
+        this.teamList.add(new Team(2, "LAC","Los Angeles",
+                "Western", "Pacific",
+                "Los Angeles Clippers", "Clippers"));
+        this.teamList.add(new Team(3, "MIH", "Miami",
+                "Eastern", "Pacific",
+                "Miami Heat", "Heat"));
+        this.teamList.add(new Team(4, "CHB", "Chicago",
+                "Eastern", "Pacific",
+                "Chicago Bulls", "Bulls"));
     }
 
     @Override

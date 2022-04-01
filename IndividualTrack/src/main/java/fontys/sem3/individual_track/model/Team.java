@@ -13,19 +13,24 @@ public class Team {
     private String abbreviation;
     private String city;
     private String conference;
+    private String division;
     private String fullName;
+    private String name;
 
     public Team(@JsonProperty("id") long id,
                 @JsonProperty("abbreviation") String abbreviation,
                 @JsonProperty("city") String city,
                 @JsonProperty("conference") String conference,
-                @JsonProperty("full_name") String fullName
+                @JsonProperty("division") String division,
+                @JsonProperty("full_name") String fullName,
+                @JsonProperty("name") String name
                 ) {
         this.id = id;
         this.abbreviation = abbreviation;
         this.city = city;
         this.conference = conference;
+        this.division = division;
         this.fullName = fullName;
+        this.name = name;
     }
-
 }
