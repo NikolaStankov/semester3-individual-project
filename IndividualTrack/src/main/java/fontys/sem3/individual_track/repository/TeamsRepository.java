@@ -1,7 +1,6 @@
 package fontys.sem3.individual_track.repository;
 
 import fontys.sem3.individual_track.model.Team;
-import fontys.sem3.individual_track.model.Ticket;
 
 import java.util.List;
 

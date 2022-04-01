@@ -3,7 +3,6 @@ package fontys.sem3.individual_track.business.impl;
 import fontys.sem3.individual_track.business.GamesService;
 import fontys.sem3.individual_track.model.Game;
 import fontys.sem3.individual_track.repository.GamesRepository;
-import fontys.sem3.individual_track.repository.TeamsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;

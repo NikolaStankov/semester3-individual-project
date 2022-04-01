@@ -12,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -35,12 +34,11 @@ public class GamesController {
 
     @GetMapping
     public ResponseEntity<List<Game>> getAllGames() throws JsonProcessingException {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("YYYY-MM-dd");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDateTime now = LocalDateTime.now();
         String currDate = dtf.format(now);
 
         String externalURL = "https://www.balldontlie.io/api/v1/games?"+"start_date="+currDate;
-        System.out.println(externalURL);
 
         String gamesResponse = this.restTemplate.getForObject(externalURL, String.class);
         JSONObject jsonObject = new JSONObject(gamesResponse);

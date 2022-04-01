@@ -1,9 +1,7 @@
 package fontys.sem3.individual_track.repository.impl;
 
 import fontys.sem3.individual_track.model.Team;
-import fontys.sem3.individual_track.model.Ticket;
 import fontys.sem3.individual_track.repository.TeamsRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
@@ -22,13 +20,13 @@ public class NBATeamsRepository implements TeamsRepository {
                 "Western","Pacific",
                 "Los Angeles Lakers", "Lakers"));
         this.teamList.add(new Team(2, "LAC","Los Angeles",
-                "Western", "Pacific",
+                "Western", "Atlantic",
                 "Los Angeles Clippers", "Clippers"));
         this.teamList.add(new Team(3, "MIH", "Miami",
-                "Eastern", "Pacific",
+                "Eastern", "Central",
                 "Miami Heat", "Heat"));
         this.teamList.add(new Team(4, "CHB", "Chicago",
-                "Eastern", "Pacific",
+                "Eastern", "Southwest",
                 "Chicago Bulls", "Bulls"));
     }
 

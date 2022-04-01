@@ -16,10 +16,10 @@ public class NBAGamesTicketsRepository implements TicketsRepository {
 
     public NBAGamesTicketsRepository() {
         this.tickets = new ArrayList<>();
-        this.tickets.add(new Ticket(1, 20, LocalDate.now(), "Some game"));
-        this.tickets.add(new Ticket(2, 20, LocalDate.now(), "Some game"));
-        this.tickets.add(new Ticket(3, 25, LocalDate.now(), "Some game"));
-        this.tickets.add(new Ticket(4, 15, LocalDate.now(), "Some game"));
+        this.tickets.add(new Ticket(1, 20, LocalDate.now(), "Clippers vs Lakers"));
+        this.tickets.add(new Ticket(2, 20, LocalDate.now(), "Bulls vs Wizards"));
+        this.tickets.add(new Ticket(3, 25, LocalDate.now(), "Minnesota vs Celtics"));
+        this.tickets.add(new Ticket(4, 15, LocalDate.now(), "Raptors vs Suns"));
     }
 
     @Override

@@ -1,7 +1,6 @@
 package fontys.sem3.individual_track.business;
 
 import fontys.sem3.individual_track.model.Game;
-import fontys.sem3.individual_track.model.Ticket;
 
 import java.util.List;
 

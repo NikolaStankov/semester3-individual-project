@@ -2,14 +2,11 @@ package fontys.sem3.individual_track.repository.impl;
 
 import fontys.sem3.individual_track.model.Game;
 import fontys.sem3.individual_track.model.Team;
-import fontys.sem3.individual_track.model.Ticket;
 import fontys.sem3.individual_track.repository.GamesRepository;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Repository("nbaGames")
@@ -26,15 +23,15 @@ public class NBAGamesRepository implements GamesRepository {
                         "Western","Pacific",
                         "Los Angeles Lakers", "Lakers"),
                 new Team(2, "LAC","Los Angeles",
-                        "Western", "Pacific",
+                        "Western", "Atlantic",
                         "Los Angeles Clippers", "Clippers")));
 
         this.gamesList.add(new Game(2, "2018-10-16", 2022,
                 new Team(3, "MIH", "Miami",
-                        "Eastern", "Pacific",
+                        "Eastern", "Central",
                         "Miami Heat", "Heat"),
                 new Team(4, "CHB", "Chicago",
-                        "Eastern", "Pacific",
+                        "Eastern", "Southwest",
                         "Chicago Bulls", "Bulls")));
     }
 
