@@ -1,23 +1,14 @@
 import React, { useState, useEffect } from "react";
 import TicketsList from "../../components/TicketsList";
+import useFetch from "../../custom-hooks/useFetch";
 
 const Tickets = () => {
-  const [tickets, setTickets] = useState([]);
-  var axios = require("axios").default;
-
-  const getTicketsFromBackend = () => {
-    axios.get("http://localhost:8080/tickets").then((response) => {
-      setTickets(response.data || []);
-    });
-  };
-
-  useEffect(() => {
-    getTicketsFromBackend();
-  }, []);
+  const url = "http://localhost:8080/tickets";
+  const { data: tickets } = useFetch(url);
 
   return (
     <>
-      <TicketsList tickets={tickets} />
+      {tickets && <TicketsList tickets={tickets} />}
       <div> ***THESE COME FROM BACK END***</div>
     </>
   );

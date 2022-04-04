@@ -1,29 +1,12 @@
 import React, { useState, useEffect } from "react";
 import TeamList from "../../components/TeamList";
+import useFetch from "../../custom-hooks/useFetch";
 
 const Teams = () => {
-    const [teams, setTeams] = useState(null);
+  const url = "http://localhost:8080/teams";
+  const { data: teams } = useFetch(url);
 
-    const getTeams = () => {
-    var axios = require("axios").default;
+  return <>{teams && <TeamList teams={teams} />}</>;
+};
 
-    axios.get("http://localhost:8080/teams").then((response) => {
-      const teamsData = response.data || [];
-      setTeams(teamsData);
-      console.log(response.data);
-      console.log(teams);
-    });
-    }
-
-    useEffect(() => {
-        getTeams();
-    }, [])
-
-    return ( 
-        <>
-        {teams && <TeamList teams={teams} />}
-        </>
-     );
-}
- 
 export default Teams;
