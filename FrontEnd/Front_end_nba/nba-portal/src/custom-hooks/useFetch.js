@@ -7,7 +7,7 @@ const useFetch = (url) => {
     var axios = require("axios").default;
 
     axios.get(url).then((response) => {
-      const responseData = response.data || [];
+      const responseData = response.data;
       setData(responseData);
       console.log(responseData);
       console.log(data);

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
 import useFetch from "../../custom-hooks/useFetch";
 
@@ -10,7 +10,15 @@ const GameDetails = () => {
 
   return (
     <>
-      <div>Game details - id:{id}</div>
+      {game && (
+        <div className="game-details">
+          <div>Game details - id:{id}</div>
+          <div>Date: {game.date}</div>
+          <div>
+            {game.home_team.full_name} vs {game.visitor_team.full_name}
+          </div>
+        </div>
+      )}
     </>
   );
 };
