@@ -1,10 +1,10 @@
 package fontys.sem3.individual_track.business.impl;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import fontys.sem3.individual_track.business.GamesService;
 import fontys.sem3.individual_track.model.Game;
 import fontys.sem3.individual_track.repository.GamesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,12 +15,12 @@ public class NBAGamesService implements GamesService {
     private final GamesRepository gamesRepository;
 
     @Autowired
-    public NBAGamesService(@Qualifier("nbaGames") GamesRepository gamesRepository) {
+    public NBAGamesService(GamesRepository gamesRepository) {
         this.gamesRepository = gamesRepository;
     }
 
     @Override
-    public List<Game> getAllGames() {
+    public List<Game> getAllGames() throws JsonProcessingException {
         return this.gamesRepository.selectAllGames();
     }
 

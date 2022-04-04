@@ -1,31 +1,64 @@
 package fontys.sem3.individual_track.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import fontys.sem3.individual_track.business.TeamsService;
+import fontys.sem3.individual_track.model.Game;
 import fontys.sem3.individual_track.model.Team;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestOperations;
+import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins ="*", allowedHeaders = "*")
 @RequestMapping("/teams")
 public class TeamsController {
 
     private final TeamsService teamsService;
+    private final RestTemplate restTemplate;
 
     @Autowired
-    public TeamsController(TeamsService teamsService) {
+    public TeamsController(TeamsService teamsService, RestTemplate restTemplate) {
         this.teamsService = teamsService;
+        this.restTemplate = restTemplate;
     }
 
     @GetMapping
-    public ResponseEntity<List<Team>> getAllTeams() {
-        List<Team> teamList = this.teamsService.getAllTeams();
+    public ResponseEntity<List<Team>> getAllTeams() throws JsonProcessingException {
+        String externalURL = "https://www.balldontlie.io/api/v1/teams";
 
-        if (teamList != null) {
+        String teamsResponse = this.restTemplate.getForObject(externalURL, String.class);
+        JSONObject jsonObject = new JSONObject(teamsResponse);
+        JSONArray jsonArray = jsonObject.getJSONArray("data");
+
+        List<Team> teamList = new ArrayList<>();
+
+        for (int i = 0; i < jsonArray.length(); i++){
+            long id = jsonArray.getJSONObject(i).getLong("id");
+            String abbreviation = jsonArray.getJSONObject(i).getString("abbreviation");
+            String city = jsonArray.getJSONObject(i).getString("city");
+            String conference = jsonArray.getJSONObject(i).getString("conference");
+            String division = jsonArray.getJSONObject(i).getString("division");
+            String fullName = jsonArray.getJSONObject(i).getString("full_name");
+            String name = jsonArray.getJSONObject(i).getString("name");
+
+            Team team = new Team(id, abbreviation, city, conference,
+                    division, fullName, name);
+            teamList.add(team);
+
+        }
+
+        if (!teamList.isEmpty()) {
             return ResponseEntity.ok().body(teamList);
         } else {
             return ResponseEntity.notFound().build();

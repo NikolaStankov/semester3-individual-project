@@ -9,36 +9,9 @@ import Home from "./pages/Home/Home";
 import Games from "./pages/Games/Games";
 import Tickets from "./pages/Tickets/Tickets";
 import GameDetails from "./pages/Games/GameDetails";
+import Teams from "./pages/Teams/Teams"
 
 function App() {
-  /*const [teams, setTeams] = useState();
-  const [pageCount, setPageCount] = useState(1);
-
-  var axios = require("axios").default;
-
-  const getPlayers = () => {
-    setPageCount(pageCount + 1);
-    console.log(pageCount);
-
-    var options = {
-      method: "GET",
-      url: "https://free-nba.p.rapidapi.com/players",
-      params: { page: pageCount, per_page: "25" },
-      headers: {
-        "x-rapidapi-host": "free-nba.p.rapidapi.com",
-        "x-rapidapi-key": "d5e4bbdd15msh4006a737ac378b4p14971ajsnfea34a9968a3",
-      },
-    };
-
-    axios
-      .request(options)
-      .then(function (response) {
-        console.log(response.data);
-      })
-      .catch(function (error) {
-        console.error(error);
-      });
-  };*/
 
   return (
     <>
@@ -73,6 +46,7 @@ function App() {
             <Route exact path="/games" element={<Games />} />
             <Route path="/games/:id" element={<GameDetails />} />
             <Route path="/tickets" element={<Tickets />} />
+            <Route path="/teams" element={<Teams />} />
           </Routes>
         </Router>
       </div>
