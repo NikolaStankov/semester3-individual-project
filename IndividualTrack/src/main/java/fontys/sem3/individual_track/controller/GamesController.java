@@ -11,18 +11,14 @@ import org.springframework.web.client.RestTemplate;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins ="*", allowedHeaders = "*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/games")
 public class GamesController {
     private final GamesService gamesService;
-    private final RestTemplate restTemplate;
-
 
     @Autowired
-    public GamesController(GamesService gamesService,
-                           RestTemplate restTemplate){
+    public GamesController(GamesService gamesService) {
         this.gamesService = gamesService;
-        this.restTemplate = restTemplate;
     }
 
     @GetMapping
@@ -31,8 +27,7 @@ public class GamesController {
 
         if (!gameList.isEmpty()) {
             return ResponseEntity.ok().body(gameList);
-        }
-        else{
+        } else {
             return ResponseEntity.notFound().build();
         }
     }

@@ -8,6 +8,7 @@ import Games from "./pages/Games/Games";
 import Tickets from "./pages/Tickets/Tickets";
 import GameDetails from "./pages/Games/GameDetails";
 import Teams from "./pages/Teams/Teams";
+import Players from "./pages/Players/Players";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path="/games/:id" element={<GameDetails />} />
             <Route path="/tickets" element={<Tickets />} />
             <Route path="/teams" element={<Teams />} />
+            <Route path="/players" element={<Players />} />
           </Routes>
         </Router>
       </div>

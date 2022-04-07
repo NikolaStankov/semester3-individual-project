@@ -7,7 +7,10 @@ import java.util.List;
 
 public interface GamesService {
     List<Game> getAllGames() throws JsonProcessingException;
+
     Game getGame(long gameId);
+
     boolean addGame(Game game);
+
     boolean removeGame(long gameId);
 }

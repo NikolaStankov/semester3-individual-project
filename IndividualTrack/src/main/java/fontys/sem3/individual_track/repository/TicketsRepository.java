@@ -6,7 +6,10 @@ import java.util.List;
 
 public interface TicketsRepository {
     List<Ticket> selectAllTickets();
+
     Ticket selectTicket(long ticketId);
+
     boolean insertTicket(Ticket ticket);
+
     boolean deleteTicket(long tickedId);
 }

@@ -6,7 +6,10 @@ import java.util.List;
 
 public interface TeamsService {
     List<Team> getAllTeams();
+
     Team getTeam(long teamId);
+
     boolean addTeam(Team team);
+
     boolean removeTeam(long teamId);
 }

@@ -6,7 +6,10 @@ import java.util.List;
 
 public interface TicketsService {
     List<Ticket> getAllTickets();
+
     Ticket getTicket(long ticketId);
+
     boolean addTicket(Ticket ticket);
+
     boolean removeTicket(long tickedId);
 }

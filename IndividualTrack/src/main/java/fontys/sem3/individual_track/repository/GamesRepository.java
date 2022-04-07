@@ -7,7 +7,10 @@ import java.util.List;
 
 public interface GamesRepository {
     List<Game> selectAllGames() throws JsonProcessingException;
+
     Game selectGame(long gameId);
+
     boolean insertGame(Game game);
+
     boolean deleteGame(long gameId);
 }

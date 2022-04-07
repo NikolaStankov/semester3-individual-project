@@ -6,7 +6,10 @@ import java.util.List;
 
 public interface TeamsRepository {
     List<Team> selectAllTeams();
+
     Team selectTeam(long teamId);
+
     boolean insertTeam(Team team);
+
     boolean deleteTeam(long teamId);
 }

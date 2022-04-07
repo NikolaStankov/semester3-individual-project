@@ -31,11 +31,11 @@ public class NBAGamesService implements GamesService {
 
     @Override
     public boolean addGame(Game game) {
-       return this.gamesRepository.insertGame(game);
+        return this.gamesRepository.insertGame(game);
     }
 
     @Override
     public boolean removeGame(long gameId) {
-        return  this.gamesRepository.deleteGame(gameId);
+        return this.gamesRepository.deleteGame(gameId);
     }
 }
