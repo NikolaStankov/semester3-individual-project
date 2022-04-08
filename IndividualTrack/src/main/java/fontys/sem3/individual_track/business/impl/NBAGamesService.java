@@ -1,41 +1,51 @@
 package fontys.sem3.individual_track.business.impl;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import fontys.sem3.individual_track.business.GamesService;
+import fontys.sem3.individual_track.business.converter.GameDTOConverter;
 import fontys.sem3.individual_track.model.GameDTO;
 import fontys.sem3.individual_track.repository.GamesRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import fontys.sem3.individual_track.repository.entity.Game;
+import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
+@Primary
 public class NBAGamesService implements GamesService {
 
     private final GamesRepository gamesRepository;
 
-    @Autowired
-    public NBAGamesService(GamesRepository gamesRepository) {
-        this.gamesRepository = gamesRepository;
+    @Override
+    public List<GameDTO> getAllGames() {
+        List<Game> gameList = this.gamesRepository.findAll();
+        List<GameDTO> gameDTOList = new ArrayList<>();
+
+        for (Game game : gameList) {
+            gameDTOList.add(GameDTOConverter.convertToDTO(game));
+        }
+
+        return gameDTOList;
     }
 
     @Override
-    public List<GameDTO> getAllGames() throws JsonProcessingException {
-        return this.gamesRepository.selectAllGames();
+    public Optional<GameDTO> getGame(long gameId) {
+
+        return this.gamesRepository.findById(gameId)
+                .map(GameDTOConverter::convertToDTO);
     }
 
     @Override
-    public GameDTO getGame(long gameId) {
-        return this.gamesRepository.selectGame(gameId);
-    }
-
-    @Override
-    public boolean addGame(GameDTO game) {
-        return this.gamesRepository.insertGame(game);
+    public boolean addGame(Game game) {
+        return false;
     }
 
     @Override
     public boolean removeGame(long gameId) {
-        return this.gamesRepository.deleteGame(gameId);
+        return false;
     }
 }

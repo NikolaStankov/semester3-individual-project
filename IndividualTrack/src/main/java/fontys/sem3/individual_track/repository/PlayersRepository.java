@@ -11,5 +11,5 @@ public interface PlayersRepository {
 
     boolean insertPlayer(PlayerDTO player);
 
-    boolean deletePlayer(long playerId);
+    boolean deletePlayer(long plaayerId);
 }

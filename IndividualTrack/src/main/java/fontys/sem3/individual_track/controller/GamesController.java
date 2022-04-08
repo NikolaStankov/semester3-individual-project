@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -33,12 +34,12 @@ public class GamesController {
 
     @GetMapping("{gameId}")
     public ResponseEntity<GameDTO> getGameById(@PathVariable(value = "gameId") long gameId) {
-        GameDTO game = this.gamesService.getGame(gameId);
+        Optional<GameDTO> optionalGameDTO = this.gamesService.getGame(gameId);
 
-        if (game != null) {
-            return ResponseEntity.ok().body(game);
-        } else {
+        if (optionalGameDTO.isEmpty()) {
             return ResponseEntity.notFound().build();
+        } else {
+            return ResponseEntity.ok().body(optionalGameDTO.get());
         }
     }
 }

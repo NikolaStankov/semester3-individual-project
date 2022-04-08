@@ -1,27 +1,25 @@
 package fontys.sem3.individual_track.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-@Getter
-@Setter
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class GameDTO {
-    private long id;
-    private String date;
-    private int season;
-    private TeamDTO homeTeam;
-    private TeamDTO visitorTeam;
+    @JsonProperty("id")
+    private Long id;
 
-    public GameDTO(@JsonProperty("id") long id,
-                   @JsonProperty("date") String date,
-                   @JsonProperty("season") int season,
-                   @JsonProperty("home_team") TeamDTO homeTeam,
-                   @JsonProperty("visitor_team") TeamDTO visitorTeam){
-        this.id = id;
-        this.date = date;
-        this.season = season;
-        this.homeTeam = homeTeam;
-        this.visitorTeam = visitorTeam;
-    }
+    @JsonProperty("date")
+    private String date;
+
+    @JsonProperty("season")
+    private int season;
+
+    @JsonProperty("home_team")
+    private TeamDTO homeTeam;
+
+    @JsonProperty("visitor_team")
+    private TeamDTO visitorTeam;
 }

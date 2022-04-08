@@ -1,34 +1,31 @@
 package fontys.sem3.individual_track.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-@Getter
-@Setter
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class TeamDTO {
-    private long id;
-    private String abbreviation;
-    private String city;
-    private String conference;
-    private String division;
-    private String fullName;
-    private String name;
+    @JsonProperty("id")
+    private Long id;
 
-    public TeamDTO(@JsonProperty("id") long id,
-                   @JsonProperty("abbreviation") String abbreviation,
-                   @JsonProperty("city") String city,
-                   @JsonProperty("conference") String conference,
-                   @JsonProperty("division") String division,
-                   @JsonProperty("full_name") String fullName,
-                   @JsonProperty("name") String name
-                ) {
-        this.id = id;
-        this.abbreviation = abbreviation;
-        this.city = city;
-        this.conference = conference;
-        this.division = division;
-        this.fullName = fullName;
-        this.name = name;
-    }
+    @JsonProperty("abbreviation")
+    private String abbreviation;
+
+    @JsonProperty("city")
+    private String city;
+
+    @JsonProperty("conference")
+    private String conference;
+
+    @JsonProperty("division")
+    private String division;
+
+    @JsonProperty("full_name")
+    private String fullName;
+
+    @JsonProperty("name")
+    private String name;
 }
