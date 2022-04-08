@@ -1,7 +1,7 @@
 package fontys.sem3.individual_track.business.impl;
 
 import fontys.sem3.individual_track.business.PlayersService;
-import fontys.sem3.individual_track.model.Player;
+import fontys.sem3.individual_track.model.PlayerDTO;
 import fontys.sem3.individual_track.repository.PlayersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,17 +19,17 @@ public class NBAPlayersService implements PlayersService {
     }
 
     @Override
-    public List<Player> getAllPlayers() {
+    public List<PlayerDTO> getAllPlayers() {
         return this.playersRepository.selectAllPlayers();
     }
 
     @Override
-    public Player getPlayer(long playerId) {
+    public PlayerDTO getPlayer(long playerId) {
         return this.playersRepository.selectPlayer(playerId);
     }
 
     @Override
-    public boolean addPlayer(Player player) {
+    public boolean addPlayer(PlayerDTO player) {
         return this.playersRepository.insertPlayer(player);
     }
 

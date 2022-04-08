@@ -1,9 +1,8 @@
 package fontys.sem3.individual_track.repository.impl;
 
-import fontys.sem3.individual_track.model.Game;
-import fontys.sem3.individual_track.model.Team;
+import fontys.sem3.individual_track.model.GameDTO;
+import fontys.sem3.individual_track.model.TeamDTO;
 import fontys.sem3.individual_track.repository.GamesRepository;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -12,36 +11,36 @@ import java.util.List;
 @Repository("gamesMock")
 public class NBAGamesRepositoryMock implements GamesRepository {
 
-    private final List<Game> gamesList;
+    private final List<GameDTO> gamesList;
 
     public NBAGamesRepositoryMock() {
         this.gamesList = new ArrayList<>();
 
-        this.gamesList.add(new Game(1, "2018-10-16", 2022,
-                new Team(1, "LAL","Los Angeles",
+        this.gamesList.add(new GameDTO(1, "2018-10-16", 2022,
+                new TeamDTO(1, "LAL","Los Angeles",
                         "Western","Pacific",
                         "Los Angeles Lakers", "Lakers"),
-                new Team(2, "LAC","Los Angeles",
+                new TeamDTO(2, "LAC","Los Angeles",
                         "Western", "Atlantic",
                         "Los Angeles Clippers", "Clippers")));
 
-        this.gamesList.add(new Game(2, "2018-10-16", 2022,
-                new Team(3, "MIH", "Miami",
+        this.gamesList.add(new GameDTO(2, "2018-10-16", 2022,
+                new TeamDTO(3, "MIH", "Miami",
                         "Eastern", "Central",
                         "Miami Heat", "Heat"),
-                new Team(4, "CHB", "Chicago",
+                new TeamDTO(4, "CHB", "Chicago",
                         "Eastern", "Southwest",
                         "Chicago Bulls", "Bulls")));
     }
 
     @Override
-    public List<Game> selectAllGames() {
+    public List<GameDTO> selectAllGames() {
         return this.gamesList;
     }
 
     @Override
-    public Game selectGame(long gameId) {
-        for (Game game: gamesList){
+    public GameDTO selectGame(long gameId) {
+        for (GameDTO game: gamesList){
             if (game.getId() == gameId){
                 return game;
             }
@@ -51,7 +50,7 @@ public class NBAGamesRepositoryMock implements GamesRepository {
     }
 
     @Override
-    public boolean insertGame(Game game) {
+    public boolean insertGame(GameDTO game) {
         if (this.selectGame(game.getId()) != null){
             return false;
         }
@@ -66,7 +65,7 @@ public class NBAGamesRepositoryMock implements GamesRepository {
             return false;
         }
 
-        Game game = this.selectGame(gameId);
+        GameDTO game = this.selectGame(gameId);
         return this.gamesList.remove(game);
     }
 }

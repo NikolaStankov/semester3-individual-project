@@ -9,16 +9,16 @@ import java.time.LocalDate;
 @Getter
 @Setter
 
-public class Ticket {
+public class TicketDTO {
     private long id;
     private double price;
     private LocalDate purchasedDate;
     private String game;
 
-    public Ticket(@JsonProperty("id") long id,
-                  @JsonProperty("price") double price,
-                  @JsonProperty("purchased_date") LocalDate purchasedDate,
-                  @JsonProperty("game") String game) {
+    public TicketDTO(@JsonProperty("id") long id,
+                     @JsonProperty("price") double price,
+                     @JsonProperty("purchased_date") LocalDate purchasedDate,
+                     @JsonProperty("game") String game) {
         this.id = id;
         this.price = price;
         this.purchasedDate = purchasedDate;

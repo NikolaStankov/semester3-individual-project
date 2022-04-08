@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class Team {
+public class TeamDTO {
     private long id;
     private String abbreviation;
     private String city;
@@ -15,13 +15,13 @@ public class Team {
     private String fullName;
     private String name;
 
-    public Team(@JsonProperty("id") long id,
-                @JsonProperty("abbreviation") String abbreviation,
-                @JsonProperty("city") String city,
-                @JsonProperty("conference") String conference,
-                @JsonProperty("division") String division,
-                @JsonProperty("full_name") String fullName,
-                @JsonProperty("name") String name
+    public TeamDTO(@JsonProperty("id") long id,
+                   @JsonProperty("abbreviation") String abbreviation,
+                   @JsonProperty("city") String city,
+                   @JsonProperty("conference") String conference,
+                   @JsonProperty("division") String division,
+                   @JsonProperty("full_name") String fullName,
+                   @JsonProperty("name") String name
                 ) {
         this.id = id;
         this.abbreviation = abbreviation;

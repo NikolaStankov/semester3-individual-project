@@ -2,7 +2,7 @@ package fontys.sem3.individual_track.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import fontys.sem3.individual_track.business.PlayersService;
-import fontys.sem3.individual_track.model.Player;
+import fontys.sem3.individual_track.model.PlayerDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -24,8 +24,8 @@ public class PlayersController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Player>> getAllPlayers() throws JsonProcessingException {
-        List<Player> playerList = this.playersService.getAllPlayers();
+    public ResponseEntity<List<PlayerDTO>> getAllPlayers() throws JsonProcessingException {
+        List<PlayerDTO> playerList = this.playersService.getAllPlayers();
 
         if (!playerList.isEmpty()) {
             return ResponseEntity.ok().body(playerList);

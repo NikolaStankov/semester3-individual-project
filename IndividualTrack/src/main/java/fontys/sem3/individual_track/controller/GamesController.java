@@ -2,11 +2,10 @@ package fontys.sem3.individual_track.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import fontys.sem3.individual_track.business.GamesService;
-import fontys.sem3.individual_track.model.Game;
+import fontys.sem3.individual_track.model.GameDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
@@ -22,8 +21,8 @@ public class GamesController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Game>> getAllGames() throws JsonProcessingException {
-        List<Game> gameList = this.gamesService.getAllGames();
+    public ResponseEntity<List<GameDTO>> getAllGames() throws JsonProcessingException {
+        List<GameDTO> gameList = this.gamesService.getAllGames();
 
         if (!gameList.isEmpty()) {
             return ResponseEntity.ok().body(gameList);
@@ -33,8 +32,8 @@ public class GamesController {
     }
 
     @GetMapping("{gameId}")
-    public ResponseEntity<Game> getGameById(@PathVariable(value = "gameId") long gameId) {
-        Game game = this.gamesService.getGame(gameId);
+    public ResponseEntity<GameDTO> getGameById(@PathVariable(value = "gameId") long gameId) {
+        GameDTO game = this.gamesService.getGame(gameId);
 
         if (game != null) {
             return ResponseEntity.ok().body(game);

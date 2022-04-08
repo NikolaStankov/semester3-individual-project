@@ -1,15 +1,15 @@
 package fontys.sem3.individual_track.repository;
 
-import fontys.sem3.individual_track.model.Player;
+import fontys.sem3.individual_track.model.PlayerDTO;
 
 import java.util.List;
 
 public interface PlayersRepository {
-    List<Player> selectAllPlayers();
+    List<PlayerDTO> selectAllPlayers();
 
-    Player selectPlayer(long playerId);
+    PlayerDTO selectPlayer(long playerId);
 
-    boolean insertPlayer(Player player);
+    boolean insertPlayer(PlayerDTO player);
 
     boolean deletePlayer(long playerId);
 }

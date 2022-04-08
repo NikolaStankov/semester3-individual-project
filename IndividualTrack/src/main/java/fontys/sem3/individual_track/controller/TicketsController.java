@@ -1,7 +1,7 @@
 package fontys.sem3.individual_track.controller;
 
 import fontys.sem3.individual_track.business.TicketsService;
-import fontys.sem3.individual_track.model.Ticket;
+import fontys.sem3.individual_track.model.TicketDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,8 +22,8 @@ public class TicketsController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Ticket>> getAllTickets() {
-        List<Ticket> ticketList = this.ticketsService.getAllTickets();
+    public ResponseEntity<List<TicketDTO>> getAllTickets() {
+        List<TicketDTO> ticketList = this.ticketsService.getAllTickets();
 
         if (ticketList != null) {
             return ResponseEntity.ok().body(ticketList);
@@ -33,8 +33,8 @@ public class TicketsController {
     }
 
     @GetMapping("{ticketId}")
-    public ResponseEntity<Ticket> getTicketById(@PathVariable(value = "ticketId") long ticketId) {
-        Ticket ticket = this.ticketsService.getTicket(ticketId);
+    public ResponseEntity<TicketDTO> getTicketById(@PathVariable(value = "ticketId") long ticketId) {
+        TicketDTO ticket = this.ticketsService.getTicket(ticketId);
 
         if (ticket != null) {
             return ResponseEntity.ok().body(ticket);
@@ -44,7 +44,7 @@ public class TicketsController {
     }
 
     @PostMapping
-    public ResponseEntity<Ticket> addTicket(@RequestBody Ticket ticket) {
+    public ResponseEntity<TicketDTO> addTicket(@RequestBody TicketDTO ticket) {
         if (!this.ticketsService.addTicket(ticket)) {
             String entity = "A ticket with this id(" + ticket.getId() + ") already exists";
             return new ResponseEntity(entity, HttpStatus.CONFLICT);

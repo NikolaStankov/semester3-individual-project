@@ -2,8 +2,8 @@ package fontys.sem3.individual_track.repository.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import fontys.sem3.individual_track.model.Game;
-import fontys.sem3.individual_track.model.Team;
+import fontys.sem3.individual_track.model.GameDTO;
+import fontys.sem3.individual_track.model.TeamDTO;
 import fontys.sem3.individual_track.repository.GamesRepository;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -21,7 +21,7 @@ import java.util.List;
 @Primary
 public class NBAGamesRepository implements GamesRepository {
     private final RestTemplate restTemplate;
-    private final List<Game> gameList;
+    private final List<GameDTO> gameList;
 
     @Autowired
     public NBAGamesRepository(RestTemplate restTemplate) throws JsonProcessingException {
@@ -29,7 +29,7 @@ public class NBAGamesRepository implements GamesRepository {
         this.gameList = fetchGamesFromAPI();
     }
 
-    private List<Game> fetchGamesFromAPI() throws JsonProcessingException {
+    private List<GameDTO> fetchGamesFromAPI() throws JsonProcessingException {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDateTime now = LocalDateTime.now();
         String currDate = dtf.format(now);
@@ -39,7 +39,7 @@ public class NBAGamesRepository implements GamesRepository {
         String gamesResponse = this.restTemplate.getForObject(externalURL, String.class);
         JSONObject jsonObject = new JSONObject(gamesResponse);
         JSONArray jsonArray = jsonObject.getJSONArray("data");
-        List<Game> gameList = new ArrayList<>();
+        List<GameDTO> gameList = new ArrayList<>();
 
         for (int i = 0; i < jsonArray.length(); i++){
             long id = jsonArray.getJSONObject(i).getLong("id");
@@ -51,10 +51,10 @@ public class NBAGamesRepository implements GamesRepository {
 
             ObjectMapper objectMapper = new ObjectMapper();
 
-            Team homeTeam = objectMapper.readValue(homeTeamData, Team.class);
-            Team visitorTeam = objectMapper.readValue(visitorTeamData, Team.class);
+            TeamDTO homeTeam = objectMapper.readValue(homeTeamData, TeamDTO.class);
+            TeamDTO visitorTeam = objectMapper.readValue(visitorTeamData, TeamDTO.class);
 
-            Game game = new Game(id, date, season, homeTeam, visitorTeam);
+            GameDTO game = new GameDTO(id, date, season, homeTeam, visitorTeam);
 
             gameList.add(game);
         }
@@ -63,13 +63,13 @@ public class NBAGamesRepository implements GamesRepository {
     }
 
     @Override
-    public List<Game> selectAllGames() {
+    public List<GameDTO> selectAllGames() {
         return this.gameList;
     }
 
     @Override
-    public Game selectGame(long gameId) {
-        for (Game game: gameList){
+    public GameDTO selectGame(long gameId) {
+        for (GameDTO game: gameList){
             if (game.getId() == gameId){
                 return game;
             }
@@ -79,7 +79,7 @@ public class NBAGamesRepository implements GamesRepository {
     }
 
     @Override
-    public boolean insertGame(Game game) {
+    public boolean insertGame(GameDTO game) {
         if (this.selectGame(game.getId()) != null){
             return false;
         }
@@ -94,7 +94,7 @@ public class NBAGamesRepository implements GamesRepository {
             return false;
         }
 
-        Game game = this.selectGame(gameId);
+        GameDTO game = this.selectGame(gameId);
         return this.gameList.remove(game);
     }
 }

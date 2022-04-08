@@ -6,18 +6,18 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class Game {
+public class GameDTO {
     private long id;
     private String date;
     private int season;
-    private Team homeTeam;
-    private Team visitorTeam;
+    private TeamDTO homeTeam;
+    private TeamDTO visitorTeam;
 
-    public Game(@JsonProperty("id") long id,
-                @JsonProperty("date") String date,
-                @JsonProperty("season") int season,
-                @JsonProperty("home_team") Team homeTeam,
-                @JsonProperty("visitor_team") Team visitorTeam){
+    public GameDTO(@JsonProperty("id") long id,
+                   @JsonProperty("date") String date,
+                   @JsonProperty("season") int season,
+                   @JsonProperty("home_team") TeamDTO homeTeam,
+                   @JsonProperty("visitor_team") TeamDTO visitorTeam){
         this.id = id;
         this.date = date;
         this.season = season;

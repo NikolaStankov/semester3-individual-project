@@ -1,15 +1,15 @@
 package fontys.sem3.individual_track.business;
 
-import fontys.sem3.individual_track.model.Player;
+import fontys.sem3.individual_track.model.PlayerDTO;
 
 import java.util.List;
 
 public interface PlayersService {
-    List<Player> getAllPlayers();
+    List<PlayerDTO> getAllPlayers();
 
-    Player getPlayer(long playerId);
+    PlayerDTO getPlayer(long playerId);
 
-    boolean addPlayer(Player player);
+    boolean addPlayer(PlayerDTO player);
 
     boolean removePlayer(long playerId);
 }

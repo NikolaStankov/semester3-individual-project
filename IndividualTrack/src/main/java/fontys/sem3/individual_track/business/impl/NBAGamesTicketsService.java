@@ -1,7 +1,7 @@
 package fontys.sem3.individual_track.business.impl;
 
 import fontys.sem3.individual_track.business.TicketsService;
-import fontys.sem3.individual_track.model.Ticket;
+import fontys.sem3.individual_track.model.TicketDTO;
 import fontys.sem3.individual_track.repository.TicketsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -20,17 +20,17 @@ public class NBAGamesTicketsService implements TicketsService {
     }
 
     @Override
-    public List<Ticket> getAllTickets() {
+    public List<TicketDTO> getAllTickets() {
         return this.ticketsRepository.selectAllTickets();
     }
 
     @Override
-    public Ticket getTicket(long ticketId) {
+    public TicketDTO getTicket(long ticketId) {
         return this.ticketsRepository.selectTicket(ticketId);
     }
 
     @Override
-    public boolean addTicket(Ticket ticket) {
+    public boolean addTicket(TicketDTO ticket) {
         return this.ticketsRepository.insertTicket(ticket);
     }
 

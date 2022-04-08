@@ -1,18 +1,14 @@
 package fontys.sem3.individual_track.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import fontys.sem3.individual_track.business.TeamsService;
-import fontys.sem3.individual_track.model.Game;
-import fontys.sem3.individual_track.model.Team;
+import fontys.sem3.individual_track.model.TeamDTO;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestOperations;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
@@ -34,14 +30,14 @@ public class TeamsController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Team>> getAllTeams() throws JsonProcessingException {
+    public ResponseEntity<List<TeamDTO>> getAllTeams() throws JsonProcessingException {
         String externalURL = "https://www.balldontlie.io/api/v1/teams";
 
         String teamsResponse = this.restTemplate.getForObject(externalURL, String.class);
         JSONObject jsonObject = new JSONObject(teamsResponse);
         JSONArray jsonArray = jsonObject.getJSONArray("data");
 
-        List<Team> teamList = new ArrayList<>();
+        List<TeamDTO> teamList = new ArrayList<>();
 
         for (int i = 0; i < jsonArray.length(); i++){
             long id = jsonArray.getJSONObject(i).getLong("id");
@@ -52,7 +48,7 @@ public class TeamsController {
             String fullName = jsonArray.getJSONObject(i).getString("full_name");
             String name = jsonArray.getJSONObject(i).getString("name");
 
-            Team team = new Team(id, abbreviation, city, conference,
+            TeamDTO team = new TeamDTO(id, abbreviation, city, conference,
                     division, fullName, name);
             teamList.add(team);
 
@@ -66,8 +62,8 @@ public class TeamsController {
     }
 
     @GetMapping("{teamId}")
-    public ResponseEntity<Team> getTeamById(@PathVariable(value = "teamId") long teamId) {
-        Team team = this.teamsService.getTeam(teamId);
+    public ResponseEntity<TeamDTO> getTeamById(@PathVariable(value = "teamId") long teamId) {
+        TeamDTO team = this.teamsService.getTeam(teamId);
 
         if (team != null) {
             return ResponseEntity.ok().body(team);
@@ -77,7 +73,7 @@ public class TeamsController {
     }
 
     @PostMapping
-    public ResponseEntity<Team> addTeam(@RequestBody Team team) {
+    public ResponseEntity<TeamDTO> addTeam(@RequestBody TeamDTO team) {
         if (!this.teamsService.addTeam(team)) {
             String entity = "A team with this id(" + team.getId() + ") already exists";
             return new ResponseEntity(entity, HttpStatus.CONFLICT);

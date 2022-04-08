@@ -1,15 +1,15 @@
 package fontys.sem3.individual_track.repository;
 
-import fontys.sem3.individual_track.model.Ticket;
+import fontys.sem3.individual_track.model.TicketDTO;
 
 import java.util.List;
 
 public interface TicketsRepository {
-    List<Ticket> selectAllTickets();
+    List<TicketDTO> selectAllTickets();
 
-    Ticket selectTicket(long ticketId);
+    TicketDTO selectTicket(long ticketId);
 
-    boolean insertTicket(Ticket ticket);
+    boolean insertTicket(TicketDTO ticket);
 
     boolean deleteTicket(long tickedId);
 }

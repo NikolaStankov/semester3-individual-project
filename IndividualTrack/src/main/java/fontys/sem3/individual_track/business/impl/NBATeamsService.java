@@ -1,7 +1,7 @@
 package fontys.sem3.individual_track.business.impl;
 
 import fontys.sem3.individual_track.business.TeamsService;
-import fontys.sem3.individual_track.model.Team;
+import fontys.sem3.individual_track.model.TeamDTO;
 import fontys.sem3.individual_track.repository.TeamsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -20,17 +20,17 @@ public class NBATeamsService implements TeamsService {
     }
 
     @Override
-    public List<Team> getAllTeams() {
+    public List<TeamDTO> getAllTeams() {
         return this.teamsRepository.selectAllTeams();
     }
 
     @Override
-    public Team getTeam(long teamId) {
+    public TeamDTO getTeam(long teamId) {
         return this.teamsRepository.selectTeam(teamId);
     }
 
     @Override
-    public boolean addTeam(Team team) {
+    public boolean addTeam(TeamDTO team) {
         return this.teamsRepository.insertTeam(team);
     }
 

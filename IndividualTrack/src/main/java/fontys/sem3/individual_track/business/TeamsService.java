@@ -1,15 +1,15 @@
 package fontys.sem3.individual_track.business;
 
-import fontys.sem3.individual_track.model.Team;
+import fontys.sem3.individual_track.model.TeamDTO;
 
 import java.util.List;
 
 public interface TeamsService {
-    List<Team> getAllTeams();
+    List<TeamDTO> getAllTeams();
 
-    Team getTeam(long teamId);
+    TeamDTO getTeam(long teamId);
 
-    boolean addTeam(Team team);
+    boolean addTeam(TeamDTO team);
 
     boolean removeTeam(long teamId);
 }

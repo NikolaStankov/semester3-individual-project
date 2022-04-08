@@ -2,8 +2,8 @@ package fontys.sem3.individual_track.repository.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import fontys.sem3.individual_track.model.Player;
-import fontys.sem3.individual_track.model.Team;
+import fontys.sem3.individual_track.model.PlayerDTO;
+import fontys.sem3.individual_track.model.TeamDTO;
 import fontys.sem3.individual_track.repository.PlayersRepository;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -20,7 +20,7 @@ import java.util.List;
 public class NBAPlayersRepository implements PlayersRepository {
 
     private final RestTemplate restTemplate;
-    private final List<Player> playerList;
+    private final List<PlayerDTO> playerList;
 
     @Autowired
     public NBAPlayersRepository(RestTemplate restTemplate) throws JsonProcessingException {
@@ -28,14 +28,14 @@ public class NBAPlayersRepository implements PlayersRepository {
         this.playerList = fetchPlayersFromAPI();
     }
 
-    private List<Player> fetchPlayersFromAPI() throws JsonProcessingException {
+    private List<PlayerDTO> fetchPlayersFromAPI() throws JsonProcessingException {
         String externalURL = "https://www.balldontlie.io/api/v1/players";
 
         String playersResponse = this.restTemplate.getForObject(externalURL, String.class);
         JSONObject jsonObject = new JSONObject(playersResponse);
         JSONArray jsonArray = jsonObject.getJSONArray("data");
 
-        List<Player> playerList = new ArrayList<>();
+        List<PlayerDTO> playerList = new ArrayList<>();
 
         for (int i = 0; i < jsonArray.length(); i++) {
             long id = jsonArray.getJSONObject(i).getLong("id");
@@ -47,9 +47,9 @@ public class NBAPlayersRepository implements PlayersRepository {
 
             ObjectMapper objectMapper = new ObjectMapper();
 
-            Team playerTeam = objectMapper.readValue(playerTeamData, Team.class);
+            TeamDTO playerTeam = objectMapper.readValue(playerTeamData, TeamDTO.class);
 
-            Player player = new Player(id, firstName, lastName, position, playerTeam);
+            PlayerDTO player = new PlayerDTO(id, firstName, lastName, position, playerTeam);
 
             playerList.add(player);
         }
@@ -58,13 +58,13 @@ public class NBAPlayersRepository implements PlayersRepository {
     }
 
     @Override
-    public List<Player> selectAllPlayers() {
+    public List<PlayerDTO> selectAllPlayers() {
         return this.playerList;
     }
 
     @Override
-    public Player selectPlayer(long playerId) {
-        for (Player player : playerList) {
+    public PlayerDTO selectPlayer(long playerId) {
+        for (PlayerDTO player : playerList) {
             if (player.getId() == playerId) {
                 return player;
             }
@@ -74,7 +74,7 @@ public class NBAPlayersRepository implements PlayersRepository {
     }
 
     @Override
-    public boolean insertPlayer(Player player) {
+    public boolean insertPlayer(PlayerDTO player) {
         if (this.selectPlayer(player.getId()) != null) {
             return false;
         }
@@ -89,7 +89,7 @@ public class NBAPlayersRepository implements PlayersRepository {
             return false;
         }
 
-        Player player = this.selectPlayer(playerId);
+        PlayerDTO player = this.selectPlayer(playerId);
         return this.playerList.remove(player);
     }
 }

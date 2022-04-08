@@ -1,6 +1,6 @@
 package fontys.sem3.individual_track.repository.impl;
 
-import fontys.sem3.individual_track.model.Ticket;
+import fontys.sem3.individual_track.model.TicketDTO;
 import fontys.sem3.individual_track.repository.TicketsRepository;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
@@ -12,24 +12,24 @@ import java.util.List;
 @Primary
 public class NBAGamesTicketsRepository implements TicketsRepository {
 
-    private final List<Ticket> tickets;
+    private final List<TicketDTO> tickets;
 
     public NBAGamesTicketsRepository() {
         this.tickets = new ArrayList<>();
-        this.tickets.add(new Ticket(1, 20, LocalDate.now(), "Clippers vs Lakers"));
-        this.tickets.add(new Ticket(2, 20, LocalDate.now(), "Bulls vs Wizards"));
-        this.tickets.add(new Ticket(3, 25, LocalDate.now(), "Minnesota vs Celtics"));
-        this.tickets.add(new Ticket(4, 15, LocalDate.now(), "Raptors vs Suns"));
+        this.tickets.add(new TicketDTO(1, 20, LocalDate.now(), "Clippers vs Lakers"));
+        this.tickets.add(new TicketDTO(2, 20, LocalDate.now(), "Bulls vs Wizards"));
+        this.tickets.add(new TicketDTO(3, 25, LocalDate.now(), "Minnesota vs Celtics"));
+        this.tickets.add(new TicketDTO(4, 15, LocalDate.now(), "Raptors vs Suns"));
     }
 
     @Override
-    public List<Ticket> selectAllTickets() {
+    public List<TicketDTO> selectAllTickets() {
         return this.tickets;
     }
 
     @Override
-    public Ticket selectTicket(long ticketId) {
-        for (Ticket ticket : this.tickets) {
+    public TicketDTO selectTicket(long ticketId) {
+        for (TicketDTO ticket : this.tickets) {
             if (ticket.getId() == ticketId)
                 return ticket;
         }
@@ -38,7 +38,7 @@ public class NBAGamesTicketsRepository implements TicketsRepository {
     }
 
     @Override
-    public boolean insertTicket(Ticket ticket) {
+    public boolean insertTicket(TicketDTO ticket) {
         if (this.selectTicket(ticket.getId()) != null){
             return false;
         }
@@ -53,7 +53,7 @@ public class NBAGamesTicketsRepository implements TicketsRepository {
             return false;
         }
 
-        Ticket ticket = this.selectTicket(tickedId);
+        TicketDTO ticket = this.selectTicket(tickedId);
         return this.tickets.remove(ticket);
     }
 }

@@ -1,15 +1,15 @@
 package fontys.sem3.individual_track.business;
 
-import fontys.sem3.individual_track.model.Ticket;
+import fontys.sem3.individual_track.model.TicketDTO;
 
 import java.util.List;
 
 public interface TicketsService {
-    List<Ticket> getAllTickets();
+    List<TicketDTO> getAllTickets();
 
-    Ticket getTicket(long ticketId);
+    TicketDTO getTicket(long ticketId);
 
-    boolean addTicket(Ticket ticket);
+    boolean addTicket(TicketDTO ticket);
 
     boolean removeTicket(long tickedId);
 }
