@@ -1,15 +1,9 @@
 package fontys.sem3.individual_track.repository;
 
-import fontys.sem3.individual_track.model.PlayerDTO;
+import fontys.sem3.individual_track.repository.entity.Player;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface PlayersRepository {
-    List<PlayerDTO> selectAllPlayers();
-
-    PlayerDTO selectPlayer(long playerId);
-
-    boolean insertPlayer(PlayerDTO player);
-
-    boolean deletePlayer(long plaayerId);
+public interface PlayersRepository extends JpaRepository<Player, Long> {
 }

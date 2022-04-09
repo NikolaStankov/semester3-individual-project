@@ -1,17 +1,20 @@
 package fontys.sem3.individual_track.controller;
 
 import fontys.sem3.individual_track.business.TicketsService;
+import fontys.sem3.individual_track.model.CreateTicketRequestDTO;
+import fontys.sem3.individual_track.model.CreateTicketResponseDTO;
 import fontys.sem3.individual_track.model.TicketDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.URI;
+import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@CrossOrigin(origins ="*", allowedHeaders = "*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/tickets")
 public class TicketsController {
     private final TicketsService ticketsService;
@@ -34,24 +37,18 @@ public class TicketsController {
 
     @GetMapping("{ticketId}")
     public ResponseEntity<TicketDTO> getTicketById(@PathVariable(value = "ticketId") long ticketId) {
-        TicketDTO ticket = this.ticketsService.getTicket(ticketId);
+        Optional<TicketDTO> optionalTicketDTO = this.ticketsService.getTicket(ticketId);
 
-        if (ticket != null) {
-            return ResponseEntity.ok().body(ticket);
-        } else {
+        if (optionalTicketDTO.isEmpty()) {
             return ResponseEntity.notFound().build();
+        } else {
+            return ResponseEntity.ok().body(optionalTicketDTO.get());
         }
     }
 
     @PostMapping
-    public ResponseEntity<TicketDTO> addTicket(@RequestBody TicketDTO ticket) {
-        if (!this.ticketsService.addTicket(ticket)) {
-            String entity = "A ticket with this id(" + ticket.getId() + ") already exists";
-            return new ResponseEntity(entity, HttpStatus.CONFLICT);
-        } else {
-            String url = "tickets" + "/" + ticket.getId();
-            URI uri = URI.create(url);
-            return new ResponseEntity(uri, HttpStatus.CREATED);
-        }
+    public ResponseEntity<CreateTicketResponseDTO> addTicket(@RequestBody @Valid CreateTicketRequestDTO ticketRequest) {
+        CreateTicketResponseDTO ticketResponse = this.ticketsService.createTicket(ticketRequest);
+        return ResponseEntity.status(HttpStatus.CREATED).body(ticketResponse);
     }
 }

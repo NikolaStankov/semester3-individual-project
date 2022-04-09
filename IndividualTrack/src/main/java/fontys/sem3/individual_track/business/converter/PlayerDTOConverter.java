@@ -7,7 +7,7 @@ public class PlayerDTOConverter {
     private PlayerDTOConverter() {
     }
 
-    public PlayerDTO convertToDTO(Player player) {
+    public static PlayerDTO convertToDTO(Player player) {
         return PlayerDTO.builder()
                 .id(player.getId())
                 .firstName(player.getFirstName())

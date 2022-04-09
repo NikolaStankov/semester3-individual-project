@@ -1,15 +1,19 @@
 package fontys.sem3.individual_track.business;
 
+import fontys.sem3.individual_track.model.CreateTicketRequestDTO;
+import fontys.sem3.individual_track.model.CreateTicketResponseDTO;
 import fontys.sem3.individual_track.model.TicketDTO;
+import fontys.sem3.individual_track.repository.entity.Ticket;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface TicketsService {
     List<TicketDTO> getAllTickets();
 
-    TicketDTO getTicket(long ticketId);
+    Optional<TicketDTO> getTicket(long ticketId);
 
-    boolean addTicket(TicketDTO ticket);
+    CreateTicketResponseDTO createTicket(CreateTicketRequestDTO ticketRequest);
 
-    boolean removeTicket(long tickedId);
+    void removeTicket(long tickedId);
 }

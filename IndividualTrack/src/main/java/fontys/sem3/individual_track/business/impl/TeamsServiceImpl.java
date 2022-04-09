@@ -16,7 +16,7 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 @Primary
-public class NBATeamsService implements TeamsService {
+public class TeamsServiceImpl implements TeamsService {
 
     private final TeamsRepository teamsRepository;
 
