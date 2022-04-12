@@ -2,9 +2,13 @@ package fontys.sem3.individual_track.business.impl;
 
 import fontys.sem3.individual_track.business.GamesService;
 import fontys.sem3.individual_track.business.converter.GameDTOConverter;
+import fontys.sem3.individual_track.business.validator.TeamIdValidator;
+import fontys.sem3.individual_track.model.CreateGameRequestDTO;
+import fontys.sem3.individual_track.model.CreateGameResponseDTO;
 import fontys.sem3.individual_track.model.GameDTO;
 import fontys.sem3.individual_track.repository.GamesRepository;
 import fontys.sem3.individual_track.repository.entity.Game;
+import fontys.sem3.individual_track.repository.entity.Team;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
@@ -19,6 +23,7 @@ import java.util.Optional;
 public class GamesServiceImpl implements GamesService {
 
     private final GamesRepository gamesRepository;
+    private final TeamIdValidator teamIdValidator;
 
     @Override
     public List<GameDTO> getAllGames() {
@@ -40,12 +45,26 @@ public class GamesServiceImpl implements GamesService {
     }
 
     @Override
-    public boolean addGame(Game game) {
-        return false;
+    public CreateGameResponseDTO createGame(CreateGameRequestDTO gameRequest) {
+        teamIdValidator.validateTeamId(gameRequest.getHomeTeamId());
+        teamIdValidator.validateTeamId(gameRequest.getVisitorTeamId());
+
+        Game gameToSave = Game.builder()
+                .date(gameRequest.getDate())
+                .season(gameRequest.getSeason())
+                .homeTeam(Team.builder().id(gameRequest.getHomeTeamId()).build())
+                .visitorTeam(Team.builder().id(gameRequest.getVisitorTeamId()).build())
+                .build();
+
+        Game savedGame = this.gamesRepository.save(gameToSave);
+
+        return CreateGameResponseDTO.builder()
+                .gameId(savedGame.getId())
+                .build();
     }
 
     @Override
-    public boolean removeGame(long gameId) {
-        return false;
+    public void removeGame(long gameId) {
+
     }
 }

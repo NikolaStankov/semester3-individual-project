@@ -2,6 +2,8 @@ package fontys.sem3.individual_track.business.impl;
 
 import fontys.sem3.individual_track.business.TeamsService;
 import fontys.sem3.individual_track.business.converter.TeamDTOConverter;
+import fontys.sem3.individual_track.model.CreateTeamRequestDTO;
+import fontys.sem3.individual_track.model.CreateTeamResponseDTO;
 import fontys.sem3.individual_track.model.TeamDTO;
 import fontys.sem3.individual_track.repository.TeamsRepository;
 import fontys.sem3.individual_track.repository.entity.Team;
@@ -36,5 +38,29 @@ public class TeamsServiceImpl implements TeamsService {
     public Optional<TeamDTO> getTeam(long teamId) {
         return this.teamsRepository.findById(teamId).
                 map(TeamDTOConverter::convertToDTO);
+    }
+
+    @Override
+    public CreateTeamResponseDTO createTeam(CreateTeamRequestDTO teamRequest) {
+
+        Team teamToSave = Team.builder()
+                .abbreviation(teamRequest.getAbbreviation())
+                .city(teamRequest.getCity())
+                .conference(teamRequest.getConference())
+                .division(teamRequest.getDivision())
+                .fullName(teamRequest.getFullName())
+                .name(teamRequest.getName())
+                .build();
+
+        Team savedTeam = this.teamsRepository.save(teamToSave);
+
+        return CreateTeamResponseDTO.builder()
+                .teamId(savedTeam.getId())
+                .build();
+    }
+
+    @Override
+    public void removeTeam(long teamId) {
+        this.teamsRepository.deleteById(teamId);
     }
 }

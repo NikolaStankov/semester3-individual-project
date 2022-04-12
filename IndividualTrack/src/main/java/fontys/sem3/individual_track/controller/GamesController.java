@@ -1,28 +1,27 @@
 package fontys.sem3.individual_track.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import fontys.sem3.individual_track.business.GamesService;
+import fontys.sem3.individual_track.model.CreateGameRequestDTO;
+import fontys.sem3.individual_track.model.CreateGameResponseDTO;
 import fontys.sem3.individual_track.model.GameDTO;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/games")
+@RequiredArgsConstructor
 public class GamesController {
     private final GamesService gamesService;
 
-    @Autowired
-    public GamesController(GamesService gamesService) {
-        this.gamesService = gamesService;
-    }
-
     @GetMapping
-    public ResponseEntity<List<GameDTO>> getAllGames() throws JsonProcessingException {
+    public ResponseEntity<List<GameDTO>> getAllGames() {
         List<GameDTO> gameList = this.gamesService.getAllGames();
 
         if (!gameList.isEmpty()) {
@@ -41,5 +40,11 @@ public class GamesController {
         } else {
             return ResponseEntity.ok().body(optionalGameDTO.get());
         }
+    }
+
+    @PostMapping
+    public ResponseEntity<CreateGameResponseDTO> addGame(@RequestBody @Valid CreateGameRequestDTO gameRequest) {
+        CreateGameResponseDTO gameResponse = this.gamesService.createGame(gameRequest);
+        return ResponseEntity.status(HttpStatus.CREATED).body(gameResponse);
     }
 }

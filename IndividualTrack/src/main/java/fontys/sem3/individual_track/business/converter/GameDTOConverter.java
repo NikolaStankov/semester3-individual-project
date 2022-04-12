@@ -1,7 +1,6 @@
 package fontys.sem3.individual_track.business.converter;
 
 import fontys.sem3.individual_track.model.GameDTO;
-import fontys.sem3.individual_track.model.TeamDTO;
 import fontys.sem3.individual_track.repository.entity.Game;
 
 public class GameDTOConverter {

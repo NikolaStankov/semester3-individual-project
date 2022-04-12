@@ -1,5 +1,7 @@
 package fontys.sem3.individual_track.business;
 
+import fontys.sem3.individual_track.model.CreateGameRequestDTO;
+import fontys.sem3.individual_track.model.CreateGameResponseDTO;
 import fontys.sem3.individual_track.model.GameDTO;
 import fontys.sem3.individual_track.repository.entity.Game;
 
@@ -11,7 +13,7 @@ public interface GamesService {
 
     Optional<GameDTO> getGame(long gameId);
 
-    boolean addGame(Game game);
+    CreateGameResponseDTO createGame(CreateGameRequestDTO gameRequest);
 
-    boolean removeGame(long gameId);
+    void removeGame(long gameId);
 }

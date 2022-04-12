@@ -1,11 +1,9 @@
 package fontys.sem3.individual_track.repository.entity;
 
-import fontys.sem3.individual_track.model.TeamDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -27,8 +25,7 @@ public class Game {
     @Column(name = "date")
     private String date;
 
-    @NotBlank
-    @Length(min = 4)
+    @NotNull
     @Column(name = "season")
     private int season;
 

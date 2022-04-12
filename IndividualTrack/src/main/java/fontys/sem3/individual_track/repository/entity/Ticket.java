@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
@@ -23,7 +22,7 @@ public class Ticket {
     @Column(name = "id")
     private Long id;
 
-    @NotBlank
+    @NotNull
     @DecimalMin(value = "1")
     @Column(name = "price")
     private double price;
@@ -32,7 +31,7 @@ public class Ticket {
     @Column(name = "purchased_date")
     private LocalDate purchasedDate;
 
-    @NotBlank
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "game_id")
     private Game game;

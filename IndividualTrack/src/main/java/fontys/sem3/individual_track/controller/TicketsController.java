@@ -4,6 +4,7 @@ import fontys.sem3.individual_track.business.TicketsService;
 import fontys.sem3.individual_track.model.CreateTicketRequestDTO;
 import fontys.sem3.individual_track.model.CreateTicketResponseDTO;
 import fontys.sem3.individual_track.model.TicketDTO;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,13 +17,9 @@ import java.util.Optional;
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/tickets")
+@RequiredArgsConstructor
 public class TicketsController {
     private final TicketsService ticketsService;
-
-    @Autowired
-    public TicketsController(TicketsService ticketsService) {
-        this.ticketsService = ticketsService;
-    }
 
     @GetMapping
     public ResponseEntity<List<TicketDTO>> getAllTickets() {

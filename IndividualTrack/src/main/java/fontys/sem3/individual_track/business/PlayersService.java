@@ -1,5 +1,7 @@
 package fontys.sem3.individual_track.business;
 
+import fontys.sem3.individual_track.model.CreatePlayerRequestDTO;
+import fontys.sem3.individual_track.model.CreatePlayerResponseDTO;
 import fontys.sem3.individual_track.model.PlayerDTO;
 import fontys.sem3.individual_track.repository.entity.Player;
 
@@ -11,7 +13,7 @@ public interface PlayersService {
 
     Optional<PlayerDTO> getPlayer(long playerId);
 
-    boolean addPlayer(Player player);
+    CreatePlayerResponseDTO createPlayer(CreatePlayerRequestDTO playerRequest);
 
     boolean removePlayer(long playerId);
 }

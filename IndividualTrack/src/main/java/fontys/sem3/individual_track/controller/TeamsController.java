@@ -1,35 +1,23 @@
 package fontys.sem3.individual_track.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import fontys.sem3.individual_track.business.TeamsService;
-import fontys.sem3.individual_track.model.GameDTO;
-import fontys.sem3.individual_track.model.TeamDTO;
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
+import fontys.sem3.individual_track.model.*;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
-import java.net.URI;
-import java.util.ArrayList;
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/teams")
+@RequiredArgsConstructor
 public class TeamsController {
 
     private final TeamsService teamsService;
-    private final RestTemplate restTemplate;
-
-    @Autowired
-    public TeamsController(TeamsService teamsService, RestTemplate restTemplate) {
-        this.teamsService = teamsService;
-        this.restTemplate = restTemplate;
-    }
 
     @GetMapping
     public ResponseEntity<List<TeamDTO>> getAllTeams() {
@@ -51,5 +39,11 @@ public class TeamsController {
         } else {
             return ResponseEntity.ok().body(optionalTeamDTO.get());
         }
+    }
+
+    @PostMapping
+    public ResponseEntity<CreateTeamResponseDTO> createTeam(@RequestBody @Valid CreateTeamRequestDTO teamRequest) {
+        CreateTeamResponseDTO teamResponse = this.teamsService.createTeam(teamRequest);
+        return ResponseEntity.status(HttpStatus.CREATED).body(teamResponse);
     }
 }

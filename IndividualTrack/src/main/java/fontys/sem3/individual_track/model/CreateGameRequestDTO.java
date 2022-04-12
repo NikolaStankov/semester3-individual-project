@@ -6,20 +6,22 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.*;
-import java.time.LocalDate;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateTicketRequestDTO {
+public class CreateGameRequestDTO {
+
+    @NotBlank
+    private String date;
+
+    @Min(value = 0L, message = "The value must be positive")
+    private int season;
 
     @NotNull
-    private double price;
+    private Long homeTeamId;
 
     @NotNull
-    private LocalDate purchasedDate;
-
-    @NotNull
-    private Long gameId;
+    private Long visitorTeamId;
 }
