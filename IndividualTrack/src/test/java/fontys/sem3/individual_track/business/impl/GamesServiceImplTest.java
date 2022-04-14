@@ -35,12 +35,12 @@ class GamesServiceImplTest {
     private GamesServiceImpl gamesService;
 
     private Team createFakeHomeTeam() {
-        return new Team(1l, "HT", "Home city",
+        return new Team(1L, "HT", "Home city",
                 "Home conf", "Home", "Home Homes", "Homes");
     }
 
     private Team createFakeVisitorTeam() {
-        return new Team(2l, "VT", "Visitor city",
+        return new Team(2L, "VT", "Visitor city",
                 "Visitor conf", "Visitor", "Visitor Visitors", "Visitors");
     }
 

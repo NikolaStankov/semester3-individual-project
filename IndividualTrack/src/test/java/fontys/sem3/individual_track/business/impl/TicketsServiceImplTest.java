@@ -34,9 +34,9 @@ class TicketsServiceImplTest {
     TicketsServiceImpl ticketsService;
 
     private Game createFakeGame() {
-        Team homeTeam = new Team(1l, "HT", "Home city",
+        Team homeTeam = new Team(1L, "HT", "Home city",
                 "Home conf", "Home", "Home Homes", "Homes");
-        Team visitorTeam = new Team(2l, "VT", "Visitor city",
+        Team visitorTeam = new Team(2L, "VT", "Visitor city",
                 "Visitor conf", "Visitor", "Visitor Visitors", "Visitors");
 
         return Game.builder().id(1L).date("18/04/2022").season(2022)
