@@ -1,11 +1,13 @@
 import React from "react";
 
 const SingleTicket = (props) => {
-  const { ticketId, price, game } = props.ticket;
+  const { id, price, game } = props.ticket;
+  const { home_team, visitor_team } = game;
 
   return (
     <li>
-      Ticket: {ticketId}, price : {price}, game: {game}
+      Ticket: {id}, price : {price}, game: {home_team.name} vs{" "}
+      {visitor_team.name}
     </li>
   );
 };

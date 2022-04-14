@@ -1,6 +1,8 @@
 package fontys.sem3.individual_track.business.impl;
 
 import fontys.sem3.individual_track.business.converter.TeamDTOConverter;
+import fontys.sem3.individual_track.model.CreateTeamRequestDTO;
+import fontys.sem3.individual_track.model.CreateTeamResponseDTO;
 import fontys.sem3.individual_track.model.TeamDTO;
 import fontys.sem3.individual_track.repository.TeamsRepository;
 import fontys.sem3.individual_track.repository.entity.Team;
@@ -61,6 +63,27 @@ class TeamsServiceImplTest {
     }
 
     @Test
-    void createTeam() {
+    void createTeam_shouldSaveTeamWithAllFields() {
+        Team expectedTeamToSave = Team.builder().abbreviation("T1").city("City1").conference("West")
+                .division("Atlantic").fullName("Team Teams1").name("Team1").build();
+        Team savedTeam = Team.builder().id(1L).abbreviation("T1").city("City1").conference("West")
+                .division("Atlantic").fullName("Team Teams1").name("Team1").build();
+
+        when(teamsRepositoryMock.save(expectedTeamToSave)).thenReturn(savedTeam);
+
+        CreateTeamRequestDTO teamRequest = CreateTeamRequestDTO.builder()
+                .abbreviation("T1")
+                .city("City1")
+                .conference("West")
+                .division("Atlantic")
+                .fullName("Team Teams1")
+                .name("Team1")
+                .build();
+
+        CreateTeamResponseDTO actualTeamResponse = teamsService.createTeam(teamRequest);
+        CreateTeamResponseDTO expectedTeamResponse = CreateTeamResponseDTO.builder().teamId(1L).build();
+
+        assertEquals(expectedTeamResponse, actualTeamResponse);
+        verify(teamsRepositoryMock).save(expectedTeamToSave);
     }
 }

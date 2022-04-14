@@ -1,5 +1,6 @@
 package fontys.sem3.individual_track.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
@@ -17,6 +18,7 @@ public class TicketDTO {
     private double price;
 
     @JsonProperty("purchased_date")
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate purchasedDate;
 
     @JsonProperty("game")

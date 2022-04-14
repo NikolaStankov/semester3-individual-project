@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 const Home = () => {
-  return <div title="homeText">HOME</div> ;
+  useEffect(() => {
+    console.log(Date.now());
+  }, []);
+
+  return <div title="homeText">HOME</div>;
 };
 
-export default Home; 
+export default Home;
