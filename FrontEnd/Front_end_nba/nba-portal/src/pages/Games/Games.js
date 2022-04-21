@@ -6,7 +6,11 @@ const Games = () => {
   const url = "http://localhost:8080/games";
   const { data: games } = useFetch(url);
 
-  return <>{games && <GamesList games={games} />}</>;
+  return (
+    <>
+      <div className="content-list">{games && <GamesList games={games} />}</div>
+    </>
+  );
 };
 
 export default Games;
