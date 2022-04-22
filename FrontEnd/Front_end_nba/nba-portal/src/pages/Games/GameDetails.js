@@ -11,11 +11,17 @@ const GameDetails = () => {
   return (
     <>
       {game && (
-        <div className="game-details">
-          <div>Game details - id:{id}</div>
-          <div>Date: {game.date}</div>
+        <div className="content-details">
           <div>
-            {game.home_team.full_name} vs {game.visitor_team.full_name}
+            <span className="details-title">Date:</span> {game.date}
+          </div>
+          <div>
+            <spin className="details-title">Home team:</spin>{" "}
+            {game.home_team.full_name}
+          </div>
+          <div>
+            <span className="details-title">Visitor team:</span>{" "}
+            {game.visitor_team.full_name}
           </div>
         </div>
       )}

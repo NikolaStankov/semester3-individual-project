@@ -2,20 +2,17 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const SingleTeam = (props) => {
-  const { id, abbreviation, city, conference, division, full_name, name } =
+  const { abbreviation, city, conference, division, full_name } =
     props.team;
 
-  let url = "/teams/" + id;
-
   return (
-    <li>
-      <Link to={url}>
-        <span>{name}</span>{" - "}
-        <span>
-          Conference: {conference}, Division: {division}{" "}
-        </span>
-      </Link>
-    </li>
+    <tr>
+      <td>{abbreviation}</td>
+      <td>{city}</td>
+      <td>{conference}</td>
+      <td>{division}</td>
+      <td>{full_name}</td>
+    </tr>
   );
 };
 

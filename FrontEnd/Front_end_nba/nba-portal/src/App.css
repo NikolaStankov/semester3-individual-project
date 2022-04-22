@@ -1,3 +1,13 @@
+/*--GLOBAL VARIABLES--*/
+:root {
+  --border-color: rgba(255, 255, 255, 0.55);
+  --hover-color: rgb(186, 152, 110);
+}
+
+/*--------------------/
+
+/*---Start of general styling---*/
+
 html {
   background: url("./images/nba-background.jpg") no-repeat center center fixed;
   -webkit-background-size: cover;
@@ -5,22 +15,27 @@ html {
   -o-background-size: cover;
   background-size: cover;
 }
+
 body {
   margin: 0;
   padding: 0;
   background-color: transparent;
   color: white;
+  padding-top: 80px;
+  font-family: Arial, Helvetica, sans-serif;
 }
+
+.clickable:hover {
+  cursor: pointer;
+}
+
+/*---End of general styling---*/
+/*--------------------------------------------*/
+/*---Start of Navbar styling---*/
 
 .logo-icon {
   color: "#ed8021";
   font-size: "40px";
-}
-
-.content {
-  margin-top: 60px;
-  height: auto;
-  background: transparent;
 }
 
 .nav-link {
@@ -28,36 +43,60 @@ body {
   margin-inline: 10px;
 }
 
-.content-list{
-  background-color: rgb(61, 57, 56, 0.5);
-    width: 50%;
-    margin-top: 100px;
-    margin-inline: auto;
+/*---End of Navbar styling---*/
+/*--------------------------------------------*/
+/*---Start of Tables styling---*/
+
+.content-table,
+.content-table th,
+.content-table td {
+  border: solid var(--border-color);
 }
 
-.content-list ul{
-  list-style-type: none;
+.content-table {
+  width: 66%;
   margin: auto;
-  width: 70%;
-  padding-block: 20px;
-  padding-inline: 0;
+  border-collapse: collapse;
+  background-color: rgb(61, 57, 56, 0.7);
 }
 
-.content-list li{
-  margin-block: 7px;
-  display: block;
+.content-table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: rgb(201, 127, 48);
+  color: white;
 }
 
-.content-list li a{
-  color: rgb(255, 100, 3);
-  font-size: 18px;
-  text-decoration: none;
-  letter-spacing: 1.3px;
+.content-table tr:nth-child(even) {
+  background-color: rgb(204, 204, 204, 0.3);
 }
 
-.content-list a:hover{
-  border-bottom: solid rgb(255, 134, 59);
-  color: rgb(255, 134, 59);
-
+.content-table tr:hover {
+  background-color: var(--hover-color);
 }
 
+/*---End of Tables styling---*/
+/*--------------------------------------------*/
+/*---Start of Content Details styling---*/
+
+.content-details {
+  width: 30%;
+  margin: auto;
+  text-align: center;
+  border: solid var(--border-color);
+  background-color: rgb(204, 204, 204, 0.3);
+  font-size: 20px;
+}
+
+.content-details div {
+  margin-block: 8px;
+}
+
+.details-title {
+  background-color: rgb(204, 204, 204, 0.6);
+  padding: 5px;
+  color: black;
+}
+
+/*---End of Content Details styling---*/
