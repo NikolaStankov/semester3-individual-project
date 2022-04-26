@@ -17,6 +17,7 @@ import java.util.List;
 @RequestMapping("/players")
 @RequiredArgsConstructor
 public class PlayersController {
+
     private final PlayersService playersService;
 
     @GetMapping

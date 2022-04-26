@@ -2,6 +2,7 @@
 :root {
   --border-color: rgba(255, 255, 255, 0.55);
   --hover-color: rgb(186, 152, 110);
+  --background-color: rgb(204, 204, 204, 0.3)
 }
 
 /*--------------------/
@@ -69,7 +70,7 @@ body {
 }
 
 .content-table tr:nth-child(even) {
-  background-color: rgb(204, 204, 204, 0.3);
+  background-color: var(--background-color);
 }
 
 .content-table tr:hover {
@@ -85,7 +86,7 @@ body {
   margin: auto;
   text-align: center;
   border: solid var(--border-color);
-  background-color: rgb(204, 204, 204, 0.3);
+  background-color: var(--background-color);
   font-size: 20px;
 }
 
@@ -100,3 +101,102 @@ body {
 }
 
 /*---End of Content Details styling---*/
+/*--------------------------------------------*/
+/*---Start of Home page styling---*/
+
+.home-text {
+  width: 50%;
+  margin: auto;
+  text-align: center;
+  background-color: var(--background-color);
+  padding: 50px;
+  border: none;
+  box-shadow: 4px 4px 8px 0 rgba(0, 0, 0, 0.45), 0 6px 20px 0 rgba(0, 0, 0, 0.8);
+}
+
+.sign-up,
+.login {
+  text-decoration: none;
+}
+
+.sign-up:hover,
+.login:hover {
+  color: var(--hover-color);
+}
+
+.home-pic {
+  width: 80%;
+  margin: auto;
+  box-shadow: 4px 4px 8px 0 rgba(0, 0, 0, 0.45), 0 6px 20px 0 rgba(0, 0, 0, 0.8);
+  margin-block-end: 20px;
+}
+
+/*---End of Home page styling---*/
+/*--------------------------------------------*/
+/*---Start of Login form styling---*/
+
+.form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+  width: 30%;
+  margin: auto;
+  margin-top: 50px;
+  background-color: rgb(204, 204, 204, 0.3);
+  box-shadow: 4px 4px 8px 0 rgba(0, 0, 0, 0.45), 0 6px 20px 0 rgba(0, 0, 0, 0.8);
+}
+
+.form form {
+  width: 84%;
+}
+
+.form input[type="text"],
+.form input[type="password"] {
+  height: 25px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.form input[type="submit"] {
+  margin-top: 10px;
+  cursor: pointer;
+  font-size: 15px;
+  background: #0d6efd;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  margin-block-end: 10px;
+}
+
+.form input[type="submit"]:hover {
+  background: var(--hover-color);
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+}
+
+.list-container {
+  display: flex;
+}
+
+.error {
+  color: red;
+  font-size: 12px;
+}
+
+.title {
+  font-size: 25px;
+  margin-bottom: 20px;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 10px;
+}
+
+/*---End of Login form styling---*/

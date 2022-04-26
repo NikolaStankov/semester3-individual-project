@@ -9,6 +9,8 @@ import Tickets from "./pages/Tickets/Tickets";
 import GameDetails from "./pages/Games/GameDetails";
 import Teams from "./pages/Teams/Teams";
 import Players from "./pages/Players/Players";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
             <Route path="/tickets" element={<Tickets />} />
             <Route path="/teams" element={<Teams />} />
             <Route path="/players" element={<Players />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
           </Routes>
         </Router>
       </div>

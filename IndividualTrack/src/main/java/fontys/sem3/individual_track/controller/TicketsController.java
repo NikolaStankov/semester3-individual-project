@@ -18,6 +18,7 @@ import java.util.Optional;
 @RequestMapping("/tickets")
 @RequiredArgsConstructor
 public class TicketsController {
+
     private final TicketsService ticketsService;
 
     @GetMapping

@@ -18,6 +18,7 @@ import java.util.Optional;
 @RequestMapping("/games")
 @RequiredArgsConstructor
 public class GamesController {
+
     private final GamesService gamesService;
 
     @GetMapping
