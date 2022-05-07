@@ -3,6 +3,7 @@ plugins {
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
     id "org.sonarqube" version "3.3"
+    id "org.flywaydb.flyway" version "8.5.10"
 }
 
 sonarqube {
@@ -20,6 +21,17 @@ configurations {
     compileOnly {
         extendsFrom annotationProcessor
     }
+}
+
+flyway {
+    url = 'jdbc:h2:mem:mydb'
+    user = 'myUsr'
+    password = 'mySecretPwd'
+    schemas = ['schema1', 'schema2', 'schema3']
+    placeholders = [
+            'keyABC': 'valueXYZ',
+            'otherplaceholder': 'value123'
+    ]
 }
 
 repositories {
@@ -48,6 +60,14 @@ dependencies {
     implementation 'ch.qos.logback:logback-classic:1.2.11'
     implementation 'mysql:mysql-connector-java:8.0.28'
     testImplementation 'com.h2database:h2'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.2'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.2'
+    implementation 'org.springframework.boot:spring-boot-starter-aop'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
 }
 
 test {

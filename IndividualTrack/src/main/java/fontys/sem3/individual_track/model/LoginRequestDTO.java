@@ -1,18 +1,19 @@
 package fontys.sem3.individual_track.model;
 
-import fontys.sem3.individual_track.repository.entity.RoleEnum;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 
 @Data
-public class CreateUserRequestDTO {
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class LoginRequestDTO {
     @NotBlank
     private String username;
-
     @NotBlank
     private String password;
-
-    @NotBlank
-    private RoleEnum role;
 }

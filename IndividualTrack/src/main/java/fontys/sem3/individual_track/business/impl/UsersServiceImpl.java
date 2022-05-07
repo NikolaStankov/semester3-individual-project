@@ -3,14 +3,18 @@ package fontys.sem3.individual_track.business.impl;
 import fontys.sem3.individual_track.business.UsersService;
 import fontys.sem3.individual_track.model.CreateUserRequestDTO;
 import fontys.sem3.individual_track.repository.UsersRepository;
+import fontys.sem3.individual_track.repository.entity.RoleEnum;
 import fontys.sem3.individual_track.repository.entity.User;
+import fontys.sem3.individual_track.repository.entity.UserRole;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -18,7 +22,7 @@ import java.util.Optional;
 public class UsersServiceImpl implements UsersService {
 
     private final UsersRepository usersRepository;
-    private final BCryptPasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public User readUserByUsername(String username) {
@@ -36,7 +40,12 @@ public class UsersServiceImpl implements UsersService {
 
         user.setUsername(createUserRequestDTO.getUsername());
         user.setPassword(this.passwordEncoder.encode(createUserRequestDTO.getPassword()));
-        user.setRole(createUserRequestDTO.getRole());
+        user.setUserRoles(Set.of(
+                UserRole.builder()
+                        .user(user)
+                        .role(createUserRequestDTO.getRole())
+                        .build()));
+
         this.usersRepository.save(user);
     }
 }

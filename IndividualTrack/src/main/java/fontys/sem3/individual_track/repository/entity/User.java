@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.Set;
 
 @Entity
 @Table(name = "user")
@@ -29,8 +30,7 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @NotBlank
-    @ValidateRole(acceptedValues = {"User", "Admin"}, message = "Invalid user role")
-    @Column(name = "role")
-    private String role;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private Set<UserRole> userRoles;
 }
