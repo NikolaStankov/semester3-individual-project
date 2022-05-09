@@ -13,7 +13,7 @@ const Home = () => {
         now and get a ticket for your favourite's team game
       </h3>
       <p>
-        You don't have an account?Sign up{" "}
+        You don't have an account? Sign up{" "}
         <Link to="/register" className="sign-up">
           {" "}
           here

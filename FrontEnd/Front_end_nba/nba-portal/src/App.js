@@ -13,6 +13,10 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 
 function App() {
+  const [loggedUser, setLoggedUser] = useState(null);
+
+  
+
   return (
     <>
       <div className="content">
@@ -25,7 +29,10 @@ function App() {
             <Route path="/tickets" element={<Tickets />} />
             <Route path="/teams" element={<Teams />} />
             <Route path="/players" element={<Players />} />
-            <Route path="/login" element={<Login />} />
+            <Route
+              path="/login"
+              element={<Login savedURL={window.location.pathname} />}
+            />
             <Route path="/register" element={<Register />} />
           </Routes>
         </Router>

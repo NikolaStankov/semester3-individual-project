@@ -11,7 +11,7 @@ const SingleGame = (props) => {
 
   return (
     <tr
-      className="clickable"
+      className="clickable" 
       onClick={() => {
         navigate(url);
       }}
