@@ -14,5 +14,8 @@ public class CreateUserRequestDTO {
     private String password;
 
     @NotBlank
+    private String repeatedPassword;
+
+    @NotBlank
     private RoleEnum role;
 }

@@ -49,7 +49,7 @@ public class TicketsServiceImpl implements TicketsService {
         gameIdValidator.validateGameId(ticketRequest.getGameId());
 
         Ticket ticketToSave = Ticket.builder()
-                .price(ticketRequest.getPrice())
+                //.price(ticketRequest.getPrice())
                 .purchasedDate(ticketRequest.getPurchasedDate())
                 .game(Game.builder().id(ticketRequest.getGameId()).build())
                 .build();

@@ -1,24 +1,17 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Cookies from "universal-cookie";
 import axios from "axios";
 
 const LoginForm = () => {
-  const [errorMessages, setErrorMessages] = useState({});
+  const [errorMessage, setErrorMessage] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   let navigate = useNavigate();
 
-  const renderErrorMessage = (name) =>
-    name === errorMessages.name && (
-      <div className="error">{errorMessages.message}</div>
-    );
-
   const handleSubmit = (event) => {
     event.preventDefault();
-    const cookies = new Cookies();
-    var data = JSON.stringify({
+    const loginRequest = JSON.stringify({
       username: username,
       password: password,
     });
@@ -29,17 +22,18 @@ const LoginForm = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      data: data,
+      data: loginRequest,
     };
 
     axios(config)
       .then(function (response) {
-        cookies.set("accessToken", response.data, { path: "/" });
+        localStorage.setItem("accessToken", response.data.accessToken);
         navigate("/");
       })
       .catch(function (error) {
-        setErrorMessages(true);
-        console.log(error);
+        if (error.response) {
+          setErrorMessage(error.response.data.message);
+        }
       });
   };
 
@@ -55,7 +49,6 @@ const LoginForm = () => {
             required
             onChange={(e) => setUsername(e.target.value)}
           />
-          {renderErrorMessage("uname")}
         </div>
         <div className="input-container">
           <label>Password </label>
@@ -66,8 +59,8 @@ const LoginForm = () => {
             required
             onChange={(e) => setPassword(e.target.value)}
           />
-          {renderErrorMessage("pass")}
         </div>
+        {errorMessage && <div className="text-error">* {errorMessage}</div>}
         <div className="button-container">
           <input type="submit" value="Login" />
         </div>

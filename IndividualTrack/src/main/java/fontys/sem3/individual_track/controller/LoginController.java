@@ -5,14 +5,12 @@ import fontys.sem3.individual_track.model.LoginRequestDTO;
 import fontys.sem3.individual_track.model.LoginResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/login")
 @RequiredArgsConstructor
 public class LoginController {

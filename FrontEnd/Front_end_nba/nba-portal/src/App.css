@@ -144,7 +144,7 @@ body {
   width: 30%;
   margin: auto;
   margin-top: 50px;
-  background-color: rgb(204, 204, 204, 0.3);
+  background-color: rgba(72, 76, 82, 0.6);
   box-shadow: 4px 4px 8px 0 rgba(0, 0, 0, 0.45), 0 6px 20px 0 rgba(0, 0, 0, 0.8);
 }
 
@@ -197,6 +197,12 @@ body {
   flex-direction: column;
   gap: 8px;
   margin: 10px;
+}
+
+.text-error {
+  font-size: larger;
+  text-align: center;
+  border-bottom: solid rgb(240, 65, 65);
 }
 
 /*---End of Login form styling---*/

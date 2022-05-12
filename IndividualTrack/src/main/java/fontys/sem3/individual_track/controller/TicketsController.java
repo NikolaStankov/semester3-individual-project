@@ -1,6 +1,7 @@
 package fontys.sem3.individual_track.controller;
 
 import fontys.sem3.individual_track.business.TicketsService;
+import fontys.sem3.individual_track.configuration.security.isauthenticated.IsAuthenticated;
 import fontys.sem3.individual_track.model.CreateTicketRequestDTO;
 import fontys.sem3.individual_track.model.CreateTicketResponseDTO;
 import fontys.sem3.individual_track.model.TicketDTO;
@@ -44,6 +45,7 @@ public class TicketsController {
     }
 
     @PostMapping
+    @IsAuthenticated
     public ResponseEntity<CreateTicketResponseDTO> addTicket(@RequestBody @Valid CreateTicketRequestDTO ticketRequest) {
         CreateTicketResponseDTO ticketResponse = this.ticketsService.createTicket(ticketRequest);
         return ResponseEntity.status(HttpStatus.CREATED).body(ticketResponse);

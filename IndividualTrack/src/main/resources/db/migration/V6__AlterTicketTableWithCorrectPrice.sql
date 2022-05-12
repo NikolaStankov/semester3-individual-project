@@ -1,0 +1,1 @@
+ALTER TABLE ticket MODIFY price double NOT NULL ;

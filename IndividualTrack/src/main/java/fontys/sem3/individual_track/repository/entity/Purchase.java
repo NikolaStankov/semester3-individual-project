@@ -6,32 +6,31 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
 
 @Entity
-@Table(name = "ticket")
+@Table(name = "purchase")
 @Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Ticket {
+public class Purchase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
     @NotNull
-    @Column(name = "ticket_type")
-    @Enumerated(EnumType.STRING)
-    private TicketTypeEnum ticketType;
+    @ManyToOne
+    @JoinColumn(name = "ticket_id")
+    private Ticket ticket;
 
     @NotNull
-    @Column(name = "price")
-    private double price;
+    @ManyToOne
+    @JoinColumn(name = "game_id")
+    private Game game;
 
     @NotNull
-    @Column(name = "specification")
-    private String specification;
+    @Column(name = "quantity")
+    private int quantity;
 }

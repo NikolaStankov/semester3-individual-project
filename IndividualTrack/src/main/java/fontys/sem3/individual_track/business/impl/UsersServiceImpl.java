@@ -1,14 +1,14 @@
 package fontys.sem3.individual_track.business.impl;
 
 import fontys.sem3.individual_track.business.UsersService;
+import fontys.sem3.individual_track.business.exception.ExistingUsernameException;
+import fontys.sem3.individual_track.business.exception.MismatchingPasswordsException;
 import fontys.sem3.individual_track.model.CreateUserRequestDTO;
 import fontys.sem3.individual_track.repository.UsersRepository;
-import fontys.sem3.individual_track.repository.entity.RoleEnum;
 import fontys.sem3.individual_track.repository.entity.User;
 import fontys.sem3.individual_track.repository.entity.UserRole;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -35,7 +35,11 @@ public class UsersServiceImpl implements UsersService {
         Optional<User> userByUsername = this.usersRepository.findByUsername(createUserRequestDTO.getUsername());
 
         if (userByUsername.isPresent()) {
-            throw new RuntimeException("User already registered. Please use different username.");
+            throw new ExistingUsernameException();
+        }
+
+        if (!(createUserRequestDTO.getPassword().equals(createUserRequestDTO.getRepeatedPassword()))) {
+            throw new MismatchingPasswordsException();
         }
 
         user.setUsername(createUserRequestDTO.getUsername());

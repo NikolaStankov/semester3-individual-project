@@ -14,7 +14,7 @@ import Register from "./pages/Register";
 
 function App() {
   const [loggedUser, setLoggedUser] = useState(null);
-
+  
   
 
   return (
