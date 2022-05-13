@@ -1,9 +1,11 @@
 package fontys.sem3.individual_track.business.impl;
 
 import fontys.sem3.individual_track.business.UsersService;
+import fontys.sem3.individual_track.business.converter.UserDTOConverter;
 import fontys.sem3.individual_track.business.exception.ExistingUsernameException;
 import fontys.sem3.individual_track.business.exception.MismatchingPasswordsException;
 import fontys.sem3.individual_track.model.CreateUserRequestDTO;
+import fontys.sem3.individual_track.model.UserDTO;
 import fontys.sem3.individual_track.repository.UsersRepository;
 import fontys.sem3.individual_track.repository.entity.User;
 import fontys.sem3.individual_track.repository.entity.UserRole;
@@ -51,5 +53,11 @@ public class UsersServiceImpl implements UsersService {
                         .build()));
 
         this.usersRepository.save(user);
+    }
+
+    @Override
+    public Optional<UserDTO> getUser(long id) {
+        return this.usersRepository.findById(id).
+                map(UserDTOConverter::convertToDTO);
     }
 }

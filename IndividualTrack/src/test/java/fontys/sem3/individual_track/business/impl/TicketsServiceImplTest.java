@@ -26,28 +26,16 @@ import static org.mockito.Mockito.when;
 class TicketsServiceImplTest {
 
     @Mock
-    TicketsRepository ticketsRepositoryMock;
+    private TicketsRepository ticketsRepositoryMock;
 
     @Mock
-    GameIdValidator gameIdValidator;
+    private GameIdValidator gameIdValidator;
 
     @InjectMocks
-    TicketsServiceImpl ticketsService;
-
-    private Game createFakeGame() {
-        Team homeTeam = new Team(1L, "HT", "Home city",
-                "Home conf", "Home", "Home Homes", "Homes");
-        Team visitorTeam = new Team(2L, "VT", "Visitor city",
-                "Visitor conf", "Visitor", "Visitor Visitors", "Visitors");
-
-        return Game.builder().id(1L).date("18/04/2022").season(2022)
-                .homeTeam(homeTeam).visitorTeam(visitorTeam).build();
-    }
+    private TicketsServiceImpl ticketsService;
 
     @Test
     void getAllTickets_shouldReturnAllTicketsFromRepository() {
-        Game game = createFakeGame();
-
         List<Ticket> ticketList = List.of(
                 Ticket.builder().id(1L).ticketType(TicketTypeEnum.PREMIUM).price(50)
                         .specification("Premium ticket with seats in the middle of the arena").build(),
@@ -82,8 +70,6 @@ class TicketsServiceImplTest {
 
     @Test
     void createTicket() {
-        Game game = Game.builder().id(1L).build();
-
         Ticket expectedTicketToSave = Ticket.builder().ticketType(TicketTypeEnum.STANDARD).price(20)
                 .specification("Standard ticket with seats in the back of the arena").build();
 
@@ -102,7 +88,6 @@ class TicketsServiceImplTest {
         CreateTicketResponseDTO expectedTicketResponse = CreateTicketResponseDTO.builder().ticketId(1L).build();
 
         assertEquals(expectedTicketResponse, actualTicketResponse);
-        verify(gameIdValidator).validateGameId(1L);
         verify(ticketsRepositoryMock).save(expectedTicketToSave);
     }
 }

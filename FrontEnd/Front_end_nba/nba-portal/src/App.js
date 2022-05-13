@@ -14,8 +14,6 @@ import Register from "./pages/Register";
 
 function App() {
   const [loggedUser, setLoggedUser] = useState(null);
-  
-  
 
   return (
     <>
@@ -23,7 +21,7 @@ function App() {
         <Router>
           <NavBar />
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Home loggedUser={loggedUser} />} />
             <Route path="/games" element={<Games />} />
             <Route path="/games/:id" element={<GameDetails />} />
             <Route path="/tickets" element={<Tickets />} />
@@ -31,7 +29,7 @@ function App() {
             <Route path="/players" element={<Players />} />
             <Route
               path="/login"
-              element={<Login savedURL={window.location.pathname} />}
+              element={<Login updateLoggedUserProps={setLoggedUser} />}
             />
             <Route path="/register" element={<Register />} />
           </Routes>

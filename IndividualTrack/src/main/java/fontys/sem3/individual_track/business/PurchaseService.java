@@ -1,9 +1,6 @@
 package fontys.sem3.individual_track.business;
 
-import fontys.sem3.individual_track.model.CreatePlayerRequestDTO;
-import fontys.sem3.individual_track.model.CreatePlayerResponseDTO;
-import fontys.sem3.individual_track.model.PlayerDTO;
-import fontys.sem3.individual_track.model.PurchaseDTO;
+import fontys.sem3.individual_track.model.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -11,9 +8,9 @@ import java.util.Optional;
 public interface PurchaseService {
     List<PurchaseDTO> getAllPurchases();
 
-    Optional<PurchaseDTO> getPurchase(long playerId);
+    Optional<PurchaseDTO> getPurchase(long purchaseId);
 
-    CreatePlayerResponseDTO createPurchase (CreatePlayerRequestDTO playerRequest);
+    CreatePurchaseResponseDTO createPurchase (CreatePurchaseRequestDTO purchaseRequest);
 
     boolean removePurchase (long purchaseId);
 }

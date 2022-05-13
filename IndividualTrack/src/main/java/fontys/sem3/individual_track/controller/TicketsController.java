@@ -1,6 +1,7 @@
 package fontys.sem3.individual_track.controller;
 
 import fontys.sem3.individual_track.business.TicketsService;
+import fontys.sem3.individual_track.configuration.security.isauthenticated.IsAuthenticated;
 import fontys.sem3.individual_track.model.CreateTicketRequestDTO;
 import fontys.sem3.individual_track.model.CreateTicketResponseDTO;
 import fontys.sem3.individual_track.model.TicketDTO;
@@ -22,6 +23,7 @@ public class TicketsController {
     private final TicketsService ticketsService;
 
     @GetMapping
+    @IsAuthenticated
     public ResponseEntity<List<TicketDTO>> getAllTickets() {
         List<TicketDTO> ticketList = this.ticketsService.getAllTickets();
 

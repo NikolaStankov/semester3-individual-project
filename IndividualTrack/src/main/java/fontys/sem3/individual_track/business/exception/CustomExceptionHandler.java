@@ -35,4 +35,31 @@ public class CustomExceptionHandler {
         errorResponse.setMessage("This username already exists");
         return errorResponse;
     }
+
+    @ExceptionHandler(InvalidUserIdException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public ErrorResponse handleInvalidUserId() {
+        ErrorResponse errorResponse = new ErrorResponse();
+        errorResponse.setMessage("Invalid user id.");
+        return errorResponse;
+    }
+
+    @ExceptionHandler(InvalidTicketIdException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public ErrorResponse handleInvalidTicketId() {
+        ErrorResponse errorResponse = new ErrorResponse();
+        errorResponse.setMessage("Invalid ticket id.");
+        return errorResponse;
+    }
+
+    @ExceptionHandler(InvalidGameIdException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public ErrorResponse handleInvalidGameId() {
+        ErrorResponse errorResponse = new ErrorResponse();
+        errorResponse.setMessage("Invalid game id.");
+        return errorResponse;
+    }
 }

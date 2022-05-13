@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import homePic from "../../images/home-pic.jpeg";
 
-const Home = () => {
+const Home = (props) => {
   return (
     <div className="home-text">
       <h2>Welcome to NBA-portal.</h2>
@@ -20,6 +20,7 @@ const Home = () => {
         </Link>
       </p>
       <img className="home-pic" src={homePic} alt="NBA arena" />
+      {props.loggedUser && <h2>Logged in as {props.loggedUser.username} </h2>}
     </div>
   );
 };

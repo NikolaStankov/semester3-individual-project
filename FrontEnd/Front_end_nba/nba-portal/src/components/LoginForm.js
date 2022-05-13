@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
+import jwtDecode from "jwt-decode";
 
-const LoginForm = () => {
+const LoginForm = (props) => {
   const [errorMessage, setErrorMessage] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -28,12 +29,29 @@ const LoginForm = () => {
     axios(config)
       .then(function (response) {
         localStorage.setItem("accessToken", response.data.accessToken);
+        var decodedToken = jwtDecode(response.data.accessToken);
+        localStorage.setItem("expirationDate", decodedToken.exp);
+        const userId = decodedToken.userId;
+        getUser(userId);
         navigate("/");
       })
       .catch(function (error) {
         if (error.response) {
           setErrorMessage(error.response.data.message);
         }
+      });
+  };
+
+  const getUser = (id) => {
+    const userURL = "http://localhost:8080/users/" + id;
+
+    axios
+      .get(userURL)
+      .then((response) => {
+        props.updateLoggedUserProps(response.data);
+      })
+      .catch((error) => {
+        console.log(error.response.message);
       });
   };
 
@@ -64,6 +82,13 @@ const LoginForm = () => {
         <div className="button-container">
           <input type="submit" value="Login" />
         </div>
+        <p>
+          You don't have an account? Sign up{" "}
+          <Link to="/register" className="sign-up">
+            {" "}
+            here
+          </Link>
+        </p>
       </form>
     </div>
   );
