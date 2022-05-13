@@ -3,6 +3,7 @@ package fontys.sem3.individual_track.repository;
 import fontys.sem3.individual_track.repository.entity.Game;
 import fontys.sem3.individual_track.repository.entity.Team;
 import fontys.sem3.individual_track.repository.entity.Ticket;
+import fontys.sem3.individual_track.repository.entity.TicketTypeEnum;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +11,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.persistence.EntityManager;
-
-import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -53,9 +52,9 @@ class TicketsRepositoryTest {
         Game game = saveGame("22/07/2022", 2022);
 
         Ticket ticket = Ticket.builder()
+                .ticketType(TicketTypeEnum.STANDARD)
                 .price(22)
-                .purchasedDate(LocalDate.now())
-                .game(game)
+                .specification("This is a standard ticket for testing")
                 .build();
 
         Ticket savedTicket = ticketsRepository.save(ticket);
@@ -66,9 +65,9 @@ class TicketsRepositoryTest {
 
         Ticket expectedTicket = Ticket.builder()
                 .id(savedTicket.getId())
+                .ticketType(TicketTypeEnum.STANDARD)
                 .price(22)
-                .purchasedDate(LocalDate.now())
-                .game(game)
+                .specification("This is a standard ticket for testing")
                 .build();
 
         assertEquals(expectedTicket, savedTicket);
@@ -79,9 +78,9 @@ class TicketsRepositoryTest {
         Game game = saveGame("11/04/2023", 2023);
 
         Ticket ticket = Ticket.builder()
+                .ticketType(TicketTypeEnum.STANDARD)
                 .price(20)
-                .purchasedDate(LocalDate.now().plusDays(100))
-                .game(game)
+                .specification("This is a standard ticket for testing")
                 .build();
 
         Ticket savedTicket = ticketsRepository.save(ticket);

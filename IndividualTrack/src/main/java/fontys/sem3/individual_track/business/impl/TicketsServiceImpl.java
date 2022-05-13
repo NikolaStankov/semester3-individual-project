@@ -2,13 +2,12 @@ package fontys.sem3.individual_track.business.impl;
 
 import fontys.sem3.individual_track.business.TicketsService;
 import fontys.sem3.individual_track.business.converter.TicketDTOConverter;
-import fontys.sem3.individual_track.business.validator.GameIdValidator;
 import fontys.sem3.individual_track.model.CreateTicketRequestDTO;
 import fontys.sem3.individual_track.model.CreateTicketResponseDTO;
 import fontys.sem3.individual_track.model.TicketDTO;
 import fontys.sem3.individual_track.repository.TicketsRepository;
-import fontys.sem3.individual_track.repository.entity.Game;
 import fontys.sem3.individual_track.repository.entity.Ticket;
+import fontys.sem3.individual_track.repository.entity.TicketTypeEnum;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
@@ -23,8 +22,6 @@ import java.util.Optional;
 public class TicketsServiceImpl implements TicketsService {
 
     private final TicketsRepository ticketsRepository;
-    private final GameIdValidator gameIdValidator;
-
 
     @Override
     public List<TicketDTO> getAllTickets() {
@@ -46,12 +43,10 @@ public class TicketsServiceImpl implements TicketsService {
 
     @Override
     public CreateTicketResponseDTO createTicket(CreateTicketRequestDTO ticketRequest) {
-        gameIdValidator.validateGameId(ticketRequest.getGameId());
-
         Ticket ticketToSave = Ticket.builder()
-                //.price(ticketRequest.getPrice())
-                .purchasedDate(ticketRequest.getPurchasedDate())
-                .game(Game.builder().id(ticketRequest.getGameId()).build())
+                .ticketType(TicketTypeEnum.valueOf(ticketRequest.getTicketType()))
+                .price(ticketRequest.getPrice())
+                .specification(ticketRequest.getSpecification())
                 .build();
 
         Ticket savedTicket = this.ticketsRepository.save(ticketToSave);

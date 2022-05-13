@@ -6,21 +6,19 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.*;
+import java.util.List;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateTicketRequestDTO {
+public class UserDTO {
+    @JsonProperty("id")
+    private Long id;
 
-    @NotNull
-    @JsonProperty("ticket_type")
-    private String ticketType;
+    @JsonProperty("username")
+    private String username;
 
-    @NotNull
-    private double price;
-
-    @NotNull
-    private String specification;
+    @JsonProperty("role")
+    private List<String> roles;
 }

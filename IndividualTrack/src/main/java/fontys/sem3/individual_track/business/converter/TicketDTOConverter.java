@@ -10,9 +10,9 @@ public class TicketDTOConverter {
     public static TicketDTO convertToDTO(Ticket ticket) {
         return TicketDTO.builder()
                 .id(ticket.getId())
-                //.price(ticket.getPrice())
-                .purchasedDate(ticket.getPurchasedDate())
-                .game(GameDTOConverter.convertToDTO(ticket.getGame()))
+                .ticketType(ticket.getTicketType().toString())
+                .price(ticket.getPrice())
+                .specification(ticket.getSpecification())
                 .build();
     }
 }

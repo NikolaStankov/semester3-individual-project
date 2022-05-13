@@ -33,4 +33,9 @@ public class Purchase {
     @NotNull
     @Column(name = "quantity")
     private int quantity;
+
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }

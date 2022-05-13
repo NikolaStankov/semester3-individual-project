@@ -6,6 +6,7 @@ import fontys.sem3.individual_track.model.TicketDTO;
 import fontys.sem3.individual_track.repository.entity.Game;
 import fontys.sem3.individual_track.repository.entity.Team;
 import fontys.sem3.individual_track.repository.entity.Ticket;
+import fontys.sem3.individual_track.repository.entity.TicketTypeEnum;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
@@ -19,16 +20,8 @@ class TicketDTOConverterTest {
         Ticket ticketToBeConverted = Ticket.builder()
                 .id(1L)
                 .price(22)
-                .purchasedDate(LocalDate.now())
-                .game(Game.builder()
-                        .id(1L)
-                        .date("13/04/2022")
-                        .season(2022)
-                        .homeTeam(new Team(1L, "HT", "Home city",
-                                "Home conf", "Home", "Home Homes", "Homes"))
-                        .visitorTeam(new Team(2L, "VT", "Visitor city",
-                                "Visitor conf", "Visitor", "Visitor Visitors", "Visitors"))
-                        .build())
+                .ticketType(TicketTypeEnum.STANDARD)
+                .specification("Test conversion")
                 .build();
 
         TicketDTO actualDTO = TicketDTOConverter.convertToDTO(ticketToBeConverted);
@@ -36,20 +29,8 @@ class TicketDTOConverterTest {
         TicketDTO expectedDTO = TicketDTO.builder()
                 .id(1L)
                 .price(22)
-                .purchasedDate(LocalDate.now())
-                .game(GameDTO.builder()
-                        .id(1L)
-                        .date("13/04/2022")
-                        .season(2022)
-                        .homeTeam(TeamDTO.builder()
-                                .id(1L).abbreviation("HT").city("Home city").conference("Home conf")
-                                .division("Home").fullName("Home Homes").name("Homes")
-                                .build())
-                        .visitorTeam(TeamDTO.builder()
-                                .id(2L).abbreviation("VT").city("Visitor city").conference("Visitor conf")
-                                .division("Visitor").fullName("Visitor Visitors").name("Visitors")
-                                .build())
-                        .build())
+                .ticketType("STANDARD")
+                .specification("Test conversion")
                 .build();
 
         assertEquals(expectedDTO, actualDTO);

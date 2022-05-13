@@ -7,6 +7,7 @@ import fontys.sem3.individual_track.repository.TicketsRepository;
 import fontys.sem3.individual_track.repository.entity.Game;
 import fontys.sem3.individual_track.repository.entity.Team;
 import fontys.sem3.individual_track.repository.entity.Ticket;
+import fontys.sem3.individual_track.repository.entity.TicketTypeEnum;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -48,10 +49,10 @@ class TicketsServiceImplTest {
         Game game = createFakeGame();
 
         List<Ticket> ticketList = List.of(
-                Ticket.builder().id(1L).price(22)
-                        .purchasedDate(LocalDate.now()).game(game).build(),
-                Ticket.builder().id(2L).price(32)
-                        .purchasedDate(LocalDate.now().plusDays(2)).game(game).build()
+                Ticket.builder().id(1L).ticketType(TicketTypeEnum.PREMIUM).price(50)
+                        .specification("Premium ticket with seats in the middle of the arena").build(),
+                Ticket.builder().id(2L).ticketType(TicketTypeEnum.STANDARD).price(20)
+                        .specification("Standard ticket with seats in the back of the arena").build()
         );
 
         when(ticketsRepositoryMock.findAll()).thenReturn(ticketList);
@@ -65,40 +66,36 @@ class TicketsServiceImplTest {
 
     @Test
     void getTicket_shouldReturnTicketWithGivenId() {
-        Game game = createFakeGame();
+        Ticket ticket = Ticket.builder().id(22L).ticketType(TicketTypeEnum.STANDARD).price(20)
+                .specification("Standard ticket with seats in the back of the arena").build();
 
-        Ticket ticket = Ticket.builder().id(12L).price(22)
-                .purchasedDate(LocalDate.now()).game(game).build();
+        when(ticketsRepositoryMock.findById(22L)).thenReturn(Optional.of(ticket));
 
-        when(ticketsRepositoryMock.findById(12L)).thenReturn(Optional.of(ticket));
-
-        Optional<TicketDTO> ticketOptional = ticketsService.getTicket(12L);
+        Optional<TicketDTO> ticketOptional = ticketsService.getTicket(22L);
 
         TicketDTO actualTicketDTO = ticketOptional.orElseThrow();
         TicketDTO expectedTicketDTO = TicketDTOConverter.convertToDTO(ticket);
 
         assertEquals(expectedTicketDTO, actualTicketDTO);
-        verify(ticketsRepositoryMock).findById(12L);
+        verify(ticketsRepositoryMock).findById(22L);
     }
 
     @Test
     void createTicket() {
         Game game = Game.builder().id(1L).build();
 
-        Ticket expectedTicketToSave = Ticket.builder().price(22)
-                .purchasedDate(LocalDate.now())
-                .game(game).build();
+        Ticket expectedTicketToSave = Ticket.builder().ticketType(TicketTypeEnum.STANDARD).price(20)
+                .specification("Standard ticket with seats in the back of the arena").build();
 
-        Ticket savedTicket = Ticket.builder().id(1L).price(22)
-                .purchasedDate(LocalDate.now())
-                .game(game).build();
+        Ticket savedTicket = Ticket.builder().id(1L).ticketType(TicketTypeEnum.STANDARD).price(20)
+                .specification("Standard ticket with seats in the back of the arena").build();
 
         when(ticketsRepositoryMock.save(expectedTicketToSave)).thenReturn(savedTicket);
 
         CreateTicketRequestDTO ticketRequest = CreateTicketRequestDTO.builder()
-                .price(22)
-                .purchasedDate(LocalDate.now())
-                .gameId(game.getId())
+                .ticketType("STANDARD")
+                .price(20)
+                .specification("Standard ticket with seats in the back of the arena")
                 .build();
 
         CreateTicketResponseDTO actualTicketResponse = ticketsService.createTicket(ticketRequest);
