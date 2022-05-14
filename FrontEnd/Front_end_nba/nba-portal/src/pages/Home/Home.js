@@ -1,26 +1,20 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import homePic from "../../images/home-pic.jpeg";
+import homePic from "../../images/home-page-img.jpg";
 
 const Home = (props) => {
   return (
-    <div className="home-text">
-      <h2>Welcome to NBA-portal.</h2>
+    <div className="home-container">
+      <h1>NBA-portal.</h1>
       <h3>
-        <Link to="/login" className="login">
-          Sign in
-        </Link>{" "}
-        now and get a ticket for your favourite's team game
+        See all of your favourite teams and players. Get a ticket to watch them
+        compete.
       </h3>
-      <p>
-        You don't have an account? Sign up{" "}
-        <Link to="/register" className="sign-up">
-          {" "}
-          here
-        </Link>
-      </p>
-      <img className="home-pic" src={homePic} alt="NBA arena" />
-      {props.loggedUser && <h2>Logged in as {props.loggedUser.username} </h2>}
+      <h4>
+        Enjoy a variety of tickets and prices for the ultimate NBA experience
+      </h4>
+      {props.loggedUser && <h2>Hello, {props.loggedUser.username} </h2>}
+      <img src={homePic} alt="Basketball in a basket" className="img-bg-tr home-pic"/>
     </div>
   );
 };

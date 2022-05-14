@@ -104,31 +104,21 @@ body {
 /*--------------------------------------------*/
 /*---Start of Home page styling---*/
 
-.home-text {
+.home-container {
   width: 50%;
   margin: auto;
   text-align: center;
-  background-color: var(--background-color);
-  padding: 50px;
   border: none;
-  box-shadow: 4px 4px 8px 0 rgba(0, 0, 0, 0.45), 0 6px 20px 0 rgba(0, 0, 0, 0.8);
-}
-
-.sign-up,
-.login {
-  text-decoration: none;
-}
-
-.sign-up:hover,
-.login:hover {
-  color: var(--hover-color);
 }
 
 .home-pic {
-  width: 80%;
+  width: 70%;
   margin: auto;
-  box-shadow: 4px 4px 8px 0 rgba(0, 0, 0, 0.45), 0 6px 20px 0 rgba(0, 0, 0, 0.8);
   margin-block-end: 20px;
+}
+
+.img-bg-tr {
+  mix-blend-mode: multiply;
 }
 
 /*---End of Home page styling---*/

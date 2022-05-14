@@ -3,9 +3,11 @@ import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import useFetch from "../../custom-hooks/useFetch";
 
-const GameDetails = () => {
+const GameDetails = (props) => {
   const [tickets, setTickets] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
+
+  const loggedUser = props.loggedUser;
 
   let navigate = useNavigate();
 
@@ -16,22 +18,27 @@ const GameDetails = () => {
 
   const getTickets = () => {
     const tickets_url = "http://localhost:8080/tickets";
+    const token = localStorage.getItem("accessToken");
 
-    axios
-      .get(tickets_url)
-      .then((response) => {
-        const responseData = response.data;
-        setTickets(responseData);
-        console.log(tickets);
-      })
-      .catch(function (error) {
-        if (error.response) {
-          if (error.response.status === 401) {
-            navigate("/login", { state: { page: window.location.pathname } });
+    if (loggedUser) {
+      axios
+        .get(tickets_url, { headers: { Authorization: `Bearer ${token}` } })
+        .then((response) => {
+          const responseData = response.data;
+          console.log("Response data: ", responseData);
+          setTickets(responseData);
+        })
+        .catch(function (error) {
+          if (error.response) {
+            console.log(error.response.errorMessage);
           }
-        }
-      });
+        });
+    } else {
+      navigate("/login", { state: { page: window.location.pathname } });
+    }
   };
+
+  console.log(localStorage.getItem("accessToken"));
 
   return (
     <>

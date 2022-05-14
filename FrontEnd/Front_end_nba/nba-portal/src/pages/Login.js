@@ -4,7 +4,6 @@ const Login = (props) => {
   return (
     <LoginForm
       updateLoggedUserProps={props.updateLoggedUserProps}
-      updateExpirationDateProps={props.updateExpirationDateProps}
     />
   );
 };
