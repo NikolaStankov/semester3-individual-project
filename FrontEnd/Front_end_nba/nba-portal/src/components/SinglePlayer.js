@@ -3,11 +3,11 @@ const SinglePlayer = (props) => {
   const { team } = props.player;
 
   return (
-    <li>
-      <div>
-        {first_name} {last_name}
-      </div>
-    </li>
+    <tr>
+      <td>{first_name}</td>
+      <td>{last_name}</td>
+      <td>{position}</td>
+    </tr>
   );
 };
 

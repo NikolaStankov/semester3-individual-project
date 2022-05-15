@@ -3,6 +3,7 @@ package fontys.sem3.individual_track.business;
 import fontys.sem3.individual_track.model.CreatePlayerRequestDTO;
 import fontys.sem3.individual_track.model.CreatePlayerResponseDTO;
 import fontys.sem3.individual_track.model.PlayerDTO;
+import fontys.sem3.individual_track.repository.entity.Team;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,4 +16,6 @@ public interface PlayersService {
     CreatePlayerResponseDTO createPlayer(CreatePlayerRequestDTO playerRequest);
 
     boolean removePlayer(long playerId);
+
+    List<PlayerDTO> getPlayersByTeam(Team team);
 }

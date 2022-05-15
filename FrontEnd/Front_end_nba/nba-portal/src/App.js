@@ -12,6 +12,7 @@ import Players from "./pages/Players/Players";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Logout from "./pages/Logout/Logout";
+import TeamDetails from "./pages/Teams/TeamDetails";
 
 function App() {
   const [loggedUser, setLoggedUser] = useState(null);
@@ -24,9 +25,13 @@ function App() {
           <Routes>
             <Route path="/" element={<Home loggedUser={loggedUser} />} />
             <Route path="/games" element={<Games />} />
-            <Route path="/games/:id" element={<GameDetails loggedUser={loggedUser} />} />
+            <Route
+              path="/games/:id"
+              element={<GameDetails loggedUser={loggedUser} />}
+            />
             <Route path="/tickets" element={<Tickets />} />
             <Route path="/teams" element={<Teams />} />
+            <Route path="/teams/:teamId" element={<TeamDetails />} />
             <Route path="/players" element={<Players />} />
             <Route
               path="/login"

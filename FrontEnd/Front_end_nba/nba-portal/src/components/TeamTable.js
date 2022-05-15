@@ -5,11 +5,9 @@ const TeamTable = (props) => {
   return (
     <table className="content-table">
       <tr>
-        <th>Abbreviation</th>
+        <th>Name</th>
+        <th>Abbreviaton</th>
         <th>City</th>
-        <th>Conference</th>
-        <th>Division</th>
-        <th>Full name</th>
       </tr>
       {props.teams.map((team) => (
         <SingleTeam key={team.id} team={team} />

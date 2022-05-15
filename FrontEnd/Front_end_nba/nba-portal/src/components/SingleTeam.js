@@ -1,17 +1,24 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const SingleTeam = (props) => {
-  const { abbreviation, city, conference, division, full_name } =
+  const { id, abbreviation, city, conference, division, full_name, name } =
     props.team;
 
+  let navigate = useNavigate();
+
+  let url = "/teams/" + id;
+
   return (
-    <tr>
+    <tr
+      className="clickable"
+      onClick={() => {
+        navigate(url);
+      }}
+    >
+      <td>{name}</td>
       <td>{abbreviation}</td>
       <td>{city}</td>
-      <td>{conference}</td>
-      <td>{division}</td>
-      <td>{full_name}</td>
     </tr>
   );
 };

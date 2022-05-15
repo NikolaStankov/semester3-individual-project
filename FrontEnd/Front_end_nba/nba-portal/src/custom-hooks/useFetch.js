@@ -11,6 +11,7 @@ const useFetch = (url) => {
       .get(url)
       .then((response) => {
         const responseData = response.data;
+        console.log("Response data: ", responseData);
         setData(responseData);
         console.log(responseData);
         console.log(data);
@@ -18,7 +19,7 @@ const useFetch = (url) => {
       .catch(function (error) {
         if (error.response) {
           setErrorMessage(error.response.data.message);
-          console.log(errorMessage)
+          console.log(errorMessage);
         }
       });
   }, [url]);
