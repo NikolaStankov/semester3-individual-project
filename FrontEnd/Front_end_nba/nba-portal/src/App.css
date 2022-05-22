@@ -81,7 +81,7 @@ body {
   background-color: var(--blue-hover);
 }
 
-.table-wrapper{
+.table-wrapper {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -89,7 +89,7 @@ body {
   gap: 50px;
 }
 
-.table-wrapper div{
+.table-wrapper div {
   width: 80%;
   text-align: center;
 }
@@ -99,16 +99,60 @@ body {
 /*---Start of Content Details styling---*/
 
 .content-details {
-  width: 30%;
+  width: 60%;
   margin: auto;
   text-align: center;
   border: solid var(--border-color);
   background-color: var(--background-color);
   font-size: 20px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: flex-start;
+  height: 100%;
+}
+
+.details div {
+  text-align: start;
+}
+
+.invisible {
+  display: none;
+}
+
+.list-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.list {
+  max-width: 100%;
+  max-height: 70%;
+  overflow-y: scroll;
+}
+
+.single-ticket {
+  border-bottom: solid var(--border-color);
+  cursor: pointer;
+}
+
+.single-ticket:hover,
+.single-ticket:focus::after {
+  border-bottom: transparent;
+  color: var(--nba-blue);
+  pointer-events: all;
+  cursor: pointer;
 }
 
 .content-details div {
   margin-block: 8px;
+  flex: 1 1 0px
 }
 
 .details-title {
