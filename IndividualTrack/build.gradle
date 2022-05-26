@@ -29,7 +29,7 @@ flyway {
     password = 'mySecretPwd'
     schemas = ['schema1', 'schema2', 'schema3']
     placeholders = [
-            'keyABC': 'valueXYZ',
+            'keyABC'          : 'valueXYZ',
             'otherplaceholder': 'value123'
     ]
 }
@@ -64,6 +64,7 @@ dependencies {
     runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.2'
     runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.2'
     implementation 'org.springframework.boot:spring-boot-starter-aop'
+    implementation('org.springframework.boot:spring-boot-starter-websocket')
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'

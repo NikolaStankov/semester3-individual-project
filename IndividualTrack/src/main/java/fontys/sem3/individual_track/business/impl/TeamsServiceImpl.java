@@ -63,4 +63,20 @@ public class TeamsServiceImpl implements TeamsService {
     public void removeTeam(long teamId) {
         this.teamsRepository.deleteById(teamId);
     }
+
+    @Override
+    public TeamDTO getTeamByFullName(String teamFullName) {
+        Team team = this.teamsRepository.getTeamByFullName(teamFullName);
+        TeamDTO teamToReturn = TeamDTO.builder()
+                .id(team.getId())
+                .abbreviation(team.getAbbreviation())
+                .city(team.getCity())
+                .conference(team.getConference())
+                .division(team.getDivision())
+                .fullName(team.getFullName())
+                .name(team.getName())
+                .build();
+
+        return teamToReturn;
+    }
 }

@@ -13,6 +13,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Logout from "./pages/Logout/Logout";
 import TeamDetails from "./pages/Teams/TeamDetails";
+import LiveScore from "./pages/LiveScore/LiveScore";
 
 function App() {
   const [loggedUser, setLoggedUser] = useState(null);
@@ -33,6 +34,7 @@ function App() {
             <Route path="/teams" element={<Teams />} />
             <Route path="/teams/:teamId" element={<TeamDetails />} />
             <Route path="/players" element={<Players />} />
+            <Route path="/liveSimulation" element={<LiveScore />} />
             <Route
               path="/login"
               element={<Login updateLoggedUserProps={setLoggedUser} />}

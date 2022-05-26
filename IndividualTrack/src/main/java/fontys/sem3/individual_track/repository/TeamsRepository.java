@@ -5,4 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface TeamsRepository extends JpaRepository<Team, Long> {
     boolean existsById(long teamId);
+
+    Team getTeamByFullName(String teamFullName);
 }

@@ -34,6 +34,10 @@ body {
   cursor: pointer;
 }
 
+.content {
+  text-align: center;
+}
+
 /*---End of general styling---*/
 /*--------------------------------------------*/
 /*---Start of Navbar styling---*/
@@ -257,3 +261,17 @@ body {
 }
 
 /*---End of Login form styling---*/
+/*--------------------------------------------*/
+/*---Start of Live game page styling---*/
+
+.live-game-menu-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.scoreBoard {
+  display: flex;
+  justify-content: space-around;
+}
+
+/*---End of Live game page styling---*/

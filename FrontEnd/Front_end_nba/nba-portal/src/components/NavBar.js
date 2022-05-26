@@ -26,6 +26,9 @@ const NavBar = (props) => {
           <Nav.Link as={Link} to="/games">
             Games
           </Nav.Link>
+          <Nav.Link as={Link} to="/liveSimulation">
+            Live game
+          </Nav.Link>
         </Nav>
         <Nav>
           {props.loggedUser ? (
