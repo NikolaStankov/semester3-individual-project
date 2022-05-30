@@ -26,21 +26,16 @@ const LiveScore = () => {
     const socket = SockJS(ENDPOINT);
     const stompClient = Stomp.over(socket);
     stompClient.connect({}, () => {
-      stompClient.subscribe("/topic/simulation", (data) => {
-        console.log(data);
+      stompClient.subscribe("/user/queue/simulation", (data) => {
         onMessageReceived(data);
       });
     });
     setStompClient(stompClient);
   }, []);
 
-  useEffect(() => {
-    if (team1Score < scorePlayedUntil && team2Score < scorePlayedUntil) {
-      sendData();
-    }
-  }, [team1Score, team2Score, team1ScoreLog, team2ScoreLog]);
-
   function onMessageReceived(data) {
+    console.log("The response is: ", data);
+
     const result = JSON.parse(data.body);
     let sumOfPoints = 0;
     let scoreLogMessage = "";
@@ -64,7 +59,7 @@ const LiveScore = () => {
 
   function sendData() {
     stompClient.send(
-      "/app/scoreboard",
+      "/app/simulation",
       {},
       JSON.stringify({ team1: team1, team2: team2, score: scorePlayedUntil })
     );

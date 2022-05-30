@@ -9,7 +9,7 @@ import fontys.sem3.individual_track.model.TeamDTO;
 import fontys.sem3.individual_track.repository.entity.Team;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 
 import java.util.List;
@@ -19,14 +19,16 @@ import java.util.Random;
 @RequiredArgsConstructor
 public class LiveSimulationController {
 
+    private final SimpMessagingTemplate simpMessagingTemplate;
+
     private final TeamsService teamsService;
     private final PlayersService playersService;
 
-    @MessageMapping("/scoreboard")
-    @SendTo("/topic/simulation")
-    public LiveSimulationResponseDTO scoreBoard(LiveSimulationDTO liveSimulationDTO) throws InterruptedException {
-        Thread.sleep(3000);
+    private int team1Score = 0;
+    private int team2Score = 0;
 
+    @MessageMapping("/simulation")
+    public void scoreBoard(LiveSimulationDTO liveSimulationDTO) throws InterruptedException {
         TeamDTO team1DTO = this.teamsService.getTeamByFullName(liveSimulationDTO.getTeam1());
         TeamDTO team2DTO = this.teamsService.getTeamByFullName(liveSimulationDTO.getTeam2());
 
@@ -55,30 +57,36 @@ public class LiveSimulationController {
         List<PlayerDTO> team1Players = this.playersService.getPlayersByTeam(team1);
         List<PlayerDTO> team2Players = this.playersService.getPlayersByTeam(team2);
 
-        int teamValue = generateTeamValue();
-        PlayerDTO playerToScore = new PlayerDTO();
+        while (team1Score < liveSimulationDTO.getScore() &&
+                team2Score < liveSimulationDTO.getScore()) {
+            Thread.sleep(3000);
 
-        switch (teamValue){
-            case 1:
-                responseDTO.setTeam1(true);
-                responseDTO.setTeam2(false);
+            int teamValue = generateTeamValue();
+            PlayerDTO playerToScore = new PlayerDTO();
+            int scoredPoints = generateScoredPoints();
 
-                playerToScore = getPlayerToScore(team1Players);
-                break;
-            case 2:
-                responseDTO.setTeam2(true);
-                responseDTO.setTeam1(false);
+            switch (teamValue) {
+                case 1:
+                    responseDTO.setTeam1(true);
+                    responseDTO.setTeam2(false);
 
-                playerToScore = getPlayerToScore(team2Players);
-                break;
+                    playerToScore = getPlayerToScore(team1Players);
+                    team1Score += scoredPoints;
+                    break;
+                case 2:
+                    responseDTO.setTeam2(true);
+                    responseDTO.setTeam1(false);
+
+                    playerToScore = getPlayerToScore(team2Players);
+                    team2Score += scoredPoints;
+                    break;
+            }
+
+            responseDTO.setPlayer(playerToScore.getFirstName() + " " + playerToScore.getLastName());
+            responseDTO.setPoints(scoredPoints);
+
+            this.simpMessagingTemplate.convertAndSendToUser("User", "/queue/simulation", responseDTO);
         }
-
-        int scoredPoints = generateScoredPoints();
-
-        responseDTO.setPlayer(playerToScore.getFirstName() + " " + playerToScore.getLastName());
-        responseDTO.setPoints(scoredPoints);
-
-        return responseDTO;
     }
 
     private int generateTeamValue() {
