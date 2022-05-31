@@ -3,7 +3,9 @@ import UploadTicketForm from "../../components/UploadTicketForm";
 const AdminPanel = (props) => {
   return (
     <>
-      <UploadTicketForm />
+      {props.loggedUser && props.loggedUser.role.some((r) => r === "ADMIN") && (
+        <UploadTicketForm />
+      )}
     </>
   );
 };

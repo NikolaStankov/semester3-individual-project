@@ -53,6 +53,7 @@ public class TicketsController {
     }
 
     @PostMapping
+    @IsAuthenticated
     public ResponseEntity<CreateTicketResponseDTO> addTicket(@RequestBody @Valid CreateTicketRequestDTO ticketRequest) {
         CreateTicketResponseDTO ticketResponse = this.ticketsService.createTicket(ticketRequest);
         return ResponseEntity.status(HttpStatus.CREATED).body(ticketResponse);

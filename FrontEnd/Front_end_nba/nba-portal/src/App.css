@@ -260,6 +260,12 @@ body {
   border-bottom: solid rgb(240, 65, 65);
 }
 
+.message-success{
+  font-size: larger;
+  text-align: center;
+  border-bottom: solid green;
+}
+
 /*---End of Login form styling---*/
 /*--------------------------------------------*/
 /*---Start of Live game page styling---*/
