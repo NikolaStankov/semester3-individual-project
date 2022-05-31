@@ -14,6 +14,7 @@ import Register from "./pages/Register";
 import Logout from "./pages/Logout/Logout";
 import TeamDetails from "./pages/Teams/TeamDetails";
 import LiveScore from "./pages/LiveScore/LiveScore";
+import AdminPanel from "./pages/AdminPanel/AdminPanel";
 
 function App() {
   const [loggedUser, setLoggedUser] = useState(null);
@@ -44,6 +45,10 @@ function App() {
               element={<Logout updateLoggedUserProps={setLoggedUser} />}
             />
             <Route path="/register" element={<Register />} />
+            <Route
+              path="/adminPanel"
+              element={<AdminPanel loggedUser={loggedUser} />}
+            />
           </Routes>
         </Router>
       </div>

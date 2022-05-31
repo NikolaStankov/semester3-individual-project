@@ -99,7 +99,7 @@ public class LiveSimulationController {
 
         return teamValue;
     }
-
+    
     private PlayerDTO getPlayerToScore(List<PlayerDTO> teamPlayers) {
         Random rand = new Random();
         int playerValue = rand.nextInt(teamPlayers.size());

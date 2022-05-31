@@ -5,12 +5,14 @@ import fontys.sem3.individual_track.configuration.security.isauthenticated.IsAut
 import fontys.sem3.individual_track.model.CreateTicketRequestDTO;
 import fontys.sem3.individual_track.model.CreateTicketResponseDTO;
 import fontys.sem3.individual_track.model.TicketDTO;
+import fontys.sem3.individual_track.repository.entity.TicketTypeEnum;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,6 +45,11 @@ public class TicketsController {
         } else {
             return ResponseEntity.ok().body(optionalTicketDTO.get());
         }
+    }
+
+    @GetMapping("/types")
+    public List<TicketTypeEnum> getAllTicketTypes() {
+        return Arrays.asList(this.ticketsService.getAllTicketTypes());
     }
 
     @PostMapping

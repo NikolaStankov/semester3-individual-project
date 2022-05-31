@@ -31,6 +31,12 @@ const NavBar = (props) => {
           </Nav.Link>
         </Nav>
         <Nav>
+          {props.loggedUser &&
+            props.loggedUser.role.some((r) => r === "ADMIN") && (
+              <Nav.Link as={Link} to="/adminPanel" className="float-right">
+                Admin
+              </Nav.Link>
+            )}
           {props.loggedUser ? (
             <Nav.Link as={Link} to="/logout" className="float-right">
               Logout
