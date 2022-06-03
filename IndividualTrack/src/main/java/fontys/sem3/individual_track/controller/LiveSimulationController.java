@@ -8,10 +8,13 @@ import fontys.sem3.individual_track.model.PlayerDTO;
 import fontys.sem3.individual_track.model.TeamDTO;
 import fontys.sem3.individual_track.repository.entity.Team;
 import lombok.RequiredArgsConstructor;
+import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Random;
 
@@ -28,7 +31,10 @@ public class LiveSimulationController {
     private int team2Score = 0;
 
     @MessageMapping("/simulation")
-    public void scoreBoard(LiveSimulationDTO liveSimulationDTO) throws InterruptedException {
+    public void scoreBoard(@Payload LiveSimulationDTO liveSimulationDTO) throws InterruptedException {
+        Thread.sleep(1000);
+        team1Score = 0;
+        team2Score = 0;
         TeamDTO team1DTO = this.teamsService.getTeamByFullName(liveSimulationDTO.getTeam1());
         TeamDTO team2DTO = this.teamsService.getTeamByFullName(liveSimulationDTO.getTeam2());
 
@@ -60,6 +66,9 @@ public class LiveSimulationController {
         while (team1Score < liveSimulationDTO.getScore() &&
                 team2Score < liveSimulationDTO.getScore()) {
             Thread.sleep(3000);
+            System.out.println("Goes in loop");
+            System.out.println("Team 1 score: " + team1Score);
+            System.out.println("Team 2 score: " + team2Score);
 
             int teamValue = generateTeamValue();
             PlayerDTO playerToScore = new PlayerDTO();
@@ -85,7 +94,7 @@ public class LiveSimulationController {
             responseDTO.setPlayer(playerToScore.getFirstName() + " " + playerToScore.getLastName());
             responseDTO.setPoints(scoredPoints);
 
-            this.simpMessagingTemplate.convertAndSendToUser("User", "/queue/simulation", responseDTO);
+            this.simpMessagingTemplate.convertAndSend("/topic/simulation", responseDTO);
         }
     }
 
@@ -99,7 +108,7 @@ public class LiveSimulationController {
 
         return teamValue;
     }
-    
+
     private PlayerDTO getPlayerToScore(List<PlayerDTO> teamPlayers) {
         Random rand = new Random();
         int playerValue = rand.nextInt(teamPlayers.size());

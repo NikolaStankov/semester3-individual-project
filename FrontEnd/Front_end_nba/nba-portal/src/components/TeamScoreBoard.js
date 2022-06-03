@@ -1,12 +1,14 @@
+import ScoreLogMessage from "./ScoreLogMessage";
+
 const TeamScoreBoard = (props) => {
   return (
     <div className="team-container">
-      <div className="team-full-name">{props.team}</div>
-      <div className="score">{props.score}</div>
+      <div className="team-full-name"><h2>{props.team}</h2></div>
+      <div className="score"><h2>Points: {props.teamScore}</h2></div>
       <div className="score-message-container">
-        {props.teamScorelog.map((scoreLogMessage) => {
-          <div className="score-message"><p>{scoreLogMessage}</p></div>
-        })}
+        {props.teamScorelog.map((scoreLogMessage) => (
+          <ScoreLogMessage scoreLogMessage={scoreLogMessage} />
+        ))}
       </div>
     </div>
   );

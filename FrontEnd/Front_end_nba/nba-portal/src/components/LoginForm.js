@@ -49,6 +49,7 @@ const LoginForm = (props) => {
       .get(userURL)
       .then((response) => {
         props.updateLoggedUserProps(response.data);
+        localStorage.setItem("username", response.data.username);
       })
       .catch((error) => {
         console.log(error.response.message);
