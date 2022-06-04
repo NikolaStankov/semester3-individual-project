@@ -4,6 +4,7 @@ plugins {
     id 'java'
     id "org.sonarqube" version "3.3"
     id "org.flywaydb.flyway" version "8.5.10"
+    id 'com.palantir.docker' version '0.33.0'
 }
 
 sonarqube {
@@ -38,6 +39,12 @@ repositories {
     mavenCentral()
 }
 
+docker {
+    name "nbaportalbackend"
+    copySpec.from(jar).rename(".*", "app.jar")
+    buildArgs(['JAR_FILE': "app.jar"])
+}
+
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-web'
@@ -58,7 +65,7 @@ dependencies {
     implementation 'com.google.guava:guava:31.1-jre'
     implementation 'net.logstash.logback:logstash-logback-encoder:7.0.1'
     implementation 'ch.qos.logback:logback-classic:1.2.11'
-    implementation 'mysql:mysql-connector-java:8.0.28'
+    implementation 'mysql:mysql-connector-java:8.0.29'
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
     runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.2'
