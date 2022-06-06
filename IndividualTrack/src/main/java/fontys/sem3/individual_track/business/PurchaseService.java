@@ -10,7 +10,9 @@ public interface PurchaseService {
 
     Optional<PurchaseDTO> getPurchase(long purchaseId);
 
-    CreatePurchaseResponseDTO createPurchase (CreatePurchaseRequestDTO purchaseRequest);
+    CreatePurchaseResponseDTO createPurchase(CreatePurchaseRequestDTO purchaseRequest);
 
-    boolean removePurchase (long purchaseId);
+    boolean removePurchase(long purchaseId);
+
+    List<PurchaseDTO> getPurchasesByUser(UserDTO userDTO);
 }

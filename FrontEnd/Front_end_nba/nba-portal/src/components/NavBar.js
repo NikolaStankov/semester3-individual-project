@@ -38,9 +38,14 @@ const NavBar = (props) => {
               </Nav.Link>
             )}
           {props.loggedUser ? (
-            <Nav.Link as={Link} to="/logout" className="float-right">
-              Logout
-            </Nav.Link>
+            <>
+              <Nav.Link as={Link} to="/profile" className="float-right">
+                Profile
+              </Nav.Link>
+              <Nav.Link as={Link} to="/logout" className="float-right">
+                Logout
+              </Nav.Link>
+            </>
           ) : (
             <Nav.Link as={Link} to="/login" className="float-right">
               Login
