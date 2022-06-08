@@ -3,9 +3,10 @@
   --border-color: rgba(255, 255, 255, 0.55);
   --hover-color: rgb(186, 152, 110);
   --background-color: rgb(204, 204, 204, 0.3);
-  --nba-blue: rgba(2, 51, 83, 255);
-  --nba-red: rgba(157, 27, 65, 255);
-  --nba-grey: rgba(183, 183, 183, 255);
+  --nba-blue: rgb(2, 51, 83);
+  --nba-blue-transparent: rgb(2, 51, 83, .6);
+  --nba-red: rgb(157, 27, 65);
+  --nba-grey: rgb(183, 183, 183);
   --blue-hover: rgb(6, 113, 184);
 }
 
@@ -322,7 +323,8 @@ body {
   border: none;
 }
 
-.live-button:hover {
+.live-button:hover,
+.standard-button-red:hover {
   border: solid var(--border-color);
   color: rgb(255, 255, 255, 0.6);
 }
@@ -352,3 +354,47 @@ body {
 }
 
 /*---End of Profile page styling---*/
+/*--------------------------------------------*/
+/*---Start of Tickets page styling---*/
+
+.team-ticket-cover-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.team-ticket-cover {
+  width: 70%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: solid var(--border-color);
+  border-radius: 10px;
+  background-color: var(--nba-blue-transparent);
+  padding-inline: 20px;
+}
+
+.logo-container {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+
+.logo-container img {
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+}
+
+.standard-button-red {
+  width: 20%;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: var(--nba-red);
+  color: white;
+  border: none;
+}
+
+/*---End of Tickets page styling---*/

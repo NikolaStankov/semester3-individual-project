@@ -1,17 +1,12 @@
 import React, { useState, useEffect } from "react";
-import TicketsList from "../../components/TicketsList";
+import TeamTicketCoverList from "../../components/TeamTicketCoverList";
 import useFetch from "../../custom-hooks/useFetch";
 
 const Tickets = () => {
-  const url = "http://localhost:8080/tickets";
-  const { data: tickets } = useFetch(url);
+  const url = "http://localhost:8080/teams";
+  const { data: teams } = useFetch(url);
 
-  return (
-    <>
-      {tickets && <TicketsList tickets={tickets} />}
-      <div> ***THESE COME FROM BACK END***</div>
-    </>
-  );
+  return <>{teams && <TeamTicketCoverList teams={teams} />}</>;
 };
 
 export default Tickets;
