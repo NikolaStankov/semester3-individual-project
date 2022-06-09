@@ -9,7 +9,7 @@ const Profile = (props) => {
 
   return (
     <>
-      <h1>Purchases:</h1>
+      <h1>{props.loggedUser.username}'s purchases:</h1>
       {purchases && <PurchaseList purchases={purchases} />}
     </>
   );

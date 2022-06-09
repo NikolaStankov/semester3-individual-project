@@ -20,11 +20,11 @@ const NavBar = (props) => {
           <Nav.Link as={Link} to="/">
             Home
           </Nav.Link>
+          <Nav.Link as={Link} to="/tickets">
+            Tickets
+          </Nav.Link>
           <Nav.Link as={Link} to="/teams">
             Teams
-          </Nav.Link>
-          <Nav.Link as={Link} to="/games">
-            Games
           </Nav.Link>
           <Nav.Link as={Link} to="/liveSimulation">
             Live game

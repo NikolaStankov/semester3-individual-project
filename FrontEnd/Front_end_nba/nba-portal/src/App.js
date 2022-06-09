@@ -17,6 +17,7 @@ import LiveScore from "./pages/LiveScore/LiveScore";
 import AdminPanel from "./pages/AdminPanel/AdminPanel";
 import Profile from "./pages/Profile/Profile";
 import TeamEvents from "./pages/Tickets/TeamEvents";
+import Purchase from "./pages/Tickets/Purchase";
 
 function App() {
   const [loggedUser, setLoggedUser] = useState(null);
@@ -58,6 +59,10 @@ function App() {
             <Route
               path="/teams/:teamId/events"
               element={<TeamEvents loggedUser={loggedUser} />}
+            />
+            <Route
+              path="/games/:gameId/tickets"
+              element={<Purchase loggedUser={loggedUser} />}
             />
           </Routes>
         </Router>

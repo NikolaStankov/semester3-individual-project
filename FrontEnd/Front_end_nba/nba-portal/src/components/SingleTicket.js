@@ -1,26 +1,18 @@
 import React from "react";
 
 const SingleTicket = (props) => {
-  const { id, price, ticket_type, specification } = props.ticket;
-
-  const handleClick = (e) => {
-    const selectedTicketRBtn = e.target;
-    selectedTicketRBtn.checked = true;
-    selectedTicketRBtn.style.color = 'var(--nba-blue)';
-    props.updateSelectedTicketProps(selectedTicketRBtn.value);
-  };
-
   return (
-    <div className="single-ticket" onClick={handleClick}>
+    <div className="ticket-entity">
       <input
-        className="invisible"
         type="radio"
-        id={id}
+        id={props.ticket.id}
+        value={props.selectedTicketId}
         name="ticket"
-        value={id}
+        onChange={(e) => props.setSelectedTicketId(e.target.id)}
       />
-      <label htmlFor={id}>
-        Ticket: {ticket_type}, price : {price} - {specification}
+      <label>
+        {props.ticket.ticket_type} - price: {props.ticket.price}(
+        {props.ticket.specification})
       </label>
     </div>
   );
