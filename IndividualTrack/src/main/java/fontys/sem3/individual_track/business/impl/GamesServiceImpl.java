@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -66,5 +67,25 @@ public class GamesServiceImpl implements GamesService {
     @Override
     public void removeGame(long gameId) {
         this.gamesRepository.deleteById(gameId);
+    }
+
+    @Override
+    public List<GameDTO> getGamesByTeamId(long teamId) {
+
+        List<GameDTO> gamesByTeamId = new ArrayList<>();
+
+        List<GameDTO> homeGames = this.gamesRepository.findAllByHomeTeamId(teamId)
+                .stream()
+                .map(game -> GameDTOConverter.convertToDTO(game))
+                .collect(Collectors.toList());
+        List<GameDTO> awayGames = this.gamesRepository.findAllByVisitorTeamId(teamId)
+                .stream()
+                .map(game -> GameDTOConverter.convertToDTO(game))
+                .collect(Collectors.toList());
+
+        gamesByTeamId.addAll(homeGames);
+        gamesByTeamId.addAll(awayGames);
+
+        return gamesByTeamId;
     }
 }

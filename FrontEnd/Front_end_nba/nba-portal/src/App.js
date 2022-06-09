@@ -16,6 +16,7 @@ import TeamDetails from "./pages/Teams/TeamDetails";
 import LiveScore from "./pages/LiveScore/LiveScore";
 import AdminPanel from "./pages/AdminPanel/AdminPanel";
 import Profile from "./pages/Profile/Profile";
+import TeamEvents from "./pages/Tickets/TeamEvents";
 
 function App() {
   const [loggedUser, setLoggedUser] = useState(null);
@@ -53,6 +54,10 @@ function App() {
             <Route
               path="/profile"
               element={<Profile loggedUser={loggedUser} />}
+            />
+            <Route
+              path="/teams/:teamId/events"
+              element={<TeamEvents loggedUser={loggedUser} />}
             />
           </Routes>
         </Router>
