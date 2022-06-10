@@ -29,7 +29,11 @@ const Purchase = (props) => {
   };
 
   useEffect(() => {
-    getTickets();
+    if (props.loggedUser) {
+      getTickets();
+    } else {
+      navigate("/login");
+    }
   }, []);
 
   const handleTicketSubmit = (e) => {

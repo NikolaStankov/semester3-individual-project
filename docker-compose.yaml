@@ -2,13 +2,18 @@ version: '3.8'
 
 services:
   db:
+    container_name: mysql_c2
     image: mysql
     ports:
       - '3308:3306'
+    expose:
+      - '3306'
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: 'root'
       MYSQL_DATABASE: 'nba-portal'
+      MYSQL_ROOT_USERNAME: 'root'
+      MYSQL_PASSWORD: 'root'
+      MYSQL_ROOT_PASSWORD: 'root'
 
   backend:
     build:
@@ -21,7 +26,8 @@ services:
       - db
     environment:
       - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/nba-portal
-      - SPRING_DATASOURCE_PASSWORD=00000000
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root
 
   frontend:
     build:

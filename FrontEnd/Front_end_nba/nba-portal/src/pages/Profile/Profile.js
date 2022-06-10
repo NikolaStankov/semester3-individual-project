@@ -1,7 +1,15 @@
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import PurchaseList from "../../components/PurchaseList";
 import useFetch from "../../custom-hooks/useFetch";
 
 const Profile = (props) => {
+  let navigate = useNavigate();
+
+  if (!props.loggedUser) {
+    navigate("/login");
+  }
+
   const purchasesURL =
     "http://localhost:8080/users/" + props.loggedUser.id + "/purchases";
 

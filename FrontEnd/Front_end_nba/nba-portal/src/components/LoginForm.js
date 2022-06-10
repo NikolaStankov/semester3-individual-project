@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import jwtDecode from "jwt-decode";
 
@@ -7,8 +7,6 @@ const LoginForm = (props) => {
   const [errorMessage, setErrorMessage] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
-  let navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -25,7 +23,6 @@ const LoginForm = (props) => {
       },
       data: loginRequest,
     };
-
     axios(config)
       .then(function (response) {
         localStorage.setItem("accessToken", response.data.accessToken);
@@ -33,7 +30,7 @@ const LoginForm = (props) => {
         localStorage.setItem("expirationDate", decodedToken.exp);
         const userId = decodedToken.userId;
         getUser(userId);
-        navigate("/");
+        props.navigateProps("/");
       })
       .catch(function (error) {
         if (error.response) {
