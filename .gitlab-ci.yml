@@ -8,7 +8,7 @@ stages:
 build:
   stage: build
   script:
-    - cd IndividualTrack 
+    - cd IndividualTrack
     - ./gradlew build -x test
     - ./gradlew.bat --stop
 
@@ -28,16 +28,6 @@ build-frontend:
     - npm install      # Run `npm install` and `npm build`
     - npm test
 
-sonarqube-check:
-  stage: sonarqube-check
-  script:
-    - cd IndividualTrack
-    - ./gradlew sonarqube
-    - ./gradlew.bat --stop
-  allow_failure: true
-  only:
-    - main
-
 docker-compose:
   stage: docker-compose
   image: docker
@@ -52,6 +42,17 @@ docker-compose:
     - docker-compose build frontend
     - docker-compose up -d
   timeout: 3 minutes
+
+sonarqube-check:
+  stage: sonarqube-check
+  script:
+    - cd IndividualTrack
+    - ./gradlew sonarqube
+    - ./gradlew.bat --stop
+  allow_failure: true
+  only:
+    - main
+
 
 
 

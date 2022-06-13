@@ -1,41 +1,45 @@
-package fontys.sem3.individual_track.controller;
-
-import fontys.sem3.individual_track.business.TicketsService;
-import fontys.sem3.individual_track.business.converter.GameDTOConverter;
-import fontys.sem3.individual_track.model.CreateTicketRequestDTO;
-import fontys.sem3.individual_track.model.CreateTicketResponseDTO;
-import fontys.sem3.individual_track.model.GameDTO;
-import fontys.sem3.individual_track.model.TicketDTO;
-import fontys.sem3.individual_track.repository.entity.Game;
-import fontys.sem3.individual_track.repository.entity.Team;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.web.servlet.MockMvc;
-
-import java.time.LocalDate;
-import java.util.List;
-import java.util.Optional;
-
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
-
-@ExtendWith(SpringExtension.class)
-@WebMvcTest(TicketsController.class)
-class TicketsControllerTest {
+//package fontys.sem3.individual_track.controller;
+//
+//import fontys.sem3.individual_track.business.AccessTokenDecoder;
+//import fontys.sem3.individual_track.business.TicketsService;
+//import fontys.sem3.individual_track.business.converter.GameDTOConverter;
+//import fontys.sem3.individual_track.model.CreateTicketRequestDTO;
+//import fontys.sem3.individual_track.model.CreateTicketResponseDTO;
+//import fontys.sem3.individual_track.model.GameDTO;
+//import fontys.sem3.individual_track.model.TicketDTO;
+//import fontys.sem3.individual_track.repository.entity.Game;
+//import fontys.sem3.individual_track.repository.entity.Team;
+//import org.junit.jupiter.api.Test;
+//import org.junit.jupiter.api.extension.ExtendWith;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+//import org.springframework.boot.test.mock.mockito.MockBean;
+//import org.springframework.test.context.junit.jupiter.SpringExtension;
+//import org.springframework.test.web.servlet.MockMvc;
+//
+//import java.time.LocalDate;
+//import java.util.List;
+//import java.util.Optional;
+//
+//import static org.mockito.Mockito.verify;
+//import static org.mockito.Mockito.when;
+//import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+//import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+//import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+//import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+//import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
+//
+//@ExtendWith(SpringExtension.class)
+//@WebMvcTest(TicketsController.class)
+//class TicketsControllerTest {
 //    @Autowired
 //    private MockMvc mockMvc;
 //
 //    @MockBean
 //    private TicketsService ticketsService;
+//
+//    @MockBean
+//    private AccessTokenDecoder accessTokenDecoder;
 //
 //    private GameDTO createFakeGame() {
 //        Team homeTeam = new Team(1L, "HT", "Home city",
@@ -158,4 +162,4 @@ class TicketsControllerTest {
 //
 //        verify(ticketsService).createTicket(expectedTicketRequest);
 //    }
-}
+//}
