@@ -3,6 +3,7 @@ stages:
   - test
   - build-frontend
   - sonarqube-check
+  - docker-compose
 
 build:
   stage: build
@@ -19,7 +20,6 @@ test:
     - ./gradlew.bat --stop
 
 build-frontend:
-  image: node:latest    # Run the job in a `node` docker image
   stage: build-frontend
   script:
     - cd FrontEnd
@@ -35,8 +35,23 @@ sonarqube-check:
     - ./gradlew sonarqube
     - ./gradlew.bat --stop
   allow_failure: true
-  #only:
-   # - main# or the name of your main branch
+  only:
+    - main
+
+docker-compose:
+  stage: docker-compose
+  image: docker
+  services:
+    - docker:dind
+  only:
+    - main
+  script:
+    - docker --version
+    - docker-compose --version
+    - docker-compose build backend
+    - docker-compose build frontend
+    - docker-compose up -d
+  timeout: 3 minutes
 
 
 
