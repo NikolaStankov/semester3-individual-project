@@ -1,8 +1,8 @@
 stages:
   - build
   - test
-  - sonarqube-check
   - docker-compose
+  - sonarqube-check
 
 build:
   stage: build
