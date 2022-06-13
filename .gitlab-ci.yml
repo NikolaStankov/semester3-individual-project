@@ -1,7 +1,6 @@
 stages:
   - build
   - test
-  - build-frontend
   - sonarqube-check
   - docker-compose
 
@@ -18,15 +17,6 @@ test:
     - cd IndividualTrack
     - ./gradlew test
     - ./gradlew.bat --stop
-
-build-frontend:
-  stage: build-frontend
-  script:
-    - cd FrontEnd
-    - cd Front_end_nba
-    - cd nba-portal
-    - npm install      # Run `npm install` and `npm build`
-    - npm test
 
 docker-compose:
   stage: docker-compose
