@@ -33,7 +33,7 @@ docker-compose:
     - docker-compose --version
    # - docker-compose build backend
    # - docker-compose build frontend
-    - docker-compose start -d
+    - docker-compose start
   timeout: 3 minutes
 
 sonarqube-check:
