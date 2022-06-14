@@ -31,9 +31,9 @@ docker-compose:
   script:
     - docker --version
     - docker-compose --version
-    - docker-compose build backend
-    - docker-compose build frontend
-    - docker-compose up -d
+   # - docker-compose build backend
+   # - docker-compose build frontend
+    - docker-compose start -d
   timeout: 3 minutes
 
 sonarqube-check:
