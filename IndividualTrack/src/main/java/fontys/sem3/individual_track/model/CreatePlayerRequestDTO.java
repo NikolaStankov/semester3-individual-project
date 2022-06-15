@@ -1,15 +1,13 @@
 package fontys.sem3.individual_track.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 @Data
+@Generated
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor

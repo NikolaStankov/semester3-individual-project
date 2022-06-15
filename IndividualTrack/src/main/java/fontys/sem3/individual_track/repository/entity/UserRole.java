@@ -9,6 +9,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "user_role")
 @Builder
 @Data
+@Generated
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserRole {

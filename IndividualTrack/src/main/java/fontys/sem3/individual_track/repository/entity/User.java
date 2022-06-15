@@ -1,10 +1,7 @@
 package fontys.sem3.individual_track.repository.entity;
 
 import fontys.sem3.individual_track.annotation.ValidateRole;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -14,6 +11,7 @@ import java.util.Set;
 @Table(name = "user")
 @Builder
 @Data
+@Generated
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {

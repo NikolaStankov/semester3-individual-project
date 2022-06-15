@@ -39,7 +39,8 @@ public class PurchaseServiceImpl implements PurchaseService {
 
     @Override
     public Optional<PurchaseDTO> getPurchase(long purchaseId) {
-        return Optional.empty();
+        return this.purchaseRepository.findById(purchaseId)
+                .map(PurchaseDTOConverter::convertToDTO);
     }
 
     @Override

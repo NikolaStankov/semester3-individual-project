@@ -1,9 +1,6 @@
 package fontys.sem3.individual_track.repository.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.DecimalMin;
@@ -14,6 +11,7 @@ import java.time.LocalDate;
 @Table(name = "ticket")
 @Builder
 @Data
+@Generated
 @AllArgsConstructor
 @NoArgsConstructor
 public class Ticket {
