@@ -44,6 +44,9 @@ frontend-test:
   stage: frontend-test
   image: cypress/base:10
   script:
+    - cd FrontEnd
+    - cd Front_end_nba
+    - cd nba-portal
     - npm install
     - npm run cypress:runHeadless
 
