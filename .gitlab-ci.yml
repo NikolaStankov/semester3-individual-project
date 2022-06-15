@@ -1,3 +1,6 @@
+variables:
+  GIT_STRATEGY: clone
+
 stages:
   - build
   - docker-compose
@@ -29,6 +32,9 @@ docker-compose:
   script:
     - docker --version
     - docker-compose --version
+    - cd IndividualTrack
+    - ./gradlew assemble
+    - cd ..
     - docker-compose build backend
     - docker-compose build frontend
     - docker-compose up -d
