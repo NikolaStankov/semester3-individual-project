@@ -21,14 +21,16 @@ import org.springframework.web.server.ResponseStatusException;
 @Component
 public class IsAuthenticatedAspect {
 
-    private final static Logger LOGGER = LoggerFactory.getLogger(IsAuthenticatedAspect.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(IsAuthenticatedAspect.class);
 
     @Pointcut("@annotation(fontys.sem3.individual_track.configuration.security.isauthenticated.IsAuthenticated)")
     public void annotatedMethod() {
+        //this is empty because it serves as a template to tell spring boot how to annotate methods and controllers for authentication
     }
 
     @Pointcut("@within(fontys.sem3.individual_track.configuration.security.isauthenticated.IsAuthenticated)")
     public void annotatedClass() {
+        //this is empty because it serves as a template to tell spring boot how to annotate methods and controllers for authentication
     }
 
     @Around("(annotatedMethod() || annotatedClass()) && execution(* *(..))")

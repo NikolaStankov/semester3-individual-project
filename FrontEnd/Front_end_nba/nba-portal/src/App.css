@@ -60,7 +60,24 @@ body {
 .content-table,
 .content-table th,
 .content-table td {
-  border: solid var(--nba-grey);
+  padding-block: 10px;
+  border-bottom: solid var(--border-color);
+}
+
+.content-table tr:last-child td:first-child {
+  border-bottom-left-radius: 10px;
+}
+
+.content-table tr:last-child td:last-child {
+  border-bottom-right-radius: 10px;
+}
+
+.content-table tr:first-child th:first-child {
+  border-top-left-radius: 10px;
+}
+
+.content-table tr:first-child th:last-child {
+  border-top-right-radius: 10px;
 }
 
 .content-table {
@@ -68,12 +85,13 @@ body {
   margin: auto;
   border-collapse: collapse;
   background-color: var(--background-color);
+  border-radius: 10px;
+  font-size: 20px;
 }
 
 .content-table th {
   padding-top: 12px;
   padding-bottom: 12px;
-  text-align: left;
   background-color: var(--nba-blue);
   color: white;
 }

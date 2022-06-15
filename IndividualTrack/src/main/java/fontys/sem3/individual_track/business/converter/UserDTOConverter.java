@@ -14,7 +14,7 @@ public class UserDTOConverter {
         return UserDTO.builder()
                 .id(user.getId())
                 .username(user.getUsername())
-                .roles(user.getUserRoles().stream().map(r -> r.getRole().toString()).collect(Collectors.toList()))
+                .roles(user.getUserRoles().stream().map(r -> r.getRole().toString()).toList())
                 .build();
     }
 }

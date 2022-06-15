@@ -12,7 +12,7 @@ public class RoleValidator implements ConstraintValidator<ValidateRole, String> 
 
     @Override
     public void initialize(ValidateRole constraintAnnotation) {
-        valueList = new ArrayList<String>();
+        valueList = new ArrayList<>();
         for (String val : constraintAnnotation.acceptedValues()) {
             valueList.add(val.toUpperCase());
         }

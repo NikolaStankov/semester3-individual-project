@@ -67,7 +67,8 @@ public class TeamsServiceImpl implements TeamsService {
     @Override
     public TeamDTO getTeamByFullName(String teamFullName) {
         Team team = this.teamsRepository.getTeamByFullName(teamFullName);
-        TeamDTO teamToReturn = TeamDTO.builder()
+
+        return TeamDTO.builder()
                 .id(team.getId())
                 .abbreviation(team.getAbbreviation())
                 .city(team.getCity())
@@ -76,7 +77,5 @@ public class TeamsServiceImpl implements TeamsService {
                 .fullName(team.getFullName())
                 .name(team.getName())
                 .build();
-
-        return teamToReturn;
     }
 }

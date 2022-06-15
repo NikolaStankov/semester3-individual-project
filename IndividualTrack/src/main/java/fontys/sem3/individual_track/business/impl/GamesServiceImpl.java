@@ -76,12 +76,12 @@ public class GamesServiceImpl implements GamesService {
 
         List<GameDTO> homeGames = this.gamesRepository.findAllByHomeTeamId(teamId)
                 .stream()
-                .map(game -> GameDTOConverter.convertToDTO(game))
-                .collect(Collectors.toList());
+                .map(GameDTOConverter::convertToDTO)
+                .toList();
         List<GameDTO> awayGames = this.gamesRepository.findAllByVisitorTeamId(teamId)
                 .stream()
-                .map(game -> GameDTOConverter.convertToDTO(game))
-                .collect(Collectors.toList());
+                .map(GameDTOConverter::convertToDTO)
+                .toList();
 
         gamesByTeamId.addAll(homeGames);
         gamesByTeamId.addAll(awayGames);
