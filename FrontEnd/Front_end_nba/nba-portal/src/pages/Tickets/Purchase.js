@@ -73,7 +73,7 @@ const Purchase = (props) => {
   return (
     <div className="purchase-form">
       {tickets && (
-        <form onSubmit={handleTicketSubmit}>
+        <form data-testid="form-submit" onSubmit={handleTicketSubmit}>
           <h2>Select a ticket: </h2>
           <TicketsList
             tickets={tickets}

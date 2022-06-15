@@ -2,6 +2,7 @@ stages:
   - build
   - docker-compose
   - test
+  - frontend-test
   - sonarqube-check
 
 build:
@@ -32,6 +33,13 @@ docker-compose:
     - docker-compose build frontend
     - docker-compose up -d
   timeout: 3 minutes
+
+frontend-test:
+  stage: frontend-test
+  image: cypress/base:10
+  script:
+    - npm install
+    - npm run cypress:runHeadless
 
 sonarqube-check:
   stage: sonarqube-check

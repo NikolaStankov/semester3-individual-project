@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Link } from "react-router-dom";
 
 const NavBar = (props) => {
   return (
-    <Navbar bg="dark" variant="dark" fixed="top" expand="sm">
+    <Navbar data-testid="navbar" bg="dark" variant="dark" fixed="top" expand="sm">
       <Navbar.Brand>
         <IoBasketballOutline
           style={{
