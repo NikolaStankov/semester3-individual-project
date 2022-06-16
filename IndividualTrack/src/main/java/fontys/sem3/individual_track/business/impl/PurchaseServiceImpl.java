@@ -64,11 +64,6 @@ public class PurchaseServiceImpl implements PurchaseService {
     }
 
     @Override
-    public boolean removePurchase(long purchaseId) {
-        return false;
-    }
-
-    @Override
     public List<PurchaseDTO> getPurchasesByUser(UserDTO userDTO) {
         User userToQueryOn = User.builder()
                 .id(userDTO.getId())

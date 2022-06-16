@@ -51,6 +51,7 @@ sonarqube-check:
   stage: sonarqube-check
   script:
     - cd IndividualTrack
+    - ./gradlew jacocoTestReport
     - ./gradlew sonarqube
     - ./gradlew.bat --stop
   allow_failure: true

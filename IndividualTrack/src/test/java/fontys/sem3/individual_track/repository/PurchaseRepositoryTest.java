@@ -24,9 +24,6 @@ import static org.junit.jupiter.api.Assertions.*;
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 class PurchaseRepositoryTest {
     @Autowired
-    private EntityManager entityManager;
-
-    @Autowired
     private PurchaseRepository purchaseRepository;
 
     private Game createFakeGame() {

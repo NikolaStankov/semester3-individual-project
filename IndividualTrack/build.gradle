@@ -13,7 +13,8 @@ sonarqube {
         property "sonar.projectKey", "NBAPortalApp"
         property "sonar.qualitygate.wait", true
         property "sonar.coverage.jacoco.xmlReportPath", "${project.buildDir}/build/reports/jacoco/test/jacocoTestReport.xml"
-        property "sonar.exclusions", "**/fontys/sem3/individual_track/business/configuration/security/**"
+        property "sonar.exclusions", "**/fontys/sem3/individual_track/business/configuration/security/**",
+        "**/fontys/sem3/individual_track/annotation/**"
     }
 }
 

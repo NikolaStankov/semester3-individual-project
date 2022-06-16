@@ -1,12 +1,14 @@
 package fontys.sem3.individual_track.business.impl;
 
 import fontys.sem3.individual_track.business.converter.PurchaseDTOConverter;
-import fontys.sem3.individual_track.business.converter.TeamDTOConverter;
+import fontys.sem3.individual_track.business.converter.UserDTOConverter;
 import fontys.sem3.individual_track.business.validator.GameIdValidator;
 import fontys.sem3.individual_track.business.validator.TicketIdValidator;
 import fontys.sem3.individual_track.business.validator.UserIdValidator;
+import fontys.sem3.individual_track.model.CreatePurchaseRequestDTO;
+import fontys.sem3.individual_track.model.CreatePurchaseResponseDTO;
 import fontys.sem3.individual_track.model.PurchaseDTO;
-import fontys.sem3.individual_track.model.TeamDTO;
+import fontys.sem3.individual_track.model.UserDTO;
 import fontys.sem3.individual_track.repository.PurchaseRepository;
 import fontys.sem3.individual_track.repository.entity.*;
 import org.junit.jupiter.api.Test;
@@ -111,14 +113,62 @@ class PurchaseServiceImplTest {
 
     @Test
     void createPurchase_shouldSavePurchaseWithAllField() {
+        Purchase purchaseToSave = Purchase.builder()
+                .user(User.builder().id(3L).build())
+                .game(Game.builder().id(1L).build())
+                .ticket(Ticket.builder().id(1L).build())
+                .quantity(4)
+                .build();
 
+        Purchase savedPurchase = Purchase.builder()
+                .id(3L)
+                .user(this.createFakeUser())
+                .game(this.createFakeGame())
+                .ticket(this.createFakeTicket())
+                .quantity(4)
+                .build();
+
+        when(purchaseRepositoryMock.save(purchaseToSave)).thenReturn(savedPurchase);
+
+        CreatePurchaseRequestDTO createPurchaseRequestDTO = CreatePurchaseRequestDTO.builder()
+                .ticketId(purchaseToSave.getTicket().getId())
+                .quantity(4)
+                .userId(purchaseToSave.getUser().getId())
+                .gameId(purchaseToSave.getGame().getId())
+                .build();
+
+        CreatePurchaseResponseDTO expectedResponse = CreatePurchaseResponseDTO.builder().purchaseId(3L).build();
+        CreatePurchaseResponseDTO actualResponse = purchaseService.createPurchase(createPurchaseRequestDTO);
+
+        assertEquals(expectedResponse, actualResponse);
+        verify(purchaseRepositoryMock).save(purchaseToSave);
     }
 
     @Test
-    void removePurchase() {
-    }
+    void getPurchasesByUser_shouldReturnAllPurchasesMadeByGivenUser() {
+        User userToQueryOn = User.builder()
+                .id(3L)
+                .username("test_username")
+                .build();
 
-    @Test
-    void getPurchasesByUser() {
+        Purchase purchase = Purchase.builder()
+                .id(3L)
+                .user(this.createFakeUser())
+                .game(this.createFakeGame())
+                .ticket(this.createFakeTicket())
+                .quantity(4)
+                .build();
+
+        List<Purchase> purchasesByUser = List.of(purchase);
+
+        UserDTO userDTO = UserDTOConverter.convertToDTO(this.createFakeUser());
+
+        when(purchaseRepositoryMock.findAllByUser(userToQueryOn)).thenReturn(purchasesByUser);
+
+        List<PurchaseDTO> expectedDTOs = List.of(PurchaseDTOConverter.convertToDTO(purchase));
+        List<PurchaseDTO> actualDTOs = purchaseService.getPurchasesByUser(userDTO);
+
+        assertEquals(expectedDTOs, actualDTOs);
+        verify(purchaseRepositoryMock).findAllByUser(userToQueryOn);
     }
 }
