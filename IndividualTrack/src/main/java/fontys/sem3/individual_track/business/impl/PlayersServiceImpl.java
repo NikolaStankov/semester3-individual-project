@@ -62,11 +62,6 @@ public class PlayersServiceImpl implements PlayersService {
     }
 
     @Override
-    public boolean removePlayer(long playerId) {
-        return false;
-    }
-
-    @Override
     public List<PlayerDTO> getPlayersByTeam(Team team) {
         List<Player> teamPlayers = this.playersRepository.findAllByTeam(team);
         List<PlayerDTO> teamPlayerDTOs = new ArrayList<>();

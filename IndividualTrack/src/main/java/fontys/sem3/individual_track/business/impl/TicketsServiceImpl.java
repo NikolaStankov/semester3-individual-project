@@ -57,11 +57,6 @@ public class TicketsServiceImpl implements TicketsService {
     }
 
     @Override
-    public void removeTicket(long tickedId) {
-        this.ticketsRepository.deleteById(tickedId);
-    }
-
-    @Override
     public TicketTypeEnum[] getAllTicketTypes() {
         return TicketTypeEnum.values();
     }

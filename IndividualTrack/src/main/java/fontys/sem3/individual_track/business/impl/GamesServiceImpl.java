@@ -64,11 +64,6 @@ public class GamesServiceImpl implements GamesService {
     }
 
     @Override
-    public void removeGame(long gameId) {
-        this.gamesRepository.deleteById(gameId);
-    }
-
-    @Override
     public List<GameDTO> getGamesByTeamId(long teamId) {
 
         List<GameDTO> gamesByTeamId = new ArrayList<>();

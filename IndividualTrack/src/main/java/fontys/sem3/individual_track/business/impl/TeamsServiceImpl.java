@@ -60,11 +60,6 @@ public class TeamsServiceImpl implements TeamsService {
     }
 
     @Override
-    public void removeTeam(long teamId) {
-        this.teamsRepository.deleteById(teamId);
-    }
-
-    @Override
     public TeamDTO getTeamByFullName(String teamFullName) {
         Team team = this.teamsRepository.getTeamByFullName(teamFullName);
 
