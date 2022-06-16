@@ -38,7 +38,7 @@ docker-compose:
     - docker-compose build backend
     - docker-compose build frontend
     - docker-compose up -d
-  timeout: 3 minutes
+  timeout: 10 minutes
 
 frontend-test:
   stage: frontend-test
@@ -58,6 +58,7 @@ sonarqube-check:
     - ./gradlew sonarqube
     - ./gradlew.bat --stop
   allow_failure: true
+  timeout: 10 minutes
   only:
     - main
 
