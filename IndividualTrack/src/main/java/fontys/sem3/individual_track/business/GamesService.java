@@ -14,7 +14,5 @@ public interface GamesService {
 
     CreateGameResponseDTO createGame(CreateGameRequestDTO gameRequest);
 
-    void removeGame(long gameId);
-
     List<GameDTO> getGamesByTeamId(long teamId);
 }

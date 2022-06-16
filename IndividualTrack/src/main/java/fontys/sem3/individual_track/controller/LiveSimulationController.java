@@ -25,15 +25,13 @@ public class LiveSimulationController {
     private final TeamsService teamsService;
     private final PlayersService playersService;
 
-    private int team1Score = 0;
-    private int team2Score = 0;
-    private Random rand = new Random();
+    private final Random rand = new Random();
 
     @MessageMapping("/simulation")
     public void scoreBoard(@Payload LiveSimulationDTO liveSimulationDTO) throws InterruptedException {
         Thread.sleep(1000);
-        team1Score = 0;
-        team2Score = 0;
+        int team1Score = 0;
+        int team2Score = 0;
         TeamDTO team1DTO = this.teamsService.getTeamByFullName(liveSimulationDTO.getTeam1());
         TeamDTO team2DTO = this.teamsService.getTeamByFullName(liveSimulationDTO.getTeam2());
 

@@ -15,7 +15,5 @@ public interface TicketsService {
 
     CreateTicketResponseDTO createTicket(CreateTicketRequestDTO ticketRequest);
 
-    void removeTicket(long tickedId);
-
     TicketTypeEnum[] getAllTicketTypes();
 }

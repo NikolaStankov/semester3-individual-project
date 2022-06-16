@@ -3,8 +3,6 @@ package fontys.sem3.individual_track.business.converter;
 import fontys.sem3.individual_track.model.UserDTO;
 import fontys.sem3.individual_track.repository.entity.User;
 
-import java.util.stream.Collectors;
-
 public class UserDTOConverter {
     private UserDTOConverter() {
 

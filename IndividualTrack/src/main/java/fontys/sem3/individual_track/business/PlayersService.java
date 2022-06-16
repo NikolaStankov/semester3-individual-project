@@ -15,7 +15,5 @@ public interface PlayersService {
 
     CreatePlayerResponseDTO createPlayer(CreatePlayerRequestDTO playerRequest);
 
-    boolean removePlayer(long playerId);
-
     List<PlayerDTO> getPlayersByTeam(Team team);
 }

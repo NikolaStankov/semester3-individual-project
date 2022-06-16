@@ -14,7 +14,5 @@ public interface TeamsService {
 
     CreateTeamResponseDTO createTeam(CreateTeamRequestDTO teamRequest);
 
-    void removeTeam(long teamId);
-
     TeamDTO getTeamByFullName(String teamFullName);
 }
