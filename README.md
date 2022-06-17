@@ -1,5 +1,5 @@
 # IndividualTrackProject-S3
-### *The current repository consists of the following components:*
+###### The current repository consists of the following components:
 
 ## FrondEnd:
 **Front end web application built on ReactJS making calls to back end API**
@@ -24,5 +24,5 @@ It consists of several documents:**
 | **ProjectPlan document**     | The project plan for my individual project.                                                                                                                                                                                                   |
 | **TestPlan document**        | Document explaining my main test strategy and way of testing my project.                                                                                                                                                                      |
 | **UserAcceptanceTest file**  | File containing a table with tests that I have run against my application and the corresponding results.                                                                                                                                      |
-
+| **FeedPulse folder**         | This folder is inside the Documentation folder and contains 3 PDF files which are the report from my personal teacher feedback, group feedback and the feedback from my group member throughout the semester so far                                                                  |
 ****

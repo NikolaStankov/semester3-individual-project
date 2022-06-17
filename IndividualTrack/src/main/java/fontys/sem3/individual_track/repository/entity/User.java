@@ -1,6 +1,5 @@
 package fontys.sem3.individual_track.repository.entity;
 
-import fontys.sem3.individual_track.annotation.ValidateRole;
 import lombok.*;
 
 import javax.persistence.*;

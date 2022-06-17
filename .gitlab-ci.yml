@@ -49,6 +49,7 @@ frontend-test:
     - cd nba-portal
     - npm install
     - npm run cypress:runHeadless
+  allow_failure: true
 
 sonarqube-check:
   stage: sonarqube-check
