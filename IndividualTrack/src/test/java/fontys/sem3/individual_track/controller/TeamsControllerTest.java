@@ -13,6 +13,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -60,6 +61,19 @@ class TeamsControllerTest {
                         {"id":2,"abbreviation":"AT","city":"Example city2",
                         "conference":"Fake conf","division":"Example2","full_name":"Fake Examples","name":"Examples"}]
                                               """));
+
+        verify(teamsService).getAllTeams();
+    }
+
+    @Test
+    void getAllTeams_shouldReturn404Response_whenThereAreNoTeams() throws Exception {
+        List<TeamDTO> responseTeamDTOs = new ArrayList<>();
+
+        when(teamsService.getAllTeams()).thenReturn(responseTeamDTOs);
+
+        mockMvc.perform(get("/teams"))
+                .andDo(print())
+                .andExpect(status().isNotFound());
 
         verify(teamsService).getAllTeams();
     }

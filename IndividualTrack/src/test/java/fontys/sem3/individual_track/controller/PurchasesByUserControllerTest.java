@@ -7,6 +7,7 @@ import fontys.sem3.individual_track.business.converter.GameDTOConverter;
 import fontys.sem3.individual_track.business.converter.TeamDTOConverter;
 import fontys.sem3.individual_track.business.converter.TicketDTOConverter;
 import fontys.sem3.individual_track.business.converter.UserDTOConverter;
+import fontys.sem3.individual_track.business.exception.InvalidUserIdException;
 import fontys.sem3.individual_track.model.PurchaseDTO;
 import fontys.sem3.individual_track.repository.entity.*;
 import org.junit.jupiter.api.Test;
@@ -112,5 +113,20 @@ class PurchasesByUserControllerTest {
 
         verify(usersService).getUser(fakeUser.getId());
         verify(purchaseService).getPurchasesByUser(UserDTOConverter.convertToDTO(fakeUser));
+    }
+
+    @Test
+    void getPurchasesByUser_shouldThrowInvalidUserIdException_whenUserNotFound() throws Exception {
+        User fakeUser = this.createFakeUser();
+
+        when(usersService.getUser(fakeUser.getId())).thenReturn(Optional.empty());
+
+        String expectedMessage = "Invalid user id.";
+
+        try {
+            mockMvc.perform(get("/users/3/purchases"));
+        } catch (InvalidUserIdException exception) {
+            assertEquals(expectedMessage, exception.getMessage());
+        }
     }
 }

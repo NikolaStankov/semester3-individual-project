@@ -86,4 +86,18 @@ class TeamsServiceImplTest {
         assertEquals(expectedTeamResponse, actualTeamResponse);
         verify(teamsRepositoryMock).save(expectedTeamToSave);
     }
+
+    @Test
+    void getTeamByFullName_shouldReturnTeamDTOWhenTeamFound() {
+        Team expectedTeam = Team.builder().abbreviation("T1").city("City1").conference("West")
+                .division("Atlantic").fullName("Team Teams1").name("Team1").build();
+
+        when(teamsRepositoryMock.getTeamByFullName(expectedTeam.getFullName())).thenReturn(expectedTeam);
+
+        TeamDTO expectedTeamDTO = TeamDTOConverter.convertToDTO(expectedTeam);
+        TeamDTO actualTeamDTO = teamsService.getTeamByFullName(expectedTeam.getFullName());
+
+        assertEquals(expectedTeamDTO, actualTeamDTO);
+        verify(teamsRepositoryMock).getTeamByFullName(expectedTeam.getFullName());
+    }
 }

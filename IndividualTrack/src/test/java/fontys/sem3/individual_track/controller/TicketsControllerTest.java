@@ -9,14 +9,17 @@ import fontys.sem3.individual_track.model.GameDTO;
 import fontys.sem3.individual_track.model.TicketDTO;
 import fontys.sem3.individual_track.repository.entity.Game;
 import fontys.sem3.individual_track.repository.entity.Team;
+import fontys.sem3.individual_track.repository.entity.TicketTypeEnum;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -76,6 +79,19 @@ class TicketsControllerTest {
                            [{"id":1,"ticket_type":  "PREMIUM","price":22.0,"specification":"Test premium"},
                              {"id":2,"ticket_type":  "STANDARD","price":20.0,"specification":"Test standard"}]
                         """));
+
+        verify(ticketsService).getAllTickets();
+    }
+
+    @Test
+    void getAllTickets_shouldReturn404ResponseWhenThereAreNoTickets() throws Exception {
+        List<TicketDTO> responseTicketDTOs = new ArrayList<>();
+
+        when(ticketsService.getAllTickets()).thenReturn(responseTicketDTOs);
+
+        mockMvc.perform(get("/tickets"))
+                .andDo(print())
+                .andExpect(status().isNotFound());
 
         verify(ticketsService).getAllTickets();
     }
@@ -145,5 +161,20 @@ class TicketsControllerTest {
                         """));
 
         verify(ticketsService).createTicket(expectedTicketRequest);
+    }
+
+    @Test
+    void getAllTicketTypes_shouldReturnAllTicketTypes() throws Exception {
+        when(ticketsService.getAllTicketTypes()).thenReturn(TicketTypeEnum.values());
+
+        mockMvc.perform(get("/tickets/types"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(header().string("Content-Type", APPLICATION_JSON_VALUE))
+                .andExpect(content().json("""
+                            ["STANDARD", "PREMIUM", "DELUXE"]
+                        """));
+
+        verify(ticketsService).getAllTicketTypes();
     }
 }

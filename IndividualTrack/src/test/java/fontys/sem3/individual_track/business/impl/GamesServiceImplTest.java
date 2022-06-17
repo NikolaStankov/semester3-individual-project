@@ -15,6 +15,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -120,5 +121,36 @@ class GamesServiceImplTest {
         verify(teamIdValidator).validateTeamId(1L);
         verify(teamIdValidator).validateTeamId(2L);
         verify(gamesRepositoryMock).save(expectedGameToSave);
+    }
+
+    @Test
+    void getGamesByTeamId_shouldReturnAllGamesPlayedByTeam() {
+        List<Game> homeGames = List.of(Game.builder()
+                .id(12L)
+                .date("22/02/2022")
+                .visitorTeam(this.createFakeVisitorTeam())
+                .homeTeam(this.createFakeHomeTeam())
+                .build());
+
+        List<Game> visitorGames = List.of(Game.builder()
+                .id(24L)
+                .date("02/12/2022")
+                .homeTeam(this.createFakeVisitorTeam())
+                .visitorTeam(this.createFakeHomeTeam())
+                .build());
+
+        when(gamesRepositoryMock.findAllByHomeTeamId(1L)).thenReturn(homeGames);
+        when(gamesRepositoryMock.findAllByVisitorTeamId(1L)).thenReturn(visitorGames);
+
+        List<GameDTO> expectedResponse = new ArrayList<>();
+        expectedResponse.addAll(homeGames.stream().map(GameDTOConverter::convertToDTO).toList());
+        expectedResponse.addAll(visitorGames.stream().map(GameDTOConverter::convertToDTO).toList());
+
+        List<GameDTO> actualResponse = this.gamesService.getGamesByTeamId(1L);
+
+        assertEquals(expectedResponse, actualResponse);
+
+        verify(gamesRepositoryMock).findAllByHomeTeamId(1L);
+        verify(gamesRepositoryMock).findAllByVisitorTeamId(1L);
     }
 }

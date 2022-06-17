@@ -1,6 +1,8 @@
 package fontys.sem3.individual_track.business.impl;
 
 import fontys.sem3.individual_track.business.converter.UserDTOConverter;
+import fontys.sem3.individual_track.business.exception.ExistingUsernameException;
+import fontys.sem3.individual_track.business.exception.MismatchingPasswordsException;
 import fontys.sem3.individual_track.model.CreateUserRequestDTO;
 import fontys.sem3.individual_track.model.UserDTO;
 import fontys.sem3.individual_track.repository.UsersRepository;
@@ -58,7 +60,7 @@ class UsersServiceImplTest {
     }
 
     @Test
-    void createUser() {
+    void createUser_shouldCreateUserIfRequestIsValid() {
         User userToSave = this.createFakeUser();
         userToSave.setId(null);
         userToSave.setPassword(this.passwordEncoder.encode("test_password"));
@@ -88,6 +90,43 @@ class UsersServiceImplTest {
 
         assertEquals(expectedUserDTO, actualUserDTO.get());
         verify(usersRepositoryMock).findById(14L);
+    }
+
+    @Test
+    void createUser_shouldThrowExistingUsernameExceptionIfUsernameExists() {
+        User userToSave = this.createFakeUser();
+        userToSave.setId(null);
+        userToSave.setPassword(this.passwordEncoder.encode("test_password"));
+
+        CreateUserRequestDTO createUserRequestDTO = CreateUserRequestDTO.builder()
+                .username(userToSave.getUsername())
+                .password("test_password")
+                .repeatedPassword("test_password")
+                .role(RoleEnum.USER)
+                .build();
+
+        when(usersRepositoryMock.findByUsername(userToSave.getUsername())).thenThrow(ExistingUsernameException.class);
+
+        ExistingUsernameException exception = assertThrows(ExistingUsernameException.class,
+                () -> usersService.createUser(createUserRequestDTO));
+
+        assertNotNull(exception);
+        verify(usersRepositoryMock).findByUsername(userToSave.getUsername());
+    }
+
+    @Test
+    void createUser_shouldThrowMismatchingPasswordsExceptionIfRequestPasswordsAreNotMatching(){
+        CreateUserRequestDTO createUserRequestDTO = CreateUserRequestDTO.builder()
+                .username("test")
+                .password("test_password1")
+                .repeatedPassword("test_password2")
+                .role(RoleEnum.USER)
+                .build();
+
+        MismatchingPasswordsException exception = assertThrows(MismatchingPasswordsException.class,
+                () -> usersService.createUser(createUserRequestDTO));
+
+        assertNotNull(exception);
     }
 
     @Test

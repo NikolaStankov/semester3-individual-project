@@ -29,7 +29,7 @@ public class TicketsController {
     public ResponseEntity<List<TicketDTO>> getAllTickets() {
         List<TicketDTO> ticketList = this.ticketsService.getAllTickets();
 
-        if (ticketList != null) {
+        if (!ticketList.isEmpty()) {
             return ResponseEntity.ok().body(ticketList);
         } else {
             return ResponseEntity.notFound().build();

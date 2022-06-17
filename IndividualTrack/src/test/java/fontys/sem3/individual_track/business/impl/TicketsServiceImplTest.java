@@ -15,6 +15,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -89,5 +90,13 @@ class TicketsServiceImplTest {
 
         assertEquals(expectedTicketResponse, actualTicketResponse);
         verify(ticketsRepositoryMock).save(expectedTicketToSave);
+    }
+
+    @Test
+    void getAllTicketTypes_shouldReturnAllValuesOfTheTicketTypeEnum(){
+        TicketTypeEnum[] actualTicketTypes = TicketTypeEnum.values();
+        TicketTypeEnum[] returnedTicketTypes = ticketsService.getAllTicketTypes();
+
+        assertEquals(Arrays.stream(actualTicketTypes).toList(), Arrays.stream(returnedTicketTypes).toList());
     }
 }

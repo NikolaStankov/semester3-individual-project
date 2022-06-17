@@ -106,4 +106,21 @@ class PlayersServiceImplTest {
         verify(teamIdValidator).validateTeamId(1L);
         verify(playersRepositoryMock).save(expectedPlayerToSave);
     }
+
+    @Test
+    void getPlayersByTeam_shouldReturnAllPlayersOfGivenTeam(){
+        Team fakeTeam = Team.builder().abbreviation("T1").city("City1").conference("West")
+                .division("Atlantic").fullName("Team Teams1").name("Team1").build();
+
+        List<Player> expectedPlayers = List.of(Player.builder().firstName("Player").lastName("1")
+                .position("SF").team(fakeTeam).build());
+
+        when(playersRepositoryMock.findAllByTeam(fakeTeam)).thenReturn(expectedPlayers);
+
+        List<PlayerDTO> expectedResponse = expectedPlayers.stream().map(PlayerDTOConverter::convertToDTO).toList();
+        List<PlayerDTO> actualResponse = playersService.getPlayersByTeam(fakeTeam);
+
+        assertEquals(expectedResponse, actualResponse);
+        verify(playersRepositoryMock).findAllByTeam(fakeTeam);
+    }
 }

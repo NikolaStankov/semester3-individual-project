@@ -13,7 +13,8 @@ sonarqube {
         property "sonar.projectKey", "NBAPortalApp"
         property "sonar.qualitygate.wait", true
         property "sonar.coverage.jacoco.xmlReportPath", "${project.buildDir}/build/reports/jacoco/test/jacocoTestReport.xml"
-        property "sonar.exclusions", "**/fontys/sem3/individual_track/business/configuration/security/**," + "**/fontys/sem3/individual_track/annotation/**"
+        property "sonar.exclusions", "**/fontys/sem3/individual_track/business/configuration/**," +
+                "**/fontys/sem3/individual_track/annotation/**," + "**/fontys/sem3/individual_track/business/exception/**"
     }
 }
 
@@ -58,6 +59,7 @@ dependencies {
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     annotationProcessor 'org.projectlombok:lombok:1.18.22'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.boot:spring-boot-test:2.6.3'
     implementation 'org.json:json:20220320'
     implementation 'org.springdoc:springdoc-openapi-ui:1.6.6'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
@@ -78,6 +80,7 @@ dependencies {
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
+    testImplementation 'org.mockito:mockito-inline:2.13.0'
 }
 
 test {

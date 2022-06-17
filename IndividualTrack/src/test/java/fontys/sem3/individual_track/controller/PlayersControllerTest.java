@@ -14,7 +14,9 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -71,6 +73,19 @@ class PlayersControllerTest {
                         "team":{"id":1,"abbreviation":"ET","city":"Example city",
                         "conference":"Example conf","division":"Example","full_name":"Example Fakes","name":"Fakes"}}]
                                               """));
+
+        verify(playersService).getAllPlayers();
+    }
+
+    @Test
+    void getAllPlayers_shouldReturn404ResponseWhenThereAreNoPlayers() throws Exception {
+        List<PlayerDTO> responsePlayerDTOs = new ArrayList<>();
+
+        when(playersService.getAllPlayers()).thenReturn(responsePlayerDTOs);
+
+        mockMvc.perform(get("/players"))
+                .andDo(print())
+                .andExpect(status().isNotFound());
 
         verify(playersService).getAllPlayers();
     }

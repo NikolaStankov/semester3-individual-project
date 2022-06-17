@@ -4,8 +4,12 @@ import fontys.sem3.individual_track.business.AccessTokenDecoder;
 import fontys.sem3.individual_track.business.PlayersService;
 import fontys.sem3.individual_track.business.TeamsService;
 import fontys.sem3.individual_track.business.converter.TeamDTOConverter;
+import fontys.sem3.individual_track.business.exception.CustomExceptionHandler;
+import fontys.sem3.individual_track.business.exception.InvalidTeamIdException;
+import fontys.sem3.individual_track.business.exception.InvalidUserIdException;
 import fontys.sem3.individual_track.model.PlayerDTO;
 import fontys.sem3.individual_track.repository.entity.Team;
+import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +21,14 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.List;
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
 import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 
 @ExtendWith(SpringExtension.class)
@@ -74,5 +81,20 @@ class PlayersByTeamControllerTest {
 
         verify(teamsService).getTeam(1L);
         verify(playersService).getPlayersByTeam(fakeTeam);
+    }
+
+    @Test
+    void getPlayersByTeam_shouldThrowInvalidTeamIdException_whenTeamNotFound() throws Exception {
+        when(teamsService.getTeam(11L)).thenReturn(Optional.empty());
+
+        String expectedMessage = "Invalid team id.";
+
+        try {
+            mockMvc.perform(get("/teams/11"));
+        } catch (InvalidTeamIdException exception) {
+            assertEquals(expectedMessage, exception.getMessage());
+
+            verify(teamsService).getTeam(11L);
+        }
     }
 }

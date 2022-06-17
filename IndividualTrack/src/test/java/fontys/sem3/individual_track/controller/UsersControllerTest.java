@@ -52,7 +52,7 @@ class UsersControllerTest {
     }
 
     @Test
-    void getUserById_shouldReturn() throws Exception {
+    void getUserById_shouldReturn200WithUserJsonObjectWhenFound() throws Exception {
         UserDTO expectedUserDTO = UserDTOConverter.convertToDTO(this.createFakeUser());
 
         when(usersService.getUser(expectedUserDTO.getId())).thenReturn(Optional.of(expectedUserDTO));
@@ -66,6 +66,17 @@ class UsersControllerTest {
                         """));
 
         verify(usersService).getUser(3L);
+    }
+
+    @Test
+    void getUserById_shouldReturn404_whenUserNotFound() throws Exception {
+        when(usersService.getUser(2L)).thenReturn(Optional.empty());
+
+        mockMvc.perform(get("/users/2"))
+                .andDo(print())
+                .andExpect(status().isNotFound());
+
+        verify(usersService).getUser(2L);
     }
 
     @Test

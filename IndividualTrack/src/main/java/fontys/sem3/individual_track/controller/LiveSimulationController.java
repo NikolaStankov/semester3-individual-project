@@ -13,6 +13,7 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 
+import java.security.SecureRandom;
 import java.util.List;
 import java.util.Random;
 
@@ -25,7 +26,7 @@ public class LiveSimulationController {
     private final TeamsService teamsService;
     private final PlayersService playersService;
 
-    private final Random rand = new Random();
+    private final Random rand = new SecureRandom();
 
     @MessageMapping("/simulation")
     public void scoreBoard(@Payload LiveSimulationDTO liveSimulationDTO) throws InterruptedException {
